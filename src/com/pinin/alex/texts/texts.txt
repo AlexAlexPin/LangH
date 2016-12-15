@@ -1,0 +1,283 @@
+* Hot keys
+
+HK_NEW_FILE =
+HK_OPEN_FILE =
+HK_SAVE_FILE =			ctrl S
+HK_SAVE_AS_FILE =
+HK_EXIT_FILE =			ctrl Q
+
+HK_REPL_EDIT =			alt DOWN
+HK_SET_EDIT =			
+
+HK_EXER_PL =			
+HK_BY_PHRASE_EXER_PL =	
+HK_BY_TRANSL_EXER_PL =  
+HK_ENTER_EXER_PL =		ENTER
+HK_CLEAN_EXER_PL =		 
+HK_PLAY_EXER_PL =		ctrl F2
+HK_HELP_EXER_PL =		ctrl F1
+HK_RUN_EXER_PL =		
+	
+HK_TASK_PL =			
+HK_SELECT_TASK_PL =		
+HK_SEL_ALL_TASK_PL =	
+HK_DELETE_TASK_PL =		DELETE
+	
+HK_ADD_PL =				
+HK_NEW_ADD_PL =			
+	
+HK_TABLE_PL =			
+HK_SELECT_TABLE_PL =	
+HK_SEL_ALL_TABLE_PL =	
+HK_DELETE_TABLE_PL =	DELETE
+HK_TO_TASK_TABLE_PL =	
+	
+HK_TAG_PL =				
+HK_SELECT_TAG_PL =		
+HK_SEL_ALL_TAG_PL =		
+HK_FIND_TAG_PL =		
+HK_TO_PHRASE_TAG_PL =	
+HK_UPDATE_TAG_PL =		
+	
+HK_SEARCH_PL =			
+HK_FIND_SEARCH_PL =		F3
+HK_CLEAN_SEARCH_PL =	
+	
+HK_SOUND_PL =			
+HK_REC_SOUND_PL =		alt LEFT
+HK_STOP_SOUND_PL =		alt RIGHT
+HK_PLAY_SOUND_PL =		alt UP
+HK_SAVE_SOUND_PL =		
+
+HK_HELP_HELP =			
+HK_ABOUT_HELP =			
+
+* Mnemonics
+
+MN_FILE =				F
+MN_EDIT =				E
+MN_EXER_PL =			X
+MN_TASK_PL =			W
+MN_ADD_PL =				A
+MN_TABLE_PL =			L
+MN_SOUND_PL =			S
+MN_HELP =				H
+
+* Buttons
+
+BT_NEW_FILE =			New
+BT_OPEN_FILE =			Open
+BT_SAVE_FILE =			Save
+BT_SAVE_AS_FILE =		Save as
+BT_EXIT_FILE =			Exit
+
+BT_REPL_EDIT =			Replace
+BT_SET_EDIT =		    Settings
+
+BT_EXER_PL =			Exercise
+BT_BY_PHRASE_EXER_PL =	Phrase - translation
+BT_BY_TRANSL_EXER_PL =	Translation - phrase
+BT_BY_PH_SND_EXER_PL =	Listening phrase - translation
+BT_BY_TR_SND_EXER_PL =	Listening phrase - phrase
+BT_ENTER_EXER_PL =		Enter
+BT_CLEAN_EXER_PL =		Clear
+BT_PLAY_EXER_PL =		Play sound
+BT_HELP_EXER_PL =		Help
+BT_RUN_EXER_PL =		Run
+
+BT_TASK_PL =			Worklist
+BT_SELECT_TASK_PL =		Select
+BT_SEL_ALL_TASK_PL =	Select all
+BT_DELETE_TASK_PL =		Delete
+
+BT_ADD_PL =				Addition
+BT_NEW_ADD_PL =			Add new
+
+BT_TABLE_PL =			Dictionary
+BT_SELECT_TABLE_PL =	Select
+BT_SEL_ALL_TABLE_PL =	Select all
+BT_DELETE_TABLE_PL =	Delete
+BT_TO_TASK_TABLE_PL =	To worklist
+BT_FILTER_TABLE_PL =	Clear filter
+
+BT_TAG_PL =				Tags
+BT_SELECT_TAG_PL =		Select
+BT_SEL_ALL_TAG_PL =		Select all
+BT_FIND_TAG_PL =		Find phrases
+BT_TO_PHRASE_TAG_PL =	To phrase
+BT_UPDATE_TAG_PL =		Upgrade tags
+
+BT_SEARCH_PL =			Search
+BT_FIND_SEARCH_PL =		Find phrases
+BT_CLEAN_SEARCH_PL =	Clear
+
+BT_SOUND_PL =			Sound
+BT_REC_SOUND_PL =		Rec
+BT_STOP_SOUND_PL =		Stop
+BT_PLAY_SOUND_PL =		Play
+BT_SAVE_SOUND_PL =		Save
+
+BT_SET_LANG_RUS =		Russian
+BT_SET_LANG_ENG =		English
+BT_SET_FSIZE_NORM =		Normal
+BT_SET_FSIZE_BIG =		Big
+BT_SET_FSIZE_HUGE =		Huge
+BT_SET_OK_BT =			Accept
+
+BT_SHOW_HIDE_PL =		Show / hide
+
+BT_HELP_HELP =			Help
+BT_ABOUT_HELP =			About
+
+* Menus
+
+MU_FILE =				File
+MU_EDIT =				Edit
+MU_EXER =				Exercise
+MU_TASK =				Worklist
+MU_ADD =				Addition
+MU_TABLE =				List
+MU_SOUND =				Sound
+MU_HELP =				Help
+
+* tips
+
+TIP_SAVE_FILE =			Save
+TIP_EXER_PL =			Show / hide the exercise panel
+TIP_TASK_PL =			Show / hide the worklist
+TIP_ADD_PL =			Show / hide the addition panel
+TIP_TABLE_PL =			Show / hide the dictionary
+TIP_TAG_PL =			Show / hide the tags
+TIP_SEARCH_PL =			Show / hide the search panel
+TIP_SOUND_PL =			Show / hide the sound recording panel
+
+TIP_SELECT =			Mark selected rows
+TIP_SEL_ALL =			Mark all visible rows
+TIP_DELETE =			Remove marked rows 
+TIP_TOTASK =			Add marked rows to the worklist
+TIP_CLEAR_FILTER =      Remove filters	
+TIP_FIND =				Find phrases
+TIP_TOPHR =				Add marked tags to marked phrases
+TIP_ADD =				Add to the dictionary
+TIP_ADD_HELP =			You can enter a few phrases. Each phrase is a new row. Number of rows in each field must be the same.
+
+TIP_EXER_PLAY =			Replay the sound
+TIP_EXER_ENTER =		Enter your answer
+TIP_EXER_HELP =			Get a prompt
+TIP_EXER_RUN =			Run an exercise
+TIP_EXER_CHOOSE =		Choose an exercise type
+
+TIP_REC_SOUND =			Start sound recording
+TIP_STOP_SOUND =		Stop sound recording
+TIP_PLAY_SOUND =		Play recorded sound
+TIP_SAVE_SOUND =		Save recorded sound
+
+* paths
+
+PH_EXT_DB =				dic
+PH_EXT_TSK =			tsk
+PH_EXT_SOUND =			wav
+
+PH_ICON_ADD =			icon_add.png
+PH_ICON_BOOK =			icon_book.png
+PH_ICON_CLOSE =			icon_close.png
+PH_ICON_DELETE =		icon_delete.png
+PH_ICON_EXER =			icon_exer.png
+PH_ICON_LIST =			icon_list.png
+PH_ICON_NO_SOUND =		icon_no_sound.png
+PH_ICON_PLAY =			icon_play.png
+PH_ICON_REC =			icon_rec.png
+PH_ICON_SAVE =			icon_save.png
+PH_ICON_SEARCH =		icon_search.png
+PH_ICON_SOUND =			icon_sound.png
+PH_ICON_STOP =			icon_stop.png
+PH_ICON_TAG =			icon_tag.png
+
+* labels
+
+LB_COL_CHECK =			
+LB_COL_NUM =			ID
+LB_COL_PHRASE =			Phrase
+LB_COL_TRANSL =			Translation
+LB_COL_COMMENT =		Comment
+LB_COL_TAG =			Tag
+LB_COL_PLAY =			Play
+
+LB_HEADER_EXER_PL =		Your worklist:
+LB_HEADER_TASK =		Your task:
+LB_HEADER_ASWER = 		Your answer:
+
+LB_HEADER_TABLE_PL =	Your dictionary:
+LB_HEADER_TAG_PL =		Tags:
+LB_HEADER_SEARCH_PL =	Find:
+
+LB_HEADER_ADD_PHRASE = 	New phrases:
+LB_HEADER_ADD_TRANSL =	New translations:
+LB_HEADER_ADD_COMM =	New comments:
+LB_HEADER_ADD_TAG =		New tags:
+
+LB_HEADER_SET_LANG =	Language
+LB_HEADER_SET_FSIZE =	Font size
+
+* titles
+
+TL_TITLE =				LangH
+TL_ERROR =				Error
+TL_CONF_EXIT =			Confirm exit
+TL_CONF_REMOVE =		Confirm removal
+TL_CONF_EDIT =			Confirm editing 
+TL_CONF_SELECT =		Confirm selection
+TL_CONF_TASK =			Confirm new task
+TL_CONF_REPLACE =		Confirm replacement
+TL_CONF_NEW =           Confirm new dictionary creating
+TL_NO_SELECTION =		No selected rows
+TL_NO_RECORD =			No record
+
+* messages
+
+MG_DB_LOADED =			Dictionary has been loaded
+MG_NO_DB =				No active dictionary
+MG_FILE_NOT_LOADED =	Sorry, file has not been loaded
+MG_FILE_NOT_SAVED =		Sorry, file has not been saved
+MG_FILE_IS_DAMAGED =	Sorry, file is damaged
+MG_REC_NOT_SAVED =		Sorry, record has not been saved
+MG_EXIT_QUESTION =		Exit program?
+MG_REMOVE_QUESTION =	Remove selected rows?
+MG_EDIT_QUESTION =		Edit it?
+MG_EDIT_REC_QUESTION =	Add this record to the phrase
+MG_TO_TASK_QUESTION =	Put selected rows to the worklist?
+MG_TO_PHRASE_QUESTION = Add selected tags to selected phrases?
+MG_SELECT_ROWS =		Please, select rows
+MG_SAVED_REPORT =		Saved
+MG_CORRECT_ANSW =		Correct answer
+MG_WRONG_ANSW =			Wrong answer
+MG_DONE =				Done
+MG_BY_PHRASE_INFO =		Exercise: Phrase - translation
+MG_BY_TRANSL_INFO =		Exercise: Translation - phrase
+MG_BY_PH_SND_INFO =		Exercise: Listening Phrase - translation
+MG_BY_TR_SND_INFO =		Exercise: Listening Phrase - phrase
+MG_SOUND_INFO =			Please listen...
+MG_ERROR_ADD =			Number of rows is not equal
+MG_LIST_CONT_PHRASE =	Your list already contains the phrase
+MG_ATTEMPT =			Attempt #
+MG_PHRASES =			phrases
+MG_MISTAKES =			mistakes
+MG_REST =				left
+MG_NO_RECORD_FULL =		There is no a record for this phrase. Open a panel to record it?
+MG_NO_RECORD =			No record
+MG_RECORDING =			Recording...
+MG_RECORDED =			Recorded
+MG_RECORD_SOUND =		Please, record sound
+MG_FILE_DESCRIPT =		Dictionary files
+MG_SET_REST_TO_APL =	Restart to apply changes					
+MG_NEW_DOC_INFO =		New dictionary has been created
+MG_ADD_QUESTION =		Add new phrases?
+MG_NEW_TASK_QUESTON =	Start a new exercise?
+MG_HELP_LINK =			Push the button below to visit our website to get full information
+MG_FILE_EXISTS =		file exists already. Replace it?
+MG_NEW_QUESTION = 		Do you want to make a new dictionary?
+
+* URLs
+
+URL_WEBSITE =			www.alexpinin.com	
+URL_SUPPORT =			www.alexpinin.com/#!langhsupport/gifwh/

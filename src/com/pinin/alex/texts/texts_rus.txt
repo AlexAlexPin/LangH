@@ -1,0 +1,280 @@
+﻿* Hot keys
+
+HK_NEW_FILE =
+HK_OPEN_FILE =
+HK_SAVE_FILE =			ctrl S
+HK_SAVE_AS_FILE =
+HK_EXIT_FILE =			ctrl Q
+
+HK_REPL_EDIT =			alt DOWN
+HK_SET_EDIT =			
+
+HK_EXER_PL =			
+HK_BY_PHRASE_EXER_PL =	
+HK_BY_TRANSL_EXER_PL =  
+HK_ENTER_EXER_PL =		ENTER
+HK_CLEAN_EXER_PL =		 
+HK_PLAY_EXER_PL =		ctrl F2
+HK_HELP_EXER_PL =		ctrl F1
+HK_RUN_EXER_PL =		
+	
+HK_TASK_PL =			
+HK_SELECT_TASK_PL =		
+HK_DELETE_TASK_PL =		DELETE
+	
+HK_ADD_PL =				
+HK_NEW_ADD_PL =			
+	
+HK_TABLE_PL =			
+HK_SELECT_TABLE_PL =	
+HK_DELETE_TABLE_PL =	DELETE
+HK_TO_TASK_TABLE_PL =	
+	
+HK_TAG_PL =				
+HK_SELECT_TAG_PL =		
+HK_FIND_TAG_PL =		
+HK_TO_PHRASE_TAG_PL =	
+HK_UPDATE_TAG_PL =		
+	
+HK_SEARCH_PL =			
+HK_FIND_SEARCH_PL =		F3
+HK_CLEAN_SEARCH_PL =	
+	
+HK_SOUND_PL =			
+HK_REC_SOUND_PL =		alt LEFT
+HK_STOP_SOUND_PL =		alt RIGHT
+HK_PLAY_SOUND_PL =		alt UP
+HK_SAVE_SOUND_PL =		
+
+HK_HELP_HELP =			
+HK_ABOUT_HELP =			
+
+* Mnemonics
+
+MN_FILE =				F
+MN_EDIT =				E
+MN_EXER_PL =			X
+MN_TASK_PL =			W
+MN_ADD_PL =				A
+MN_TABLE_PL =			L
+MN_SOUND_PL =			S
+MN_HELP =				H
+
+* Buttons
+
+BT_NEW_FILE =			Новый словарь
+BT_OPEN_FILE =			Открыть
+BT_SAVE_FILE =			Сохранить
+BT_SAVE_AS_FILE =		Сохранить как
+BT_EXIT_FILE =			Выход
+
+BT_REPL_EDIT =			Заменить
+BT_SET_EDIT =		    Настройки
+
+BT_EXER_PL =			Упражнения
+BT_BY_PHRASE_EXER_PL =	Фраза - перевод
+BT_BY_TRANSL_EXER_PL =	Перевод - фраза
+BT_BY_PH_SND_EXER_PL =	Аудирование фраза - перевод
+BT_BY_TR_SND_EXER_PL =	Аудирование фраза - фраза
+BT_ENTER_EXER_PL =		Ввод
+BT_CLEAN_EXER_PL =		Очистить
+BT_PLAY_EXER_PL =		Проиграть звук
+BT_HELP_EXER_PL =		Подсказка
+BT_RUN_EXER_PL =		Запустить
+
+BT_TASK_PL =			Рабочий лист
+BT_SELECT_TASK_PL =		Выбрать
+BT_SEL_ALL_TASK_PL =	Выбрать все
+BT_DELETE_TASK_PL =		Удалить
+
+BT_ADD_PL =				Добавить
+BT_NEW_ADD_PL =			Добавить
+
+BT_TABLE_PL =			Словарь
+BT_SELECT_TABLE_PL =	Выбрать
+BT_SEL_ALL_TABLE_PL =	Выбрать все
+BT_DELETE_TABLE_PL =	Удалить
+BT_TO_TASK_TABLE_PL =	В рабочий лист
+BT_FILTER_TABLE_PL =	Очистить фильтр
+
+BT_TAG_PL =				Метки
+BT_SELECT_TAG_PL =		Выбрать
+BT_SEL_ALL_TAG_PL =		Выбрать все
+BT_FIND_TAG_PL =		Найти фразы
+BT_TO_PHRASE_TAG_PL =	Добавить к фразе
+BT_UPDATE_TAG_PL =		Обновить метки
+
+BT_SEARCH_PL =			Поиск
+BT_FIND_SEARCH_PL =		Найти фразы
+BT_CLEAN_SEARCH_PL =	Очистить
+
+BT_SOUND_PL =			Звук
+BT_REC_SOUND_PL =		Запись
+BT_STOP_SOUND_PL =		Стоп
+BT_PLAY_SOUND_PL =		Проиграть
+BT_SAVE_SOUND_PL =		Сохранить
+
+BT_SET_LANG_RUS =		Русский
+BT_SET_LANG_ENG =		Английский
+BT_SET_FSIZE_NORM =		Нормальный
+BT_SET_FSIZE_BIG =		Большой
+BT_SET_FSIZE_HUGE =		Огромный
+BT_SET_OK_BT =			Принять
+
+BT_SHOW_HIDE_PL =		Показать/скрыть
+
+BT_HELP_HELP =			Помощь
+BT_ABOUT_HELP =			О программе
+
+* Menus
+
+MU_FILE =				Файл
+MU_EDIT =				Правка
+MU_EXER =				Упражнения
+MU_TASK =				Рабочий лист
+MU_ADD =				Добавить
+MU_TABLE =				Словарь
+MU_SOUND =				Звук
+MU_HELP =				Помощь
+
+* tips
+
+TIP_SAVE_FILE =			Сохранить
+TIP_EXER_PL =			Показать / скрыть панель упражнений
+TIP_TASK_PL =			Показать / скрыть рабочий лист
+TIP_ADD_PL =			Показать / скрыть панель добавления
+TIP_TABLE_PL =			Показать / скрыть словарь
+TIP_TAG_PL =			Показать / скрыть список меток
+TIP_SEARCH_PL =			Показать / скрыть панель поиска
+TIP_SOUND_PL =			Показать / скрыть панель звукозаписи
+
+TIP_SELECT =			Отметить выделенные строки
+TIP_SEL_ALL =			Отметить все видимые строки
+TIP_DELETE =			Удалить отмеченные строки 
+TIP_TOTASK =			Добавить отмеченные строки к заданиям
+TIP_CLEAR_FILTER =      Удалить все фильтры
+TIP_FIND =				Найти фразы
+TIP_TOPHR =				Добавить отмеченные строки к отмеченным фразам
+TIP_ADD =				Добавить в словарь
+TIP_ADD_HELP =			Можно ввести несколько фраз. Каждая фраза - новая строка. Количество строк в полях должно быть одинаковым.
+
+TIP_EXER_PLAY =			Воспроизвести звук
+TIP_EXER_ENTER =		Ввести ответ
+TIP_EXER_HELP =			Получить подсказку
+TIP_EXER_RUN =			Запустить упражнение
+TIP_EXER_CHOOSE =		Выбрать упражнение
+
+TIP_REC_SOUND =			Записать звук
+TIP_STOP_SOUND =		Остановить запись
+TIP_PLAY_SOUND =		Воспроизвести запись
+TIP_SAVE_SOUND =		Сохранить запись
+
+* paths
+
+PH_EXT_DB =				dic
+PH_EXT_TSK =			tsk
+PH_EXT_SOUND =			wav
+
+PH_ICON_ADD =			icon_add.png
+PH_ICON_BOOK =			icon_book.png
+PH_ICON_CLOSE =			icon_close.png
+PH_ICON_DELETE =		icon_delete.png
+PH_ICON_EXER =			icon_exer.png
+PH_ICON_LIST =			icon_list.png
+PH_ICON_NO_SOUND =		icon_no_sound.png
+PH_ICON_PLAY =			icon_play.png
+PH_ICON_REC =			icon_rec.png
+PH_ICON_SAVE =			icon_save.png
+PH_ICON_SEARCH =		icon_search.png
+PH_ICON_SOUND =			icon_sound.png
+PH_ICON_STOP =			icon_stop.png
+PH_ICON_TAG =			icon_tag.png
+
+* labels
+
+LB_COL_CHECK =			
+LB_COL_NUM =			ID
+LB_COL_PHRASE =			Фраза
+LB_COL_TRANSL =			Перевод
+LB_COL_COMMENT =		Комментарий
+LB_COL_TAG =			Метка
+LB_COL_PLAY =			Звук
+
+LB_HEADER_EXER_PL =		Рабочий лист:
+LB_HEADER_TASK =		Ваше задание
+LB_HEADER_ASWER = 		Ваш ответ
+
+LB_HEADER_TABLE_PL =	Словарь:
+LB_HEADER_TAG_PL =		Ваш список меток:
+LB_HEADER_SEARCH_PL =	Найти:
+
+LB_HEADER_ADD_PHRASE = 	Новые фразы:
+LB_HEADER_ADD_TRANSL =	Новые переводы:
+LB_HEADER_ADD_COMM =	Новые комментарии:
+LB_HEADER_ADD_TAG =		Новые метки:
+
+LB_HEADER_SET_LANG =	Язык
+LB_HEADER_SET_FSIZE =	Размер шрифта
+
+* titles
+
+TL_TITLE =				LangH
+TL_ERROR =				Ошибка
+TL_CONF_EXIT =			Подтвердите выход
+TL_CONF_REMOVE =		Подтвердите удаление
+TL_CONF_EDIT =			Подтвердите редактирование 
+TL_CONF_SELECT =		Подтвердите выбор
+TL_CONF_TASK =			Подтвердите новое задание
+TL_CONF_REPLACE =		Подтвердите замену
+TL_CONF_NEW =           Подтвердите создание нового словаря
+TL_NO_SELECTION =		Строки не выделены
+TL_NO_RECORD =			Нет записи
+
+* messages
+
+MG_DB_LOADED =			Словарь загружен
+MG_NO_DB =				Нет активного словаря
+MG_FILE_NOT_LOADED =	Сожалею, файл не был загружен
+MG_FILE_NOT_SAVED =		Сожалею, файл не был сохранен
+MG_FILE_IS_DAMAGED =	Сожалею, файл поврежден
+MG_REC_NOT_SAVED =		Сожалею, запись не сохранена
+MG_EXIT_QUESTION =		Закрыть программу?
+MG_REMOVE_QUESTION =	Удалить выбранные строки?
+MG_EDIT_QUESTION =		Отредактировать?
+MG_EDIT_REC_QUESTION =	Добавить эту запись к фразе
+MG_TO_TASK_QUESTION =	Помесить выделенные строки с список заданий?
+MG_TO_PHRASE_QUESTION = Добавить выделенные метки к выделенным фразам?
+MG_SELECT_ROWS =		Пожалуйста, выделите строки
+MG_SAVED_REPORT =		Сохранено
+MG_CORRECT_ANSW =		Правильный ответ
+MG_WRONG_ANSW =			Неправильный ответ
+MG_DONE =				Завершено
+MG_BY_PHRASE_INFO =		Упражнение: Фраза - перевод
+MG_BY_TRANSL_INFO =		Упражнение: Перевод - фраза
+MG_BY_PH_SND_INFO =		Упражнение: Аудирование фраза - перевод
+MG_BY_TR_SND_INFO =		Упражнение: Аудирование фраза - фраза
+MG_SOUND_INFO =			Пожалуйста слушайте...
+MG_ERROR_ADD =			Количество строк не равно
+MG_LIST_CONT_PHRASE =	Ваш словарь уже содержит фразу
+MG_ATTEMPT =			Попытка №
+MG_PHRASES =			фраз
+MG_MISTAKES =			ошибок
+MG_REST =				осталось
+MG_NO_RECORD_FULL =		Для этой фразы нет записи. Открыть панель звукозаписи?
+MG_NO_RECORD =			Нет записи
+MG_RECORDING =			Запись...
+MG_RECORDED =			Записано
+MG_RECORD_SOUND =		Пожалуйста, запишите звук
+MG_FILE_DESCRIPT =		Словари
+MG_SET_REST_TO_APL =	Перезагрузите, чтобы применить изменения
+MG_NEW_DOC_INFO =		Создан новый словарь
+MG_ADD_QUESTION =		Добавить новые фразы?
+MG_NEW_TASK_QUESTON =	Начать новое упражнение?
+MG_HELP_LINK =			Нажмите кнопку ниже для посещения нашего сайта чтобы получить всю информацию
+MG_FILE_EXISTS =		файл уже существует. Заменить его?
+MG_NEW_QUESTION = 		Хотите создать новый словарь?
+
+* URLs
+
+URL_WEBSITE =			www.alexpinin.com	
+URL_SUPPORT =			www.alexpinin.com/#!langhsupport/gifwh/
