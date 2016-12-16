@@ -22,10 +22,9 @@ package com.pinin.alex.gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.logging.*;
 import javax.swing.*;
-import com.pinin.alex.*;
+import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
 
 /**
@@ -40,7 +39,7 @@ public class Recorder extends AbstractControlledPanel
 	// data
 	
 	/** An object that allows to work with sounds. */
-	private SoundWav audio;
+	private Sound audio;
 	
 	// elements of this panel
 	
@@ -80,10 +79,8 @@ public class Recorder extends AbstractControlledPanel
 	public Recorder(DictionaryTable dic) 
 	{
 		// data
-		
-		audio = new SoundWav();
-		String tempFolder = System.getProperty("user.home") + File.separator + ".langH";
-		audio.setTempFolder(new File(tempFolder));
+			
+		audio = new Sound();
 			
 		// buttons
 			

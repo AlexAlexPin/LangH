@@ -20,8 +20,6 @@
 
 package com.pinin.alex.main;
 
-import java.io.Serializable;
-
 /**
  * Element that represents a virtual foreign phrase and contains the identifier, the phrase itself
  * and sets of translations, comments, and tags.<br>
@@ -36,13 +34,12 @@ import java.io.Serializable;
  * <code>Term tag</code> - the set of tags;<br>
  * </blockquote><p>
  */
-public class Phrase implements Comparable <Phrase>, Serializable
+public class Phrase implements Comparable <Phrase> 
 {
-
 //
 // Variables
 //
-
+	
 	/** An attribute for easier representation this element in other objects */
 	private Integer id;
 	
@@ -58,9 +55,6 @@ public class Phrase implements Comparable <Phrase>, Serializable
 	
 	/** The set of tags */
 	private Term tag;
-	
-	/** Generated serial version ID */
-	private static final long serialVersionUID = -4473683568332091424L;
 
 //
 // Constructors

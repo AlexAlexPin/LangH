@@ -44,7 +44,7 @@ import com.pinin.alex.main.Common.*;
  * The delimiter will be replaced before a file will be written. The default value is <i>'`'</i>;<br>
  * </blockquote>
  */
-public class Phrases extends ArrayList<Phrase>
+public class Phrases extends ArrayList<Phrase> 
 {
 //
 // Variables	
@@ -69,8 +69,8 @@ public class Phrases extends ArrayList<Phrase>
 	/** The character to replace the delimiter in case if user try to enter it */
 	private char replacement;
 	
-	/** Generated serial version ID */
-	private static final long serialVersionUID = -3893537185982556327L;
+	/** Default serial version ID */
+	private static final long serialVersionUID = 1L;
 	
 //	
 //	Constructors

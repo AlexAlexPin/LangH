@@ -79,7 +79,7 @@ public class GUI extends JFrame
 	public GUI() 
 	{
 		thisFrame = this;
-		
+			
 		Data data = LangH.getData();
 		
 		this.setSize(data.getSize());
@@ -88,7 +88,7 @@ public class GUI extends JFrame
 		this.setIconImage(LangH.getResource(Texts.PH_ICON_TITLE).getImage());
 		this.setTitle(TXT.TL_TITLE);
 		this.setLayout(new GridBagLayout());
-		
+			
 		// catch the extended state changing
 			
 		this.addWindowStateListener(event -> 
@@ -109,7 +109,7 @@ public class GUI extends JFrame
 				exit();
 			}
 		});
-		
+			
 		// panels
 		
 		dictionary = new Dictionary();

@@ -382,7 +382,7 @@ public class Texts
 	
 	// preferences
 	
-	public final static String PR_PATH          = "/com/pinin/alex/langh";
+	public final static String PR_PATH          = "/com/pinin/alex/langH";
 	public final static String PR_DB_PATH       = "db_path";
 	public final static String PR_FRAME_HEIGHT  = "frame_height";
 	public final static String PR_FRAME_STATE   = "frame_state";

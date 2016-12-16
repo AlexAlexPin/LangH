@@ -176,7 +176,7 @@ TIP_SAVE_SOUND =		Save recorded sound
 
 PH_EXT_DB =				dic
 PH_EXT_TSK =			tsk
-PH_EXT_SOUND =			wav
+PH_EXT_SOUND =			au
 
 PH_ICON_ADD =			icon_add.png
 PH_ICON_BOOK =			icon_book.png

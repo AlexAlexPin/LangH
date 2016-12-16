@@ -146,11 +146,6 @@ public class ModelPhrases extends AbstractTableModel
 			this.dataPath = dataPath;
 			
 			data.clear();
-//			ObjectInputStream in =
-//				new ObjectInputStream(
-//					new FileInputStream(dataPath));
-//			data = (Phrases) in.readObject();
-//			in.close();	
 			data.parseFile(dataPath);
 			
 			checkbox.clear();
@@ -186,11 +181,6 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-//			ObjectOutputStream out = 
-//				new ObjectOutputStream(
-//					new FileOutputStream(file));
-//			out.writeObject(data);
-//			out.close();
 			data.codeFile(file);
 			dataPath = file;
 		}
@@ -396,16 +386,10 @@ public class ModelPhrases extends AbstractTableModel
 				sounds.add(fileName);
 				
 				String filePath = soundFolder + File.separator + fileName;
-				if (sound.save(new File(filePath)))
-				{
-					LOGGER.log(Level.CONFIG, "Record has been saved " + filePath);
-					GUI.sendMessage(TXT.MG_SAVED_REPORT + " " + filePath);
-				}
-				else
-				{
-					LOGGER.log(Level.CONFIG, "Record has not been saved " + filePath);
-					GUI.sendMessage(TXT.MG_FILE_NOT_SAVED + " " + filePath);
-				}
+				sound.save(new File(filePath));
+				
+				LOGGER.log(Level.CONFIG, "Record has been saved " + dataPath);
+				GUI.sendMessage(TXT.MG_SAVED_REPORT + " " + dataPath);
 			}
 			
 		}

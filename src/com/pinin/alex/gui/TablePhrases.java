@@ -277,7 +277,7 @@ public class TablePhrases extends JTable
 			if (pushedButtonRow == -1) return;
 			
 			int id = (int) this.getValueAt(pushedButtonRow, ModelPhrases.ID_COL);	
-			AudioContainer sound = new SoundWav();
+			Sound sound = new Sound();
 			
 			boolean b = getSound(sound, id);
 			if (b) sound.play();

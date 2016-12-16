@@ -198,7 +198,7 @@ public class Exercise extends AbstractControlledPanel
 	{
 		if (tasks == null) return;
 		
-		AudioContainer sound = new SoundWav();
+		Sound sound = new Sound();
 		int id = tasks.getPhrase().getId();
 		
 		boolean b = dic.getSound(sound, id);
@@ -457,7 +457,7 @@ public class Exercise extends AbstractControlledPanel
 	 */
 	private boolean playSound(DictionaryTable dic)
 	{
-		AudioContainer sound = new SoundWav();
+		Sound sound = new Sound();
 		int id = tasks.getPhrase().getId();
 		boolean b = dic.getSound(sound, id);
 		if (b) sound.play();
