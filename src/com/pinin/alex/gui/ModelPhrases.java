@@ -149,7 +149,7 @@ class ModelPhrases extends AbstractTableModel
 				checkbox.add(false);
 			}
 			
-			soundFolder = dataFactory.getPrefFacade().getSoundFolderPath(dataPath, "Sound");
+			soundFolder = dataFactory.getPrefFacade().getSoundFolderPath(dataPath, "RecordedSound");
 			File[] files = Common.getListFiles(new File(soundFolder), Common.GET_FILES);
 			sounds.clear();
 			
@@ -345,7 +345,7 @@ class ModelPhrases extends AbstractTableModel
         String filePath = soundFolder + File.separator + fileName;
         File file = new File(filePath);
 
-        return file.exists() && toGet.load(file);
+        return file.exists() && toGet.loadSound(file);
     }
 	
 	/**
@@ -372,7 +372,7 @@ class ModelPhrases extends AbstractTableModel
 				sounds.add(fileName);
 				
 				String filePath = soundFolder + File.separator + fileName;
-				sound.save(new File(filePath));
+				sound.saveSound(new File(filePath));
 				
 				logger.log(Level.CONFIG, "Record has been saved " + dataPath);
 				GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + dataPath);

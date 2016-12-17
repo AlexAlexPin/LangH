@@ -34,7 +34,7 @@ import com.pinin.alex.main.*;
 class Recorder extends AbstractControlledPanel
 {
 	// data
-	private Sound audio;
+	private RecordedSound audio;
 	
 	// elements of this panel
 	private JButton captureBut;
@@ -72,7 +72,7 @@ class Recorder extends AbstractControlledPanel
 
 		// data
 
-		audio = new Sound();
+		audio = new RecordedSound();
 			
 		// buttons
 			
@@ -156,7 +156,7 @@ class Recorder extends AbstractControlledPanel
 			captureMit.setEnabled(true);
 			stopBut.setEnabled(false);
 			stopMit.setEnabled(false);
-			audio.stop();
+			audio.stopCapture();
 		}
 		catch (Exception e) 
 		{

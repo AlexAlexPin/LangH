@@ -199,11 +199,11 @@ public class Exercise extends AbstractControlledPanel
 	{
 		if (tasks == null) return;
 		
-		Sound sound = new Sound();
+		RecordedSound recordedSound = new RecordedSound();
 		int id = tasks.getPhrase().getId();
 		
-		boolean b = dic.getSound(sound, id);
-		if (b) sound.play();
+		boolean b = dic.getSound(recordedSound, id);
+		if (b) recordedSound.play();
 		
 		answField.requestFocus();
 	}
@@ -458,10 +458,10 @@ public class Exercise extends AbstractControlledPanel
 	 */
 	private boolean playSound(DictionaryTable dic)
 	{
-		Sound sound = new Sound();
+		RecordedSound recordedSound = new RecordedSound();
 		int id = tasks.getPhrase().getId();
-		boolean b = dic.getSound(sound, id);
-		if (b) sound.play();
+		boolean b = dic.getSound(recordedSound, id);
+		if (b) recordedSound.play();
 		return b;
 	}
 	

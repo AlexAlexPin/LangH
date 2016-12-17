@@ -258,10 +258,10 @@ class TablePhrases extends JTable
 			if (pushedButtonRow == -1) return;
 			
 			int id = (int) this.getValueAt(pushedButtonRow, ModelPhrases.ID_COL);	
-			Sound sound = new Sound();
+			RecordedSound recordedSound = new RecordedSound();
 			
-			boolean b = getSound(sound, id);
-			if (b) sound.play();
+			boolean b = getSound(recordedSound, id);
+			if (b) recordedSound.play();
 		}
 		catch (Exception e) 
 		{

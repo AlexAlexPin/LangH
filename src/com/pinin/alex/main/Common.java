@@ -442,7 +442,7 @@ public class Common
 	}
 	
 	/**
-	 * Runs the file chooser that allows to save one file.
+	 * Runs the file chooser that allows to saveSound one file.
 	 * @param parent - the parent component of the dialog, can be <code>null</code>.
 	 * @param description - textual description for the filter, may be <code>null</code>.
 	 * @param path - a path to start choice.

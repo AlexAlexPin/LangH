@@ -81,7 +81,7 @@ BT_BY_PH_SND_EXER_PL =	Listening phrase - translation
 BT_BY_TR_SND_EXER_PL =	Listening phrase - phrase
 BT_ENTER_EXER_PL =		Enter
 BT_CLEAN_EXER_PL =		Clear
-BT_PLAY_EXER_PL =		Play sound
+BT_PLAY_EXER_PL =		Play recordedSound
 BT_HELP_EXER_PL =		Help
 BT_RUN_EXER_PL =		Run
 
@@ -149,7 +149,7 @@ TIP_ADD_PL =			Show / hide the addition panel
 TIP_TABLE_PL =			Show / hide the dictionary
 TIP_TAG_PL =			Show / hide the tags
 TIP_SEARCH_PL =			Show / hide the search panel
-TIP_SOUND_PL =			Show / hide the sound recording panel
+TIP_SOUND_PL =			Show / hide the recordedSound recording panel
 
 TIP_SELECT =			Mark selected rows
 TIP_SEL_ALL =			Mark all visible rows
@@ -161,16 +161,16 @@ TIP_TOPHR =				Add marked tags to marked phrases
 TIP_ADD =				Add to the dictionary
 TIP_ADD_HELP =			You can enter a few phrases. Each phrase is a new row. Number of rows in each field must be the same.
 
-TIP_EXER_PLAY =			Replay the sound
+TIP_EXER_PLAY =			Replay the recordedSound
 TIP_EXER_ENTER =		Enter your answer
 TIP_EXER_HELP =			Get a prompt
 TIP_EXER_RUN =			Run an exercise
 TIP_EXER_CHOOSE =		Choose an exercise type
 
-TIP_REC_SOUND =			Start sound recording
-TIP_STOP_SOUND =		Stop sound recording
-TIP_PLAY_SOUND =		Play recorded sound
-TIP_SAVE_SOUND =		Save recorded sound
+TIP_REC_SOUND =			Start recordedSound recording
+TIP_STOP_SOUND =		Stop recordedSound recording
+TIP_PLAY_SOUND =		Play recorded recordedSound
+TIP_SAVE_SOUND =		Save recorded recordedSound
 
 * paths
 
@@ -267,7 +267,7 @@ MG_NO_RECORD_FULL =		There is no a record for this phrase. Open a panel to recor
 MG_NO_RECORD =			No record
 MG_RECORDING =			Recording...
 MG_RECORDED =			Recorded
-MG_RECORD_SOUND =		Please, record sound
+MG_RECORD_SOUND =		Please, record recordedSound
 MG_FILE_DESCRIPT =		Dictionary files
 MG_SET_REST_TO_APL =	Restart to apply changes					
 MG_NEW_DOC_INFO =		New dictionary has been created

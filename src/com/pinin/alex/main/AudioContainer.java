@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -23,37 +23,13 @@ package com.pinin.alex.main;
 import java.io.*;
 
 /**
- * Contains a sound.
+ * Manages a sound.
  */
 public interface AudioContainer
 {
-	/**
-	 * Starts sound capturing.
-	 */
 	void capture();
-	
-	/**
-	 * Stops sound capturing.
-	 */
-	void stop();
-	
-	/**
-	 * Plays captured or loaded sound.
-	 */
+	void stopCapture();
 	void play();
-	
-	/**
-	 * Saves sound to the specified file.
-	 * @param file - a file to be written.
-	 * @return <code>true</code> if the file has been written successfully.
-	 */
-	boolean save(File file);
-	
-	/**
-	 * Loads sound from the specified file.
-	 * @param file - a file to be read.
-	 * @return <code>true</code> if the file has been read successfully.
-	 */
-	boolean load(File file);
-	
-} // end AudioContainer
+	boolean saveSound(File file);
+	boolean loadSound(File file);
+}

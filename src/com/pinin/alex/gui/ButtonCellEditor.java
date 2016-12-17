@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -109,7 +109,7 @@ public class ButtonCellEditor extends AbstractCellEditor
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// the button has been pressed. stop editing and invoke the action
+		// the button has been pressed. stopCapture editing and invoke the action
 		int row = table.convertRowIndexToModel(table.getEditingRow());
 		fireEditingStopped();
 
