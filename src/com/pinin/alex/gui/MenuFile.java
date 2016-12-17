@@ -105,7 +105,7 @@ class MenuFile extends AbstractControlledPanel
 		{
 			dic.loadData(null);
 			worklist.loadData(null);
-            dataFactory.getData().putDataPath("");
+            dataFactory.getPrefFacade().putDataPath("");
 		}
 	}
 	
@@ -149,7 +149,7 @@ class MenuFile extends AbstractControlledPanel
 			dic.codeFile(path);
 			GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + path);
 			
-			String pathTask = dataFactory.getData().getTaskPath(path.toString(), textsRepo.PH_EXT_TSK);
+			String pathTask = dataFactory.getPrefFacade().getTaskPath(path.toString(), textsRepo.PH_EXT_TSK);
 			workList.codeFile(new File(pathTask));
 		}
 		catch (Exception e) 
@@ -185,10 +185,10 @@ class MenuFile extends AbstractControlledPanel
 			dic.codeFile(new File(newPath));
 			GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + newPath);
 			
-			Data data = dataFactory.getData();
-			data.putDataPath(newPath);
+			PrefFacade prefFacade = dataFactory.getPrefFacade();
+			prefFacade.putDataPath(newPath);
 			
-			String newTaskData = data.getTaskPath(newPath, textsRepo.PH_EXT_TSK);
+			String newTaskData = prefFacade.getTaskPath(newPath, textsRepo.PH_EXT_TSK);
 			workList.codeFile(new File(newTaskData));
 		}
 		catch (Exception e) 

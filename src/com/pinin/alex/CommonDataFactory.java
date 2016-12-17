@@ -14,7 +14,7 @@ public interface CommonDataFactory
 
     TextsRepo getTextsRepo();
 
-    Data getData();
+    PrefFacade getPrefFacade();
 
     FontsRepo getFontsRepo();
 

@@ -10,7 +10,7 @@ class CommonDataFactoryImpl implements CommonDataFactory {
 
     private Logger logger;
     private Preferences preferences;
-    private Data data;
+    private PrefFacade prefFacade;
     private TextsRepo textsRepo;
     private FontsRepo fontsRepo;
     private ColorsRepo colorsRepo;
@@ -22,11 +22,11 @@ class CommonDataFactoryImpl implements CommonDataFactory {
 
         Preferences root = Preferences.userRoot();
         preferences = root.node("/com/pinin/alex/langh");
-        data = new Data(preferences);
+        prefFacade = new PrefFacade(preferences);
 
-        fontsRepo = new FontsRepo(data.getFontSize());
+        fontsRepo = new FontsRepo(prefFacade.getFontSize());
 
-        CharSequence textsSource = getCharsFromResource(data.getLanguage());
+        CharSequence textsSource = getCharsFromResource(prefFacade.getLanguage());
         textsRepo = new TextsRepo(textsSource);
 
         bordersRepo = new BordersRepo(fontsRepo, textsRepo, colorsRepo);
@@ -54,8 +54,8 @@ class CommonDataFactoryImpl implements CommonDataFactory {
         return textsRepo;
     }
 
-    public Data getData() {
-        return data;
+    public PrefFacade getPrefFacade() {
+        return prefFacade;
     }
 
     public FontsRepo getFontsRepo() {

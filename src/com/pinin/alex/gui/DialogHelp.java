@@ -62,7 +62,7 @@ class DialogHelp extends JDialog
 		this.add(new JScrollPane(message), BorderLayout.CENTER);
 		this.add(openSite, BorderLayout.SOUTH);
 			
-		final Dimension size = dataFactory.getData().getScreenSize();
+		final Dimension size = dataFactory.getPrefFacade().getScreenSize();
 		this.setSize(size.width/6, size.height/6);
 		this.setLocationRelativeTo(null);
 	}

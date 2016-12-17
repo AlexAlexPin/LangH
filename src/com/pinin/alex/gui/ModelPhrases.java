@@ -134,7 +134,7 @@ class ModelPhrases extends AbstractTableModel
 			
 			if (!dataPath.exists())
 			{
-				logger.log(Level.WARNING, "Data path does not exist");
+				logger.log(Level.WARNING, "PrefFacade path does not exist");
 				return;
 			}
 			
@@ -149,7 +149,7 @@ class ModelPhrases extends AbstractTableModel
 				checkbox.add(false);
 			}
 			
-			soundFolder = dataFactory.getData().getSoundFolder(dataPath, "Sound");
+			soundFolder = dataFactory.getPrefFacade().getSoundFolderPath(dataPath, "Sound");
 			File[] files = Common.getListFiles(new File(soundFolder), Common.GET_FILES);
 			sounds.clear();
 			

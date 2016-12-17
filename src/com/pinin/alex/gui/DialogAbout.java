@@ -51,7 +51,7 @@ class DialogAbout extends JDialog
 		infoPane.setCaretPosition(0);
 		add(new JScrollPane(infoPane));
 			
-		Dimension size = dataFactory.getData().getScreenSize();
+		Dimension size = dataFactory.getPrefFacade().getScreenSize();
 		this.setSize(size.width/3, size.height/3);
 		this.setLocationRelativeTo(null);
 	}

@@ -2,35 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2feb4bf2-5a4a-4b8b-a1ce-c5f5e6496f04" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactory.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactoryImpl.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactoryImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogAbout.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogAbout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogHelp.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogHelp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogSetting.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogSetting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/GUI.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuEdit.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuEdit.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuFile.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuHelp.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuHelp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelTerm.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelTerm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Search.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Search.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrasesFiltered.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrasesFiltered.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Worklist.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Worklist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Common.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Borders.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/BordersRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Colors.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/ColorsRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Fonts.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/FontsRepo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Texts.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/TextsRepo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/COPYING.txt" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/COPYING.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/texts/info.txt" afterPath="$PROJECT_DIR$/src/com/pinin/alex/texts/info.txt" />
     </list>
     <ignored path="LangH.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,41 +68,69 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Data.java">
+      <file leaf-file-name="PrefFacade.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
+            <state relative-caret-position="3094">
+              <caret line="200" column="51" selection-start-line="200" selection-start-column="51" selection-end-line="200" selection-end-column="51" />
               <folding>
-                <element signature="e#953#1025#0" expanded="true" />
-                <element signature="e#6287#6288#0" expanded="true" />
-                <element signature="e#6350#6351#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3124#3125#0" expanded="true" />
+                <element signature="e#3186#3187#0" expanded="true" />
+                <element signature="e#3646#3647#0" expanded="true" />
+                <element signature="e#3670#3671#0" expanded="true" />
+                <element signature="e#3699#3700#0" expanded="true" />
+                <element signature="e#3770#3771#0" expanded="true" />
+                <element signature="e#3999#4000#0" expanded="true" />
+                <element signature="e#4062#4063#0" expanded="true" />
+                <element signature="e#4284#4285#0" expanded="true" />
+                <element signature="e#4333#4334#0" expanded="true" />
+                <element signature="e#4572#4573#0" expanded="true" />
+                <element signature="e#4630#4631#0" expanded="true" />
+                <element signature="e#4683#4684#0" expanded="true" />
+                <element signature="e#4730#4731#0" expanded="true" />
+                <element signature="e#4777#4778#0" expanded="true" />
+                <element signature="e#4836#4837#0" expanded="true" />
+                <element signature="e#4889#4890#0" expanded="true" />
+                <element signature="e#4937#4938#0" expanded="true" />
+                <element signature="e#4982#4983#0" expanded="true" />
+                <element signature="e#5038#5039#0" expanded="true" />
+                <element signature="e#5089#5090#0" expanded="true" />
+                <element signature="e#5140#5141#0" expanded="true" />
+                <element signature="e#5189#5190#0" expanded="true" />
+                <element signature="e#5249#5250#0" expanded="true" />
+                <element signature="e#5304#5305#0" expanded="true" />
+                <element signature="e#5353#5354#0" expanded="true" />
+                <element signature="e#5400#5401#0" expanded="true" />
+                <element signature="e#5458#5459#0" expanded="true" />
+                <element signature="e#5511#5512#0" expanded="true" />
+                <element signature="e#5558#5559#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonDataFactoryImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommonDataFactoryImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactoryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="153">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1409#1410#0" expanded="true" />
-                <element signature="e#1443#1444#0" expanded="true" />
-                <element signature="e#1476#1477#0" expanded="true" />
-                <element signature="e#1505#1506#0" expanded="true" />
-                <element signature="e#1544#1545#0" expanded="true" />
-                <element signature="e#1576#1577#0" expanded="true" />
-                <element signature="e#1605#1606#0" expanded="true" />
-                <element signature="e#1632#1633#0" expanded="true" />
-                <element signature="e#1671#1672#0" expanded="true" />
-                <element signature="e#1703#1704#0" expanded="true" />
-                <element signature="e#1744#1745#0" expanded="true" />
-                <element signature="e#1777#1778#0" expanded="true" />
-                <element signature="e#1820#1821#0" expanded="true" />
-                <element signature="e#1854#1855#0" expanded="true" />
+                <element signature="e#1445#1446#0" expanded="true" />
+                <element signature="e#1479#1480#0" expanded="true" />
+                <element signature="e#1512#1513#0" expanded="true" />
+                <element signature="e#1541#1542#0" expanded="true" />
+                <element signature="e#1580#1581#0" expanded="true" />
+                <element signature="e#1612#1613#0" expanded="true" />
+                <element signature="e#1653#1654#0" expanded="true" />
+                <element signature="e#1686#1687#0" expanded="true" />
+                <element signature="e#1725#1726#0" expanded="true" />
+                <element signature="e#1757#1758#0" expanded="true" />
+                <element signature="e#1798#1799#0" expanded="true" />
+                <element signature="e#1831#1832#0" expanded="true" />
+                <element signature="e#1874#1875#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,7 +179,6 @@
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/GUI.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Borders.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/BordersRepo.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Colors.java" />
@@ -178,6 +189,10 @@
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Texts.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/TextsRepo.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactoryImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/SavedData.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PreferencesProxy.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" />
       </list>
     </option>
   </component>
@@ -661,7 +676,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -740,7 +755,7 @@
           <caret line="334" column="49" selection-start-line="334" selection-start-column="49" selection-end-line="334" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5112#5154#1" expanded="true" />
+            <element signature="e#5128#5170#1" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -912,18 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
-          <folding>
-            <element signature="e#953#1025#0" expanded="true" />
-            <element signature="e#6287#6288#0" expanded="true" />
-            <element signature="e#6350#6351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/texts/texts.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-105">
@@ -948,22 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/TextsRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/FontsRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ColorsRepo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-46">
@@ -972,26 +959,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/FontsRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/TextsRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="378" column="31" selection-start-line="378" selection-start-column="31" selection-end-line="378" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/CommonDataFactoryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        <state relative-caret-position="153">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1409#1410#0" expanded="true" />
-            <element signature="e#1443#1444#0" expanded="true" />
-            <element signature="e#1476#1477#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1544#1545#0" expanded="true" />
-            <element signature="e#1576#1577#0" expanded="true" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1632#1633#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1744#1745#0" expanded="true" />
-            <element signature="e#1777#1778#0" expanded="true" />
-            <element signature="e#1820#1821#0" expanded="true" />
-            <element signature="e#1854#1855#0" expanded="true" />
+            <element signature="e#1445#1446#0" expanded="true" />
+            <element signature="e#1479#1480#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
+            <element signature="e#1541#1542#0" expanded="true" />
+            <element signature="e#1580#1581#0" expanded="true" />
+            <element signature="e#1612#1613#0" expanded="true" />
+            <element signature="e#1653#1654#0" expanded="true" />
+            <element signature="e#1686#1687#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="true" />
+            <element signature="e#1798#1799#0" expanded="true" />
+            <element signature="e#1831#1832#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3094">
+          <caret line="200" column="51" selection-start-line="200" selection-start-column="51" selection-end-line="200" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3186#3187#0" expanded="true" />
+            <element signature="e#3646#3647#0" expanded="true" />
+            <element signature="e#3670#3671#0" expanded="true" />
+            <element signature="e#3699#3700#0" expanded="true" />
+            <element signature="e#3770#3771#0" expanded="true" />
+            <element signature="e#3999#4000#0" expanded="true" />
+            <element signature="e#4062#4063#0" expanded="true" />
+            <element signature="e#4284#4285#0" expanded="true" />
+            <element signature="e#4333#4334#0" expanded="true" />
+            <element signature="e#4572#4573#0" expanded="true" />
+            <element signature="e#4630#4631#0" expanded="true" />
+            <element signature="e#4683#4684#0" expanded="true" />
+            <element signature="e#4730#4731#0" expanded="true" />
+            <element signature="e#4777#4778#0" expanded="true" />
+            <element signature="e#4836#4837#0" expanded="true" />
+            <element signature="e#4889#4890#0" expanded="true" />
+            <element signature="e#4937#4938#0" expanded="true" />
+            <element signature="e#4982#4983#0" expanded="true" />
+            <element signature="e#5038#5039#0" expanded="true" />
+            <element signature="e#5089#5090#0" expanded="true" />
+            <element signature="e#5140#5141#0" expanded="true" />
+            <element signature="e#5189#5190#0" expanded="true" />
+            <element signature="e#5249#5250#0" expanded="true" />
+            <element signature="e#5304#5305#0" expanded="true" />
+            <element signature="e#5353#5354#0" expanded="true" />
+            <element signature="e#5400#5401#0" expanded="true" />
+            <element signature="e#5458#5459#0" expanded="true" />
+            <element signature="e#5511#5512#0" expanded="true" />
+            <element signature="e#5558#5559#0" expanded="true" />
           </folding>
         </state>
       </provider>

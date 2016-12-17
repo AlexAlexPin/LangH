@@ -66,7 +66,7 @@ class DialogSetting extends JDialog
 		rusLang = getRadioButton(textsRepo.BT_SET_LANG_RUS);
 		makeRadioButtonGroup(engLang, rusLang);
 
-		String language = dataFactory.getData().getLanguage();
+		String language = dataFactory.getPrefFacade().getLanguage();
 		if (language.equals(TextsRepo.PH_TEXT_RUS)) rusLang.setSelected(true);
 
 		Font fontP = dataFactory.getFontsRepo().getFontPlate();
@@ -82,7 +82,7 @@ class DialogSetting extends JDialog
 		hugeFont   = getRadioButton(textsRepo.BT_SET_FSIZE_HUGE);
 		makeRadioButtonGroup(normalFont, bigFont, hugeFont);
 			
-		int fontSize = dataFactory.getData().getFontSize();
+		int fontSize = dataFactory.getPrefFacade().getFontSize();
 		if (fontSize == FontsRepo.FONT_BIG)  bigFont.setSelected(true);
 		if (fontSize == FontsRepo.FONT_HUGE) hugeFont.setSelected(true);
 			
@@ -115,12 +115,12 @@ class DialogSetting extends JDialog
 
 	private void applySettings(CommonDataFactory dataFactory)
 	{
-		if (rusLang.isSelected()) dataFactory.getData().putLanguage(TextsRepo.PH_TEXT_RUS);
-		if (engLang.isSelected()) dataFactory.getData().putLanguage(TextsRepo.PH_TEXT);
+		if (rusLang.isSelected()) dataFactory.getPrefFacade().putLanguage(TextsRepo.PH_TEXT_RUS);
+		if (engLang.isSelected()) dataFactory.getPrefFacade().putLanguage(TextsRepo.PH_TEXT);
 			
-		if (normalFont.isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_NORMAL);
-		if (bigFont   .isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_BIG);
-		if (hugeFont  .isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_HUGE);
+		if (normalFont.isSelected()) dataFactory.getPrefFacade().putFontSize(FontsRepo.FONT_NORMAL);
+		if (bigFont   .isSelected()) dataFactory.getPrefFacade().putFontSize(FontsRepo.FONT_BIG);
+		if (hugeFont  .isSelected()) dataFactory.getPrefFacade().putFontSize(FontsRepo.FONT_HUGE);
 			
 		this.setVisible(false);
 	}

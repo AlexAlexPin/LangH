@@ -76,10 +76,10 @@ public class GUI extends JFrame
 
 		thisFrame = this;
 			
-		Data data = dataFactory.getData();
+		PrefFacade prefFacade = dataFactory.getPrefFacade();
 		
-		this.setSize(data.getSize());
-		this.setExtendedState(data.getExtendedState());	
+		this.setSize(prefFacade.getMainFrameSize());
+		this.setExtendedState(prefFacade.getExtendedState());
 		this.setLocationRelativeTo(null);
 		this.setIconImage(dataFactory.getIconFromResource(TextsRepo.PH_ICON_TITLE).getImage());
 		this.setTitle(textsRepo.TL_TITLE);
@@ -91,7 +91,7 @@ public class GUI extends JFrame
 		{ 
 			if (getExtendedState() == 0) 
 			{
-				setSize(data.getDefaultSize());
+				setSize(prefFacade.getDefaultMainFrameSize());
 				setLocationRelativeTo(null); 
 			}
 		});
@@ -166,15 +166,15 @@ public class GUI extends JFrame
 		exercise.openClose();
 		recorder.openClose();
 		
-		if (data.getDictionaryState()) dictionary.openClose();
-		if (data.getWorklistState())   worklist.openClose();
-		if (data.getFillerState())     filler.openClose();
-		if (data.getExerciseState())   exercise.openClose();
-		if (data.getRecorderState())   recorder.openClose();
+		if (prefFacade.getDictionaryPanelShowState()) dictionary.openClose();
+		if (prefFacade.getWorkListPanelShowState())   worklist.openClose();
+		if (prefFacade.getFillerPanelShowState())     filler.openClose();
+		if (prefFacade.getExercisePanelShowState())   exercise.openClose();
+		if (prefFacade.getRecorderPanelShowState())   recorder.openClose();
 		
 		// loads the database
 		
-		loadData(data.getDataPath());
+		loadData(prefFacade.getDataPath());
 	}
 
 	/**
@@ -222,14 +222,14 @@ public class GUI extends JFrame
 		int ok = GUI.showConfirmDialog(textsRepo.MG_EXIT_QUESTION, textsRepo.TL_CONF_EXIT);
 		if (ok == JOptionPane.OK_OPTION)
 		{
-			Data data = dataFactory.getData();
-			data.putSize(thisFrame.getSize());
-			data.putExtendedState(thisFrame.getExtendedState());
-			data.putDictionaryState(dictionary.isVisible());
-			data.putWorklistState(worklist.isVisible());
-			data.putFillerState(filler.isVisible());
-			data.putExerciseState(exercise.isVisible());
-			data.putRecorderState(recorder.isVisible());
+			PrefFacade prefFacade = dataFactory.getPrefFacade();
+			prefFacade.putMainFrameSize(thisFrame.getSize());
+			prefFacade.putExtendedState(thisFrame.getExtendedState());
+			prefFacade.putDictionaryPanelShowState(dictionary.isVisible());
+			prefFacade.putWorkListPanelShowState(worklist.isVisible());
+			prefFacade.putFillerPanelShowState(filler.isVisible());
+			prefFacade.putExercisePanelShowState(exercise.isVisible());
+			prefFacade.putRecorderPanelShowState(recorder.isVisible());
 			logger.log(Level.CONFIG, "Program has been finished");
 			System.exit(0);
 		}
@@ -250,11 +250,11 @@ public class GUI extends JFrame
 			return;
 		}
 		
-		Data data = dataFactory.getData();
-		String taskPath = data.getTaskPath(dataPath, textsRepo.PH_EXT_TSK);
+		PrefFacade prefFacade = dataFactory.getPrefFacade();
+		String taskPath = prefFacade.getTaskPath(dataPath, textsRepo.PH_EXT_TSK);
 		dictionary.loadData(dataPathFile);
 		worklist.loadData(new File(taskPath));
-		data.putDataPath(dataPath);
+		prefFacade.putDataPath(dataPath);
 		sendMessage(textsRepo.MG_DB_LOADED + " " + dataPath);
 	}
 	
