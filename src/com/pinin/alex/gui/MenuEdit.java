@@ -40,8 +40,8 @@ class MenuEdit extends AbstractControlledPanel
 	
 	// common mains
     private CommonDataFactory dataFactory;
-	private Texts texts;
-    private Fonts fonts;
+	private TextsRepo textsRepo;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -50,27 +50,27 @@ class MenuEdit extends AbstractControlledPanel
 	MenuEdit(CommonDataFactory dataFactory)
 	{
         this.dataFactory = dataFactory;
-		texts = dataFactory.getTexts();
-        fonts = dataFactory.getFonts();
+		textsRepo = dataFactory.getTextsRepo();
+        fontsRepo = dataFactory.getFontsRepo();
 
 		replacer = new Replacer();
-		CharSequence replaces = dataFactory.getResourceContent(Texts.PH_REPLACE);
+		CharSequence replaces = dataFactory.getCharsFromResource(TextsRepo.PH_REPLACE);
 		replacer.parseSequence(replaces);
 		
 		// menu items
 
-		JMenuItem replace = getMenuItem(texts.BT_REPL_EDIT, texts.HK_REPL_EDIT, event -> clearData());
-		replace.setIcon(dataFactory.getResource(Texts.PH_ICON_REPL));
+		JMenuItem replace = getMenuItem(textsRepo.BT_REPL_EDIT, textsRepo.HK_REPL_EDIT, event -> clearData());
+		replace.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_REPL));
 
-		JMenuItem settings = getMenuItem(texts.BT_SET_EDIT, texts.HK_SET_EDIT, event -> showOpenDialog());
-		settings.setIcon(dataFactory.getResource(Texts.PH_ICON_SETT));
+		JMenuItem settings = getMenuItem(textsRepo.BT_SET_EDIT, textsRepo.HK_SET_EDIT, event -> showOpenDialog());
+		settings.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SETT));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_EDIT);
-		menu.setMnemonic(texts.MN_EDIT);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_EDIT);
+		menu.setMnemonic(textsRepo.MN_EDIT);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(replace);
 		menu.addSeparator();
@@ -94,7 +94,7 @@ class MenuEdit extends AbstractControlledPanel
 
 	private void showOpenDialog()
 	{
-		GUI.showSettingDialog(texts.BT_SET_EDIT);
+		GUI.showSettingDialog(textsRepo.BT_SET_EDIT);
 	}
 
 	public JMenu getMenu()
@@ -113,7 +113,7 @@ class MenuEdit extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;

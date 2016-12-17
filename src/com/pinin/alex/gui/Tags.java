@@ -49,8 +49,8 @@ public class Tags extends JPanel implements TagContainer
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-    private Fonts fonts;
-    private Colors colors;
+    private FontsRepo fontsRepo;
+    private ColorsRepo colorsRepo;
 
 	/**
 	 * Constructor.
@@ -59,24 +59,24 @@ public class Tags extends JPanel implements TagContainer
 	 */
 	public Tags(DictionaryTable dictionary, CommonDataFactory dataFactory)
 	{
-        fonts = dataFactory.getFonts();
-        colors = dataFactory.getColors();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        colorsRepo = dataFactory.getColorsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// header
 			
-		JLabel header = getLabel(texts.LB_HEADER_TAG_PL);
+		JLabel header = getLabel(textsRepo.LB_HEADER_TAG_PL);
 			
 		// buttons
 			
-		JButton markBut     = getButton(dataFactory.getResource(Texts.PH_ICON_SELECT),
-				texts.TIP_SELECT, event -> mark());
-		JButton markAllBut  = getButton(dataFactory.getResource(Texts.PH_ICON_SEL_ALL),
-				texts.TIP_SEL_ALL, event -> markAll());
-		JButton findBut     = getButton(dataFactory.getResource(Texts.PH_ICON_SEARCH),
-				texts.TIP_FIND, event -> find(dictionary));
-		JButton toPhraseBut = getButton(dataFactory.getResource(Texts.PH_ICON_TOPHR),
-				texts.TIP_TOPHR, event -> toPhrase(dictionary));
+		JButton markBut     = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SELECT),
+				textsRepo.TIP_SELECT, event -> mark());
+		JButton markAllBut  = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SEL_ALL),
+				textsRepo.TIP_SEL_ALL, event -> markAll());
+		JButton findBut     = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SEARCH),
+				textsRepo.TIP_FIND, event -> find(dictionary));
+		JButton toPhraseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_TOPHR),
+				textsRepo.TIP_TOPHR, event -> toPhrase(dictionary));
 		
 		JToolBar buttons = getToolBar(markBut, markAllBut, findBut, toPhraseBut);
 			
@@ -94,19 +94,19 @@ public class Tags extends JPanel implements TagContainer
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_TAG_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_TAG));
+		JMenuItem openCloseMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_TAG_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_TAG));
 		
-		markMit     = getMenuItem(texts.BT_SELECT_TAG_PL,    texts.HK_SELECT_TAG_PL, event -> mark());
-		markAllMit  = getMenuItem(texts.BT_SEL_ALL_TAG_PL,   texts.HK_SEL_ALL_TAG_PL, event -> markAll());
-		findMit     = getMenuItem(texts.BT_FIND_TAG_PL,      texts.HK_FIND_TAG_PL, event -> find(dictionary));
-		toPhraseMit = getMenuItem(texts.BT_TO_PHRASE_TAG_PL, texts.HK_TO_PHRASE_TAG_PL, event -> toPhrase(dictionary));
+		markMit     = getMenuItem(textsRepo.BT_SELECT_TAG_PL,    textsRepo.HK_SELECT_TAG_PL, event -> mark());
+		markAllMit  = getMenuItem(textsRepo.BT_SEL_ALL_TAG_PL,   textsRepo.HK_SEL_ALL_TAG_PL, event -> markAll());
+		findMit     = getMenuItem(textsRepo.BT_FIND_TAG_PL,      textsRepo.HK_FIND_TAG_PL, event -> find(dictionary));
+		toPhraseMit = getMenuItem(textsRepo.BT_TO_PHRASE_TAG_PL, textsRepo.HK_TO_PHRASE_TAG_PL, event -> toPhrase(dictionary));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.BT_TAG_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.BT_TAG_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -117,7 +117,7 @@ public class Tags extends JPanel implements TagContainer
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_TAG), texts.TIP_TAG_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_TAG), textsRepo.TIP_TAG_PL, event -> openClose());
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class Tags extends JPanel implements TagContainer
 			markAllMit.setEnabled(false);
 			findMit.setEnabled(false);
 			toPhraseMit.setEnabled(false);
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 			
 			this.setVisible(false);
 		}
@@ -195,7 +195,7 @@ public class Tags extends JPanel implements TagContainer
 			markAllMit.setEnabled(true);
 			findMit.setEnabled(true);
 			toPhraseMit.setEnabled(true);
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 				
 			this.setVisible(true);
 		}
@@ -204,7 +204,7 @@ public class Tags extends JPanel implements TagContainer
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(fonts.getFontBold());
+		label.setFont(fontsRepo.getFontBold());
 		return label;
 	}
 
@@ -231,7 +231,7 @@ public class Tags extends JPanel implements TagContainer
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

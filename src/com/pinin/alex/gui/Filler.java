@@ -49,10 +49,10 @@ class Filler extends AbstractControlledPanel
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private Texts texts;
-	private Fonts fonts;
-    private Borders borders;
-    private Colors colors;
+	private TextsRepo textsRepo;
+	private FontsRepo fontsRepo;
+    private BordersRepo bordersRepo;
+    private ColorsRepo colorsRepo;
 
 	/**
 	 * Constructor.
@@ -61,17 +61,17 @@ class Filler extends AbstractControlledPanel
 	 */
 	Filler(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
-        texts = dataFactory.getTexts();
-        fonts = dataFactory.getFonts();
-        borders = dataFactory.getBorders();
-        colors = dataFactory.getColors();
+        textsRepo = dataFactory.getTextsRepo();
+        fontsRepo = dataFactory.getFontsRepo();
+        bordersRepo = dataFactory.getBordersRepo();
+        colorsRepo = dataFactory.getColorsRepo();
 
 		// workspace
 			
-		addPhrase  = getTextArea(texts.LB_HEADER_ADD_PHRASE);
-		addTransl  = getTextArea(texts.LB_HEADER_ADD_TRANSL);
-		addComment = getTextArea(texts.LB_HEADER_ADD_COMM);
-		addTag     = getTextArea(texts.LB_HEADER_ADD_TAG);
+		addPhrase  = getTextArea(textsRepo.LB_HEADER_ADD_PHRASE);
+		addTransl  = getTextArea(textsRepo.LB_HEADER_ADD_TRANSL);
+		addComment = getTextArea(textsRepo.LB_HEADER_ADD_COMM);
+		addTag     = getTextArea(textsRepo.LB_HEADER_ADD_TAG);
 			
 		JPanel workspace = getPanel(new GridLayout(1,4), new JScrollPane(addPhrase), 
 				new JScrollPane(addTransl), new JScrollPane(addComment), new JScrollPane(addTag));
@@ -79,7 +79,7 @@ class Filler extends AbstractControlledPanel
 		// buttons
 			
 		JButton addBut = getButton(
-		        dataFactory.getResource(Texts.PH_ICON_ADDNEW), texts.TIP_ADD, event -> add(dic));
+		        dataFactory.getIconFromResource(TextsRepo.PH_ICON_ADDNEW), textsRepo.TIP_ADD, event -> add(dic));
 			
 		JToolBar buttons = getToolBar(addBut);
 			
@@ -90,27 +90,27 @@ class Filler extends AbstractControlledPanel
 			
 		// add elements
 			
-		this.setBorder(borders.getPanelBorder());
+		this.setBorder(bordersRepo.getPanelBorder());
 		this.setLayout(new BorderLayout());
 			
 		this.add(headPanel,    BorderLayout.NORTH);
 		this.add(workspace,    BorderLayout.CENTER);
 
-		this.setToolTipText(texts.TIP_ADD_HELP);
+		this.setToolTipText(textsRepo.TIP_ADD_HELP);
 		
 		// menu items
 		
-		JMenuItem openCloseMit = this.getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_ADD_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_ADD));
+		JMenuItem openCloseMit = this.getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_ADD_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_ADD));
 		
-		addMit = this.getMenuItem(texts.BT_NEW_ADD_PL, texts.HK_NEW_ADD_PL, event -> add(dic));
+		addMit = this.getMenuItem(textsRepo.BT_NEW_ADD_PL, textsRepo.HK_NEW_ADD_PL, event -> add(dic));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_ADD);
-		menu.setMnemonic(texts.MN_ADD_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_ADD);
+		menu.setMnemonic(textsRepo.MN_ADD_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -118,7 +118,7 @@ class Filler extends AbstractControlledPanel
 		
 		// tool buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_ADD), texts.TIP_ADD_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_ADD), textsRepo.TIP_ADD_PL, event -> openClose());
 	}
 	
 //
@@ -162,7 +162,7 @@ class Filler extends AbstractControlledPanel
 			 (phraseSplit.length != commentSplit.length && !noComment) ||
 			 (phraseSplit.length != tagSplit    .length && !noTag)     )
 		{
-			GUI.showErrorDialog(texts.MG_ERROR_ADD, texts.TL_ERROR);
+			GUI.showErrorDialog(textsRepo.MG_ERROR_ADD, textsRepo.TL_ERROR);
 			return;
 		}
 			
@@ -220,13 +220,13 @@ class Filler extends AbstractControlledPanel
 		if (this.isVisible()) // close items
 		{
 			addMit.setEnabled(false);
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 			this.setVisible(false);
 		}
 		else // open items
 		{
 			addMit.setEnabled(true);
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 			this.setVisible(true);
 		}
 		GUI.infoPanelVisibility();
@@ -251,17 +251,17 @@ class Filler extends AbstractControlledPanel
 	private JTextArea getTextArea(String header) 
 	{
 		JTextArea textArea = new JTextArea();
-		textArea.setFont(fonts.getFontPlate());
+		textArea.setFont(fontsRepo.getFontPlate());
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		textArea.setBorder(borders.getInTextBorder(header));
+		textArea.setBorder(bordersRepo.getInTextBorder(header));
 		return textArea;
 	}
 
 //	private JButton getButton(String labelPath, String tip, ActionListener action)
 //	{
 //		JButton button = new JButton();
-//		button.setIcon(CommonDataFactoryImpl.getResource(labelPath));
+//		button.setIcon(CommonDataFactoryImpl.getIconFromResource(labelPath));
 //		button.setToolTipText(tip);
 //		button.addActionListener(action);
 //		return button;
@@ -290,7 +290,7 @@ class Filler extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -305,7 +305,7 @@ public class Common
 			throws NullPointerException, FileReadException
 	{
 		if (c == null || resource == null) 
-			throw new NullPointerException("null value in Common.getResourceContent()");
+			throw new NullPointerException("null value in Common.getCharsFromResource()");
 		
 	    try
 	    {
@@ -334,7 +334,7 @@ public class Common
 		catch (Exception e) 
 	    {
 			FileReadException ee = new FileReadException(e.getClass() 
-					+ " exception in Common.getResourceContent()");
+					+ " exception in Common.getCharsFromResource()");
 			ee.initCause(e);
 			throw ee;
 		}

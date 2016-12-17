@@ -26,9 +26,8 @@ import java.awt.*;
  * Contains main fonts.
  */
 @SuppressWarnings("unused")
-public class Fonts
+public class FontsRepo
 {
-	// fonts
 	private Font fontPlate;	
 	private Font fontBold;	
 	private Font fontItalic;
@@ -38,29 +37,25 @@ public class Fonts
 	public final static int FONT_BIG    = 18;
 	public final static int FONT_HUGE   = 24;
 
-	/**
-	 * Constructor.
-	 * @param fontSize - a size for all fonts for this application.
-	 */
-	public Fonts(int fontSize)
-	{
-		fontPlate  = new Font(Font.DIALOG, Font.PLAIN,  fontSize);
-		fontBold   = new Font(Font.DIALOG, Font.BOLD,   fontSize);
-		fontItalic = new Font(Font.DIALOG, Font.ITALIC, fontSize);
+    public FontsRepo() {
+        this(FONT_NORMAL);
+    }
+
+	public FontsRepo(int savedFontSize) {
+		fontPlate  = new Font(Font.DIALOG, Font.PLAIN,  savedFontSize);
+		fontBold   = new Font(Font.DIALOG, Font.BOLD,   savedFontSize);
+		fontItalic = new Font(Font.DIALOG, Font.ITALIC, savedFontSize);
 	}
 
-	public Font getFontPlate() 
-	{
+	public Font getFontPlate() {
 		return fontPlate;
 	}
 
-	public Font getFontBold() 
-	{
+	public Font getFontBold() {
 		return fontBold;
 	}
 
-	public Font getFontItalic() 
-	{
+	public Font getFontItalic() {
 		return fontItalic;
 	}
 }

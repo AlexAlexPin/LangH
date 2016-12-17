@@ -78,11 +78,11 @@ public class Exercise extends AbstractControlledPanel
 	
 	// common mains
 	
-	private Texts texts;
+	private TextsRepo textsRepo;
 	private Logger logger;
-    private Fonts fonts;
-    private Borders borders;
-    private Colors colors;
+    private FontsRepo fontsRepo;
+    private BordersRepo bordersRepo;
+    private ColorsRepo colorsRepo;
 
 	/**
 	 * Constructor.
@@ -91,50 +91,50 @@ public class Exercise extends AbstractControlledPanel
 	 */
 	public Exercise(DictionaryTable workList, CommonDataFactory dataFactory)
 	{
-        texts = dataFactory.getTexts();
+        textsRepo = dataFactory.getTextsRepo();
         logger = dataFactory.getLogger();
-        fonts = dataFactory.getFonts();
-        borders = dataFactory.getBorders();
-        colors = dataFactory.getColors();
+        fontsRepo = dataFactory.getFontsRepo();
+        bordersRepo = dataFactory.getBordersRepo();
+        colorsRepo = dataFactory.getColorsRepo();
 
 		// buttons
 
 		JButton playBut  = getButton(
-		        dataFactory.getResource(Texts.PH_ICON_SOUND), texts.TIP_EXER_PLAY, event -> exerPlay(workList));
+		        dataFactory.getIconFromResource(TextsRepo.PH_ICON_SOUND), textsRepo.TIP_EXER_PLAY, event -> exerPlay(workList));
 		JButton enterBut = getButton(
-                dataFactory.getResource(Texts.PH_ICON_ENTER), texts.TIP_EXER_ENTER, event -> exerEnter(workList));
+                dataFactory.getIconFromResource(TextsRepo.PH_ICON_ENTER), textsRepo.TIP_EXER_ENTER, event -> exerEnter(workList));
 		JButton helpBut  = getButton(
-                dataFactory.getResource(Texts.PH_ICON_HELP),  texts.TIP_EXER_HELP, event -> exerHelp());
+                dataFactory.getIconFromResource(TextsRepo.PH_ICON_HELP),  textsRepo.TIP_EXER_HELP, event -> exerHelp());
 		JButton runBut   = getButton(
-                dataFactory.getResource(Texts.PH_ICON_RUN),   texts.TIP_EXER_RUN, event -> exerRun(workList));
+                dataFactory.getIconFromResource(TextsRepo.PH_ICON_RUN),   textsRepo.TIP_EXER_RUN, event -> exerRun(workList));
 		
-		exercises = getComboBox(texts.BT_BY_PHRASE_EXER_PL, texts.BT_BY_TRANSL_EXER_PL,
-					texts.BT_BY_PH_SND_EXER_PL, texts.BT_BY_TR_SND_EXER_PL);
+		exercises = getComboBox(textsRepo.BT_BY_PHRASE_EXER_PL, textsRepo.BT_BY_TRANSL_EXER_PL,
+					textsRepo.BT_BY_PH_SND_EXER_PL, textsRepo.BT_BY_TR_SND_EXER_PL);
 		
-		exercises.setFont(fonts.getFontPlate());
-		exercises.setToolTipText(texts.TIP_EXER_CHOOSE);
+		exercises.setFont(fontsRepo.getFontPlate());
+		exercises.setToolTipText(textsRepo.TIP_EXER_CHOOSE);
 			
 		JToolBar buttons = getToolBar(exercises, new JLabel("  "), runBut, enterBut, playBut, helpBut);
 			
 		// workspace
 			
 		taskField = getTextPane(false);
-		taskField.setBorder(borders.getInTextBorder(texts.LB_HEADER_TASK));
+		taskField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_TASK));
 		taskField.setBackground(Color.WHITE);
 	
 		answField = getTextPane(true);
-		answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+		answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
 		answField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "doNothing");
 		answField.addCaretListener(arg0 -> {
             GUI.sendMessage("");
-            answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+            answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
         });
 			
 		JPanel workspace = getPanel(new GridLayout(1,2), new JScrollPane(taskField), new JScrollPane(answField));
 			
 		// add elements
 		
-		this.setBorder(borders.getPanelBorder());
+		this.setBorder(bordersRepo.getPanelBorder());
 		this.setLayout(new BorderLayout());
 			
 		final JPanel headPanel = new JPanel(new BorderLayout());
@@ -145,20 +145,20 @@ public class Exercise extends AbstractControlledPanel
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_EXER_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_EXER));
+		JMenuItem openCloseMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_EXER_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_EXER));
 		
-		runMit   = getMenuItem(texts.BT_RUN_EXER_PL,   texts.HK_RUN_EXER_PL, event -> exerRun(workList));
-		enterMit = getMenuItem(texts.BT_ENTER_EXER_PL, texts.HK_ENTER_EXER_PL, event -> exerEnter(workList));
-		playMit  = getMenuItem(texts.BT_PLAY_EXER_PL,  texts.HK_PLAY_EXER_PL, event -> exerPlay(workList));
-		helpMit  = getMenuItem(texts.BT_HELP_EXER_PL,  texts.HK_HELP_EXER_PL, event -> exerHelp());
+		runMit   = getMenuItem(textsRepo.BT_RUN_EXER_PL,   textsRepo.HK_RUN_EXER_PL, event -> exerRun(workList));
+		enterMit = getMenuItem(textsRepo.BT_ENTER_EXER_PL, textsRepo.HK_ENTER_EXER_PL, event -> exerEnter(workList));
+		playMit  = getMenuItem(textsRepo.BT_PLAY_EXER_PL,  textsRepo.HK_PLAY_EXER_PL, event -> exerPlay(workList));
+		helpMit  = getMenuItem(textsRepo.BT_HELP_EXER_PL,  textsRepo.HK_HELP_EXER_PL, event -> exerHelp());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_EXER);
-		menu.setMnemonic(texts.MN_EXER_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_EXER);
+		menu.setMnemonic(textsRepo.MN_EXER_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -169,7 +169,7 @@ public class Exercise extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_EXER), texts.TIP_EXER_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_EXER), textsRepo.TIP_EXER_PL, event -> openClose());
 	}
 	
 	/**
@@ -180,7 +180,7 @@ public class Exercise extends AbstractControlledPanel
 	{
 		if (tasks != null)
 		{
-			int ok = GUI.showConfirmDialog(texts.MG_NEW_TASK_QUESTON, texts.TL_CONF_TASK);
+			int ok = GUI.showConfirmDialog(textsRepo.MG_NEW_TASK_QUESTON, textsRepo.TL_CONF_TASK);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				chooseExer(dic);
@@ -248,9 +248,9 @@ public class Exercise extends AbstractControlledPanel
 		switch (check) 
 		{
 		case Task.WRONG_ANSW:	// incorrect answer
-			answField.setBorder(borders.getWrongBorder());
+			answField.setBorder(bordersRepo.getWrongBorder());
 			answField.requestFocus();
-			GUI.sendMessage(texts.MG_WRONG_ANSW + " (" + texts.MG_ATTEMPT + tasks.getAttempt() + ")");
+			GUI.sendMessage(textsRepo.MG_WRONG_ANSW + " (" + textsRepo.MG_ATTEMPT + tasks.getAttempt() + ")");
 			break;	
 			
 		case Task.RIGHT_ANSW:	// correct answer and there are more questions
@@ -272,19 +272,19 @@ public class Exercise extends AbstractControlledPanel
 				exerByTranslSound(dic);
 				break;
 			}
-			answField.setBorder(borders.getCorrectBorder());
-			GUI.sendMessage(texts.MG_CORRECT_ANSW + " (" + texts.MG_REST + " " + tasks.getRestOfPhrases() + ")");
+			answField.setBorder(bordersRepo.getCorrectBorder());
+			GUI.sendMessage(textsRepo.MG_CORRECT_ANSW + " (" + textsRepo.MG_REST + " " + tasks.getRestOfPhrases() + ")");
 			break;
 				
 		case Task.RIGHT_ANSW_FIN:	// correct answer and the last question	
 			
 			if (option != BY_PHRASE_SOUND && option != BY_TRANSL_SOUND) playSound(dic);
 	
-			taskField.setText(texts.MG_DONE + " (" + texts.MG_PHRASES + " " + numOfExer + ", "
-					+ texts.MG_MISTAKES + " " + tasks.getNumOfMistakes() + ")");
+			taskField.setText(textsRepo.MG_DONE + " (" + textsRepo.MG_PHRASES + " " + numOfExer + ", "
+					+ textsRepo.MG_MISTAKES + " " + tasks.getNumOfMistakes() + ")");
 				
 			answField.setText("");
-			answField.setBorder(borders.getCorrectBorder());
+			answField.setBorder(bordersRepo.getCorrectBorder());
 			answField.requestFocus();
 
 			tasks = null;
@@ -300,22 +300,22 @@ public class Exercise extends AbstractControlledPanel
 	{
 		String exer = exercises.getItemAt(exercises.getSelectedIndex());
 			
-		if (exer.equals(texts.BT_BY_PHRASE_EXER_PL))
+		if (exer.equals(textsRepo.BT_BY_PHRASE_EXER_PL))
 		{
 			loadData(dic);
 			exerByPhrase();
 		}
-		if (exer.equals(texts.BT_BY_TRANSL_EXER_PL))
+		if (exer.equals(textsRepo.BT_BY_TRANSL_EXER_PL))
 		{
 			loadData(dic);
 			exerByTransl();
 		}
-		if (exer.equals(texts.BT_BY_PH_SND_EXER_PL))
+		if (exer.equals(textsRepo.BT_BY_PH_SND_EXER_PL))
 		{
 			loadData(dic);
 			exerByPhraseSound(dic);
 		}
-		if (exer.equals(texts.BT_BY_TR_SND_EXER_PL))
+		if (exer.equals(textsRepo.BT_BY_TR_SND_EXER_PL))
 		{
 			loadData(dic);
 			exerByTranslSound(dic);
@@ -352,12 +352,12 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_PHRASE;
 			
 			task = tasks.doExercise(Task.OPTION_BY_PHRASE);
-			answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+			answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
 			answField.requestFocus();
 			
-			GUI.sendMessage(texts.MG_BY_PHRASE_INFO);
+			GUI.sendMessage(textsRepo.MG_BY_PHRASE_INFO);
 		}
 		catch (Exception e) 
 		{
@@ -375,12 +375,12 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_TRANSL;
 			
 			task = tasks.doExercise(Task.OPTION_BY_TRANSL);
-			answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+			answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
 			answField.requestFocus();
 			
-			GUI.sendMessage(texts.MG_BY_TRANSL_INFO);
+			GUI.sendMessage(textsRepo.MG_BY_TRANSL_INFO);
 		}
 		catch (Exception e) 
 		{
@@ -407,11 +407,11 @@ public class Exercise extends AbstractControlledPanel
 			}
 			else 
 			{
-				answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
-				taskField.setText(texts.MG_SOUND_INFO);
+				answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
+				taskField.setText(textsRepo.MG_SOUND_INFO);
 				answField.setText("");
 				answField.requestFocus();
-				GUI.sendMessage(texts.MG_BY_PH_SND_INFO);
+				GUI.sendMessage(textsRepo.MG_BY_PH_SND_INFO);
 			}
 		}
 		catch (RuntimeException e) 
@@ -439,11 +439,11 @@ public class Exercise extends AbstractControlledPanel
 			}
 			else 
 			{
-				answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
-				taskField.setText(texts.MG_SOUND_INFO);
+				answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
+				taskField.setText(textsRepo.MG_SOUND_INFO);
 				answField.setText("");
 				answField.requestFocus();
-				GUI.sendMessage(texts.MG_BY_TR_SND_INFO);
+				GUI.sendMessage(textsRepo.MG_BY_TR_SND_INFO);
 			}
 		}
 		catch (Exception e) 
@@ -494,7 +494,7 @@ public class Exercise extends AbstractControlledPanel
 			enterMit.setEnabled(false);
 			playMit.setEnabled(false);
 			helpMit.setEnabled(false);
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -504,7 +504,7 @@ public class Exercise extends AbstractControlledPanel
 			enterMit.setEnabled(true);
 			playMit.setEnabled(true);
 			helpMit.setEnabled(true);
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 				
 			this.setVisible(true);
 		}
@@ -514,7 +514,7 @@ public class Exercise extends AbstractControlledPanel
 	private JTextPane getTextPane(boolean isEditable) 
 	{
 		JTextPane textPane = new JTextPane();
-		textPane.setFont(fonts.getFontPlate());
+		textPane.setFont(fontsRepo.getFontPlate());
 		textPane.setEditable(isEditable);
 			
 		StyledDocument doc = textPane.getStyledDocument();
@@ -539,7 +539,7 @@ public class Exercise extends AbstractControlledPanel
 //	private JButton getButton(String labelPath, String tip, ActionListener action)
 //	{
 //		JButton button = new JButton();
-//		button.setIcon(CommonDataFactoryImpl.getResource(labelPath));
+//		button.setIcon(CommonDataFactoryImpl.getIconFromResource(labelPath));
 //		button.setToolTipText(tip);
 //		button.addActionListener(action);
 //		return button;
@@ -578,7 +578,7 @@ public class Exercise extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;

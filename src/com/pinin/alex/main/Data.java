@@ -23,7 +23,6 @@ package com.pinin.alex.main;
 import java.awt.*;
 import java.io.*;
 import java.util.prefs.*;
-import com.pinin.alex.*;
 
 /**
  * Loads and operates the main data.
@@ -206,7 +205,7 @@ public class Data
 	 */
 	public String getLanguage() 
 	{
-		return preferences.get(LANGUAGE_PREF, Texts.PH_TEXT);
+		return preferences.get(LANGUAGE_PREF, TextsRepo.PH_TEXT);
 	}
 	
 	/**

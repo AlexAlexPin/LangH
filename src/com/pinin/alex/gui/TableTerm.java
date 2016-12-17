@@ -40,7 +40,7 @@ class TableTerm extends JTable
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -49,15 +49,15 @@ class TableTerm extends JTable
 	 */
 	TableTerm(DictionaryTable dictionary, CommonDataFactory dataFactory)
 	{
-        fonts = dataFactory.getFonts();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// make the table
 			
 		model = new ModelTerm(dataFactory);
 		this.setModel(model);
 			
-		final Font fontP = fonts.getFontPlate();
+		final Font fontP = fontsRepo.getFontPlate();
 			
 		this.setFont(fontP);	
 		this.getTableHeader().setFont(fontP);
@@ -75,10 +75,10 @@ class TableTerm extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark     = getMenuItem(texts.BT_SELECT_TAG_PL,  Texts.PH_ICON_SELECT, event -> mark());
-		JMenuItem markAll  = getMenuItem(texts.BT_SEL_ALL_TAG_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem find     = getMenuItem(texts.BT_FIND_TAG_PL,    Texts.PH_ICON_SEARCH, event -> find(dictionary));
-		JMenuItem toPhrase = getMenuItem(texts.BT_TO_PHRASE_TAG_PL, Texts.PH_ICON_TOPHR, event -> toPhrase(dictionary));
+		JMenuItem mark     = getMenuItem(textsRepo.BT_SELECT_TAG_PL,  TextsRepo.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll  = getMenuItem(textsRepo.BT_SEL_ALL_TAG_PL, TextsRepo.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem find     = getMenuItem(textsRepo.BT_FIND_TAG_PL,    TextsRepo.PH_ICON_SEARCH, event -> find(dictionary));
+		JMenuItem toPhrase = getMenuItem(textsRepo.BT_TO_PHRASE_TAG_PL, TextsRepo.PH_ICON_TOPHR, event -> toPhrase(dictionary));
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -169,7 +169,7 @@ class TableTerm extends JTable
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;

@@ -38,8 +38,8 @@ class MenuHelp extends AbstractControlledPanel
 	private final static long serialVersionUID = 1L;
 	
 	// common mains
-	private Texts texts;
-    private Fonts fonts;
+	private TextsRepo textsRepo;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor
@@ -47,16 +47,16 @@ class MenuHelp extends AbstractControlledPanel
 	 */
 	MenuHelp(CommonDataFactory dataFactory)
 	{
-        texts = dataFactory.getTexts();
-        fonts = dataFactory.getFonts();
+        textsRepo = dataFactory.getTextsRepo();
+        fontsRepo = dataFactory.getFontsRepo();
 
 		// menu items
 			
-		JMenuItem help = this.getMenuItem(texts.BT_HELP_HELP, texts.HK_HELP_HELP,
-				event -> GUI.showHelpDialog(texts.BT_HELP_HELP));
+		JMenuItem help = this.getMenuItem(textsRepo.BT_HELP_HELP, textsRepo.HK_HELP_HELP,
+				event -> GUI.showHelpDialog(textsRepo.BT_HELP_HELP));
 					
-		JMenuItem about = this.getMenuItem(texts.BT_ABOUT_HELP, texts.HK_ABOUT_HELP,
-				event -> GUI.showAboutDialog(texts.BT_ABOUT_HELP));
+		JMenuItem about = this.getMenuItem(textsRepo.BT_ABOUT_HELP, textsRepo.HK_ABOUT_HELP,
+				event -> GUI.showAboutDialog(textsRepo.BT_ABOUT_HELP));
 
 		// add elements
 		
@@ -65,9 +65,9 @@ class MenuHelp extends AbstractControlledPanel
 		menu.addSeparator();
 		menu.add(about);
 			
-		menu.setText(texts.MU_HELP);
-		menu.setMnemonic(texts.MN_HELP);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_HELP);
+		menu.setMnemonic(textsRepo.MN_HELP);
+		menu.setFont(fontsRepo.getFontPlate());
 	}
 
 	public JMenu getMenu()
@@ -86,7 +86,7 @@ class MenuHelp extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

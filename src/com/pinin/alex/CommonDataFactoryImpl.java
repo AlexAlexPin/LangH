@@ -1,7 +1,6 @@
 package com.pinin.alex;
 
 import com.pinin.alex.main.*;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.util.logging.*;
@@ -12,26 +11,25 @@ class CommonDataFactoryImpl implements CommonDataFactory {
     private Logger logger;
     private Preferences preferences;
     private Data data;
-    private Texts texts;
-    private Fonts fonts;
-    private Colors colors;
-    private Borders borders;
+    private TextsRepo textsRepo;
+    private FontsRepo fontsRepo;
+    private ColorsRepo colorsRepo;
+    private BordersRepo bordersRepo;
 
-    CommonDataFactoryImpl() throws IOException
-    {
+    CommonDataFactoryImpl() throws IOException {
         logger = Logger.getLogger("com.pinin.alex.langh");
-        colors = new Colors();
+        colorsRepo = new ColorsRepo();
 
         Preferences root = Preferences.userRoot();
         preferences = root.node("/com/pinin/alex/langh");
         data = new Data(preferences);
 
-        fonts = new Fonts(data.getFontSize());
+        fontsRepo = new FontsRepo(data.getFontSize());
 
-        CharSequence textsSource = getResourceContent(data.getLanguage());
-        texts = new Texts(textsSource);
+        CharSequence textsSource = getCharsFromResource(data.getLanguage());
+        textsRepo = new TextsRepo(textsSource);
 
-        borders = new Borders(fonts, texts);
+        bordersRepo = new BordersRepo(fontsRepo, textsRepo, colorsRepo);
 
         String pattern = Common.getLogFolder("LangH");
         final int fileSizeLimit = 50000;
@@ -44,58 +42,39 @@ class CommonDataFactoryImpl implements CommonDataFactory {
         logger.setLevel(Level.ALL);
     }
 
-    public Preferences getPreferences()
-    {
+    public Preferences getPreferences() {
         return preferences;
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return logger;
     }
 
-    public Texts getTexts()
-    {
-        return texts;
+    public TextsRepo getTextsRepo() {
+        return textsRepo;
     }
 
-    public Data getData()
-    {
+    public Data getData() {
         return data;
     }
 
-    public Fonts getFonts()
-    {
-        return fonts;
+    public FontsRepo getFontsRepo() {
+        return fontsRepo;
     }
 
-    public Colors getColors()
-    {
-        return colors;
+    public ColorsRepo getColorsRepo() {
+        return colorsRepo;
     }
 
-    public Borders getBorders()
-    {
-        return borders;
+    public BordersRepo getBordersRepo() {
+        return bordersRepo;
     }
 
-    /**
-     * Returns the specified resource as an <code>ImageIcon</code>.
-     * @param resource - a path to get the resource.
-     * @return the specified resource as an <code>ImageIcon</code>.
-     */
-    public ImageIcon getResource(String resource)
-    {
-        return new ImageIcon(LangH.class.getResource(resource));
+    public ImageIcon getIconFromResource(String resourcePath) {
+        return new ImageIcon(LangH.class.getResource(resourcePath));
     }
 
-    /**
-     * Returns the specified resource as an <code>InputStream</code>.
-     * @param resource - a path to get the resource.
-     * @return the specified resource as an <code>InputStream</code>.
-     */
-    public CharSequence getResourceContent(String resource)
-    {
-        return Common.getResourceContent(LangH.class, resource);
+    public CharSequence getCharsFromResource(String resourcePath) {
+        return Common.getResourceContent(LangH.class, resourcePath);
     }
 }

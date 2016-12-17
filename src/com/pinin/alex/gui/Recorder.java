@@ -54,10 +54,10 @@ class Recorder extends AbstractControlledPanel
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private Texts texts;
+	private TextsRepo textsRepo;
 	private Logger logger;
-    private Fonts fonts;
-    private Colors colors;
+    private FontsRepo fontsRepo;
+    private ColorsRepo colorsRepo;
 	
 	/**
 	 * Constructor.
@@ -65,10 +65,10 @@ class Recorder extends AbstractControlledPanel
 	 */
 	Recorder(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
-        texts = dataFactory.getTexts();
+        textsRepo = dataFactory.getTextsRepo();
         logger = dataFactory.getLogger();
-        fonts = dataFactory.getFonts();
-        colors = dataFactory.getColors();
+        fontsRepo = dataFactory.getFontsRepo();
+        colorsRepo = dataFactory.getColorsRepo();
 
 		// data
 
@@ -76,40 +76,40 @@ class Recorder extends AbstractControlledPanel
 			
 		// buttons
 			
-		captureBut = getButton(dataFactory.getResource(
-		        Texts.PH_ICON_REC),  texts.TIP_REC_SOUND, event -> capture(), false);
-		stopBut = getButton(dataFactory.getResource(
-		        Texts.PH_ICON_STOP), texts.TIP_STOP_SOUND, event -> stop(), false);
+		captureBut = getButton(dataFactory.getIconFromResource(
+		        TextsRepo.PH_ICON_REC),  textsRepo.TIP_REC_SOUND, event -> capture(), false);
+		stopBut = getButton(dataFactory.getIconFromResource(
+		        TextsRepo.PH_ICON_STOP), textsRepo.TIP_STOP_SOUND, event -> stop(), false);
 		stopBut.setEnabled(false);
 			
-		JButton playBut = getButton(dataFactory.getResource(
-		        Texts.PH_ICON_PLAY), texts.TIP_PLAY_SOUND, event -> playSound(), false);
-		JButton saveBut = getButton(dataFactory.getResource(
-		        Texts.PH_ICON_SAVE), texts.TIP_SAVE_SOUND, event -> saveSound(dic), false);
+		JButton playBut = getButton(dataFactory.getIconFromResource(
+		        TextsRepo.PH_ICON_PLAY), textsRepo.TIP_PLAY_SOUND, event -> playSound(), false);
+		JButton saveBut = getButton(dataFactory.getIconFromResource(
+		        TextsRepo.PH_ICON_SAVE), textsRepo.TIP_SAVE_SOUND, event -> saveSound(dic), false);
 			
 		JPanel buttons = getPanel(new GridLayout(1,4), captureBut, stopBut, playBut, saveBut);
 			
 		// add elements
 			
-		this.setBorder(dataFactory.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBordersRepo().getPanelBorder());
 		this.add(buttons);
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_SOUND_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_SOUND));
+		JMenuItem openCloseMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_SOUND_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SOUND));
 		
-		captureMit = getMenuItem(texts.BT_REC_SOUND_PL,  texts.HK_REC_SOUND_PL, event -> capture());
-		stopMit    = getMenuItem(texts.BT_STOP_SOUND_PL, texts.HK_STOP_SOUND_PL, event -> stop());
-		playMit    = getMenuItem(texts.BT_PLAY_SOUND_PL, texts.HK_PLAY_SOUND_PL, event -> playSound());
-		saveMit    = getMenuItem(texts.BT_SAVE_SOUND_PL, texts.HK_SAVE_SOUND_PL, event -> saveSound(dic));
+		captureMit = getMenuItem(textsRepo.BT_REC_SOUND_PL,  textsRepo.HK_REC_SOUND_PL, event -> capture());
+		stopMit    = getMenuItem(textsRepo.BT_STOP_SOUND_PL, textsRepo.HK_STOP_SOUND_PL, event -> stop());
+		playMit    = getMenuItem(textsRepo.BT_PLAY_SOUND_PL, textsRepo.HK_PLAY_SOUND_PL, event -> playSound());
+		saveMit    = getMenuItem(textsRepo.BT_SAVE_SOUND_PL, textsRepo.HK_SAVE_SOUND_PL, event -> saveSound(dic));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_SOUND);
-		menu.setMnemonic(texts.MN_SOUND_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_SOUND);
+		menu.setMnemonic(textsRepo.MN_SOUND_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -120,8 +120,8 @@ class Recorder extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(
-		        Texts.PH_ICON_SOUND), texts.TIP_SOUND_PL, event -> openClose(), true);
+		openCloseBut = getButton(dataFactory.getIconFromResource(
+		        TextsRepo.PH_ICON_SOUND), textsRepo.TIP_SOUND_PL, event -> openClose(), true);
 	}
 
 	/**
@@ -131,7 +131,7 @@ class Recorder extends AbstractControlledPanel
 	{
 		try 
 		{
-			GUI.sendMessage(texts.MG_RECORDING);
+			GUI.sendMessage(textsRepo.MG_RECORDING);
 			captureBut.setEnabled(false);
 			captureMit.setEnabled(false);
 			stopBut.setEnabled(true);
@@ -151,7 +151,7 @@ class Recorder extends AbstractControlledPanel
 	{
 		try 
 		{
-			GUI.sendMessage(texts.MG_RECORDED);
+			GUI.sendMessage(textsRepo.MG_RECORDED);
 			captureBut.setEnabled(true);
 			captureMit.setEnabled(true);
 			stopBut.setEnabled(false);
@@ -205,7 +205,7 @@ class Recorder extends AbstractControlledPanel
 			stopMit.setEnabled(false);
 			playMit.setEnabled(false);
 			saveMit.setEnabled(false);
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -215,7 +215,7 @@ class Recorder extends AbstractControlledPanel
 			stopMit.setEnabled(true);
 			playMit.setEnabled(true);
 			saveMit.setEnabled(true);
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 				
 			this.setVisible(true);
 		}
@@ -245,7 +245,7 @@ class Recorder extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;

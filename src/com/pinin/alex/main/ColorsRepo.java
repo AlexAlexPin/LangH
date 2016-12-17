@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -26,49 +26,33 @@ import javax.swing.*;
 /**
  * Loads and contains colors.
  */
-public class Colors 
+public class ColorsRepo
 {
-//
-// Variables
-//
-	// colors
-	
 	private Color basicBackground;
 	private Color pushedButton;
-	
-//
-// Constructors
-//	
-	
-	/**
-	 * Constructor.
-	 */
-	public Colors() 
-	{
+	private Color green;
+	private Color red;
+
+	public ColorsRepo() {
 		basicBackground = new JLabel().getBackground();
-		pushedButton    = new Color(200, 238, 250);
+		pushedButton = new Color(200, 238, 250);
+		green = new Color(0, 128, 0);
+		red = new Color(255, 0, 0);
 	}
-	
-//
-// Methods
-//
-	
-	/**
-	 * Returns a common background swing color.
-	 * @return a common background swing color.
-	 */
-	public Color getBasicBackground() 
-	{
+
+	public Color getBasicBackground() {
 		return basicBackground;
 	}
-	
-	/**
-	 * Returns a color of pushed button.
-	 * @return a color of pushed button.
-	 */
-	public Color getPushedButton() 
-	{
+
+	public Color getPushedButton() {
 		return pushedButton;
 	}
-	
-} // end Colors
+
+	Color getGreen() {
+		return green;
+	}
+
+	Color getRed() {
+		return red;
+	}
+}

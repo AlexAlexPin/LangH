@@ -45,7 +45,7 @@ class DialogSetting extends JDialog
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor
@@ -57,48 +57,48 @@ class DialogSetting extends JDialog
 	{	
 		super(owner, title, true);
 
-        fonts = dataFactory.getFonts();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// languages
 
-		engLang = getRadioButton(texts.BT_SET_LANG_ENG);
-		rusLang = getRadioButton(texts.BT_SET_LANG_RUS);
+		engLang = getRadioButton(textsRepo.BT_SET_LANG_ENG);
+		rusLang = getRadioButton(textsRepo.BT_SET_LANG_RUS);
 		makeRadioButtonGroup(engLang, rusLang);
 
 		String language = dataFactory.getData().getLanguage();
-		if (language.equals(Texts.PH_TEXT_RUS)) rusLang.setSelected(true);
+		if (language.equals(TextsRepo.PH_TEXT_RUS)) rusLang.setSelected(true);
 
-		Font fontP = dataFactory.getFonts().getFontPlate();
+		Font fontP = dataFactory.getFontsRepo().getFontPlate();
 			
 		JPanel langPanel = getPanel(new GridLayout(2,1), engLang, rusLang);		
 		langPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
-				texts.LB_HEADER_SET_LANG, TitledBorder.LEFT, TitledBorder.TOP, fontP));
+				textsRepo.LB_HEADER_SET_LANG, TitledBorder.LEFT, TitledBorder.TOP, fontP));
 			
 		// font sizes
 
-		normalFont = getRadioButton(texts.BT_SET_FSIZE_NORM);
-		bigFont    = getRadioButton(texts.BT_SET_FSIZE_BIG);
-		hugeFont   = getRadioButton(texts.BT_SET_FSIZE_HUGE);
+		normalFont = getRadioButton(textsRepo.BT_SET_FSIZE_NORM);
+		bigFont    = getRadioButton(textsRepo.BT_SET_FSIZE_BIG);
+		hugeFont   = getRadioButton(textsRepo.BT_SET_FSIZE_HUGE);
 		makeRadioButtonGroup(normalFont, bigFont, hugeFont);
 			
 		int fontSize = dataFactory.getData().getFontSize();
-		if (fontSize == Fonts.FONT_BIG)  bigFont.setSelected(true);
-		if (fontSize == Fonts.FONT_HUGE) hugeFont.setSelected(true);
+		if (fontSize == FontsRepo.FONT_BIG)  bigFont.setSelected(true);
+		if (fontSize == FontsRepo.FONT_HUGE) hugeFont.setSelected(true);
 			
 		JPanel fontPanel = this.getPanel(new GridLayout(3,1), normalFont, bigFont, hugeFont);
 		fontPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
-				texts.LB_HEADER_SET_FSIZE, TitledBorder.LEFT, TitledBorder.TOP, fontP));
+				textsRepo.LB_HEADER_SET_FSIZE, TitledBorder.LEFT, TitledBorder.TOP, fontP));
 			
 		// main panel
 				
 		JPanel mainPl = this.getPanel(new GridLayout(1,2), langPanel, fontPanel);
 		mainPl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
-				texts.MG_SET_REST_TO_APL, TitledBorder.CENTER, TitledBorder.BOTTOM, fontP));
+				textsRepo.MG_SET_REST_TO_APL, TitledBorder.CENTER, TitledBorder.BOTTOM, fontP));
 		
 		// button
 				
-		JButton button = getButton(texts.BT_SET_OK_BT, event -> applySettings(dataFactory));
+		JButton button = getButton(textsRepo.BT_SET_OK_BT, event -> applySettings(dataFactory));
 				
 		// add elements
 		
@@ -115,12 +115,12 @@ class DialogSetting extends JDialog
 
 	private void applySettings(CommonDataFactory dataFactory)
 	{
-		if (rusLang.isSelected()) dataFactory.getData().putLanguage(Texts.PH_TEXT_RUS);
-		if (engLang.isSelected()) dataFactory.getData().putLanguage(Texts.PH_TEXT);
+		if (rusLang.isSelected()) dataFactory.getData().putLanguage(TextsRepo.PH_TEXT_RUS);
+		if (engLang.isSelected()) dataFactory.getData().putLanguage(TextsRepo.PH_TEXT);
 			
-		if (normalFont.isSelected()) dataFactory.getData().putFontSize(Fonts.FONT_NORMAL);
-		if (bigFont   .isSelected()) dataFactory.getData().putFontSize(Fonts.FONT_BIG);
-		if (hugeFont  .isSelected()) dataFactory.getData().putFontSize(Fonts.FONT_HUGE);
+		if (normalFont.isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_NORMAL);
+		if (bigFont   .isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_BIG);
+		if (hugeFont  .isSelected()) dataFactory.getData().putFontSize(FontsRepo.FONT_HUGE);
 			
 		this.setVisible(false);
 	}
@@ -128,7 +128,7 @@ class DialogSetting extends JDialog
 	private JButton getButton(String text, ActionListener action) 
 	{
 		JButton button = new JButton(text);
-		button.setFont(fonts.getFontPlate());
+		button.setFont(fontsRepo.getFontPlate());
 		button.addActionListener(action);
 		return button;
 	}
@@ -147,7 +147,7 @@ class DialogSetting extends JDialog
 	private JRadioButton getRadioButton(String text)
 	{
 		JRadioButton button = new JRadioButton(text);
-		button.setFont(fonts.getFontPlate());
+		button.setFont(fontsRepo.getFontPlate());
 		return button;
 	}
 

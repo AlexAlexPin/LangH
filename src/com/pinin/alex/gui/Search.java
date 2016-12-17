@@ -41,7 +41,7 @@ public class Search extends JPanel implements PhraseFieldsContainer
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -49,19 +49,19 @@ public class Search extends JPanel implements PhraseFieldsContainer
 	 */
 	public Search(CommonDataFactory dataFactory)
 	{
-        fonts = dataFactory.getFonts();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// label
 			
-		JLabel label = getLabel("  " + texts.LB_HEADER_SEARCH_PL + "  ");
+		JLabel label = getLabel("  " + textsRepo.LB_HEADER_SEARCH_PL + "  ");
 			
 		// workspace
 			
-		findPhrase   = getTextArea(texts.LB_COL_PHRASE);
-		findTransl   = getTextArea(texts.LB_COL_TRANSL);
-		findComment  = getTextArea(texts.LB_COL_COMMENT);
-		findTag      = getTextArea(texts.LB_COL_TAG);
+		findPhrase   = getTextArea(textsRepo.LB_COL_PHRASE);
+		findTransl   = getTextArea(textsRepo.LB_COL_TRANSL);
+		findComment  = getTextArea(textsRepo.LB_COL_COMMENT);
+		findTag      = getTextArea(textsRepo.LB_COL_TAG);
 			
 		JPanel workspace = getPanel(new GridLayout(1,4), new JScrollPane(findPhrase), 
 				new JScrollPane(findTransl), new JScrollPane(findComment), new JScrollPane(findTag));
@@ -103,7 +103,7 @@ public class Search extends JPanel implements PhraseFieldsContainer
 	private JTextArea getTextArea(String tip)
 	{
 		JTextArea textArea = new JTextArea();
-		textArea.setFont(fonts.getFontPlate());
+		textArea.setFont(fontsRepo.getFontPlate());
 		textArea.setToolTipText(tip);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
@@ -114,7 +114,7 @@ public class Search extends JPanel implements PhraseFieldsContainer
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(fonts.getFontPlate());
+		label.setFont(fontsRepo.getFontPlate());
 		return label;
 	}
 }

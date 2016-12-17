@@ -62,7 +62,7 @@ public class GUI extends JFrame
 	// common mains
 	private static CommonDataFactory dataFactory; // TODO possibly not global
 	private static Logger logger;
-	private static Texts texts;
+	private static TextsRepo textsRepo;
 
 	/**
 	 * Constructor
@@ -72,7 +72,7 @@ public class GUI extends JFrame
 	{
         GUI.dataFactory = dataFactory;
         logger = dataFactory.getLogger();
-        texts = dataFactory.getTexts();
+        textsRepo = dataFactory.getTextsRepo();
 
 		thisFrame = this;
 			
@@ -81,8 +81,8 @@ public class GUI extends JFrame
 		this.setSize(data.getSize());
 		this.setExtendedState(data.getExtendedState());	
 		this.setLocationRelativeTo(null);
-		this.setIconImage(dataFactory.getResource(Texts.PH_ICON_TITLE).getImage());
-		this.setTitle(texts.TL_TITLE);
+		this.setIconImage(dataFactory.getIconFromResource(TextsRepo.PH_ICON_TITLE).getImage());
+		this.setTitle(textsRepo.TL_TITLE);
 		this.setLayout(new GridBagLayout());
 			
 		// catch the extended state changing
@@ -142,7 +142,7 @@ public class GUI extends JFrame
 		
 		message = new JTextField("");
 		message.setEditable(false);
-		message.setFont(dataFactory.getFonts().getFontPlate());
+		message.setFont(dataFactory.getFontsRepo().getFontPlate());
 		message.setHorizontalAlignment(JTextField.LEFT);
 		message.setBorder(BorderFactory.createEtchedBorder());
 		
@@ -219,7 +219,7 @@ public class GUI extends JFrame
 	static void exit()
 	{
 		GUI.sendMessage("");
-		int ok = GUI.showConfirmDialog(texts.MG_EXIT_QUESTION, texts.TL_CONF_EXIT);
+		int ok = GUI.showConfirmDialog(textsRepo.MG_EXIT_QUESTION, textsRepo.TL_CONF_EXIT);
 		if (ok == JOptionPane.OK_OPTION)
 		{
 			Data data = dataFactory.getData();
@@ -246,16 +246,16 @@ public class GUI extends JFrame
 		File dataPathFile = new File(dataPath);
 		if (!dataPathFile.exists())
 		{
-			sendMessage(texts.MG_NO_DB);
+			sendMessage(textsRepo.MG_NO_DB);
 			return;
 		}
 		
 		Data data = dataFactory.getData();
-		String taskPath = data.getTaskPath(dataPath, texts.PH_EXT_TSK);
+		String taskPath = data.getTaskPath(dataPath, textsRepo.PH_EXT_TSK);
 		dictionary.loadData(dataPathFile);
 		worklist.loadData(new File(taskPath));
 		data.putDataPath(dataPath);
-		sendMessage(texts.MG_DB_LOADED + " " + dataPath);
+		sendMessage(textsRepo.MG_DB_LOADED + " " + dataPath);
 	}
 	
 	/**

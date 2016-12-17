@@ -57,8 +57,8 @@ public class Dictionary extends AbstractDictionaryTable
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private Colors colors;
-	private Fonts fonts;
+	private ColorsRepo colorsRepo;
+	private FontsRepo fontsRepo;
 	
 //
 // Constructor
@@ -69,25 +69,25 @@ public class Dictionary extends AbstractDictionaryTable
 	 */ 
 	public Dictionary(CommonDataFactory dataFactory)
 	{
-		Texts texts = dataFactory.getTexts();
-		colors = dataFactory.getColors();
-		fonts = dataFactory.getFonts();
+		TextsRepo textsRepo = dataFactory.getTextsRepo();
+		colorsRepo = dataFactory.getColorsRepo();
+		fontsRepo = dataFactory.getFontsRepo();
 
 		Tags tags = new Tags(this, dataFactory);
 		search = new Search(dataFactory);
 		
 		// header
 			
-		JLabel header = this.getLabel(texts.LB_HEADER_TABLE_PL);
+		JLabel header = this.getLabel(textsRepo.LB_HEADER_TABLE_PL);
 			
 		// buttons
 			
-		JButton mark    = getButton(Texts.PH_ICON_SELECT,  texts.TIP_SELECT, event -> mark());
-		JButton markAll = getButton(Texts.PH_ICON_SEL_ALL, texts.TIP_SEL_ALL, event -> markAll());
-		JButton remove  = getButton(Texts.PH_ICON_DELETE,  texts.TIP_DELETE, event -> removeMarkedRows());
-		JButton toTask  = getButton(Texts.PH_ICON_TOTASK,  texts.TIP_TOTASK, event -> toTask(GUI.getWorklist()));
-		filterBut       = getButton(Texts.PH_ICON_FILTER,  texts.TIP_CLEAR_FILTER, event -> clearFilter());
-		findBut         = getButton(Texts.PH_ICON_SEARCH,  texts.TIP_FIND, event -> showOnly());
+		JButton mark    = getButton(TextsRepo.PH_ICON_SELECT,  textsRepo.TIP_SELECT, event -> mark());
+		JButton markAll = getButton(TextsRepo.PH_ICON_SEL_ALL, textsRepo.TIP_SEL_ALL, event -> markAll());
+		JButton remove  = getButton(TextsRepo.PH_ICON_DELETE,  textsRepo.TIP_DELETE, event -> removeMarkedRows());
+		JButton toTask  = getButton(TextsRepo.PH_ICON_TOTASK,  textsRepo.TIP_TOTASK, event -> toTask(GUI.getWorklist()));
+		filterBut       = getButton(TextsRepo.PH_ICON_FILTER,  textsRepo.TIP_CLEAR_FILTER, event -> clearFilter());
+		findBut         = getButton(TextsRepo.PH_ICON_SEARCH,  textsRepo.TIP_FIND, event -> showOnly());
 			
 		JToolBar buttons = getToolBar(mark, markAll, remove, toTask, filterBut, findBut);
 			
@@ -97,7 +97,7 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// add elements
 			
-		this.setBorder(dataFactory.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBordersRepo().getPanelBorder());
 		this.setLayout(new GridBagLayout());
 					
 		this.add(buttons,                new GBC(0, 0, 1, 1).setWeight(0,   0  ).setAnchor(GBC.WEST));
@@ -108,14 +108,14 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_ADD_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_BOOK));
+		JMenuItem openCloseMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_ADD_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_BOOK));
 		
-		markMit    = getMenuItem(texts.BT_SELECT_TABLE_PL,  texts.HK_SELECT_TABLE_PL, event -> mark());
-		markAllMit = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, texts.HK_SEL_ALL_TABLE_PL, event -> markAll());
-		removeMit  = getMenuItem(texts.BT_DELETE_TABLE_PL,  texts.HK_DELETE_TABLE_PL, event -> removeMarkedRows());
-		toTaskMit  = getMenuItem(texts.BT_TO_TASK_TABLE_PL, texts.HK_TO_TASK_TABLE_PL, event -> toTask(GUI.getWorklist()));
-		filterMit  = getMenuItem(texts.BT_FILTER_TABLE_PL,  texts.HK_TO_TASK_TABLE_PL, event -> clearFilter());
+		markMit    = getMenuItem(textsRepo.BT_SELECT_TABLE_PL,  textsRepo.HK_SELECT_TABLE_PL, event -> mark());
+		markAllMit = getMenuItem(textsRepo.BT_SEL_ALL_TABLE_PL, textsRepo.HK_SEL_ALL_TABLE_PL, event -> markAll());
+		removeMit  = getMenuItem(textsRepo.BT_DELETE_TABLE_PL,  textsRepo.HK_DELETE_TABLE_PL, event -> removeMarkedRows());
+		toTaskMit  = getMenuItem(textsRepo.BT_TO_TASK_TABLE_PL, textsRepo.HK_TO_TASK_TABLE_PL, event -> toTask(GUI.getWorklist()));
+		filterMit  = getMenuItem(textsRepo.BT_FILTER_TABLE_PL,  textsRepo.HK_TO_TASK_TABLE_PL, event -> clearFilter());
 		
 		// menu tags
 
@@ -123,24 +123,24 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// menu search
 		
-		JMenuItem openCloseSearchMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_SEARCH_PL,
+		JMenuItem openCloseSearchMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_SEARCH_PL,
 				event -> openCloseSearch(search));
-		openCloseSearchMit.setIcon(dataFactory.getResource(Texts.PH_ICON_SEARCH));
+		openCloseSearchMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SEARCH));
 		
-		findMit = getMenuItem(texts.BT_FIND_SEARCH_PL,   texts.BT_FIND_SEARCH_PL, event -> showOnly());
+		findMit = getMenuItem(textsRepo.BT_FIND_SEARCH_PL,   textsRepo.BT_FIND_SEARCH_PL, event -> showOnly());
 
 		JMenu menuSearch = new JMenu();
-		menuSearch.setText(texts.BT_SEARCH_PL);
-		menuSearch.setFont(fonts.getFontPlate());
+		menuSearch.setText(textsRepo.BT_SEARCH_PL);
+		menuSearch.setFont(fontsRepo.getFontPlate());
 		menuSearch.add(openCloseSearchMit);
 		menuSearch.add(findMit);
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_TABLE);
-		menu.setMnemonic(texts.MN_TABLE_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_TABLE);
+		menu.setMnemonic(textsRepo.MN_TABLE_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -155,13 +155,13 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_BOOK),
-				texts.TIP_TABLE_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_BOOK),
+				textsRepo.TIP_TABLE_PL, event -> openClose());
 		
 		openCloseTagBut = tags.getOpenCloseButton();
 		
-		openCloseSearchBut = getButton(dataFactory.getResource(Texts.PH_ICON_SEARCH),
-				texts.TIP_SEARCH_PL, event -> openCloseSearch(search));
+		openCloseSearchBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SEARCH),
+				textsRepo.TIP_SEARCH_PL, event -> openCloseSearch(search));
 		
 		// close panels
 		
@@ -308,7 +308,7 @@ public class Dictionary extends AbstractDictionaryTable
 			toTaskMit.setEnabled(false);
 			filterMit.setEnabled(false);
 			
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 			openCloseTagBut.setEnabled(false);
 			openCloseSearchBut.setEnabled(false);
 				
@@ -322,7 +322,7 @@ public class Dictionary extends AbstractDictionaryTable
 			toTaskMit.setEnabled(true);
 			filterMit.setEnabled(true);
 			
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 			openCloseTagBut.setEnabled(true);
 			openCloseSearchBut.setEnabled(true);
 				
@@ -337,7 +337,7 @@ public class Dictionary extends AbstractDictionaryTable
 		{
 			findMit.setEnabled(false);
 			findBut.setEnabled(false);
-			openCloseSearchBut.setBackground(colors.getBasicBackground());
+			openCloseSearchBut.setBackground(colorsRepo.getBasicBackground());
 			search.setVisible(false);
 			
 		}
@@ -345,7 +345,7 @@ public class Dictionary extends AbstractDictionaryTable
 		{
 			findMit.setEnabled(true);
 			findBut.setEnabled(true);
-			openCloseSearchBut.setBackground(colors.getPushedButton());
+			openCloseSearchBut.setBackground(colorsRepo.getPushedButton());
 			search.setVisible(true);
 		}
 	}
@@ -354,18 +354,18 @@ public class Dictionary extends AbstractDictionaryTable
 	{
 		if (turnOn)
 		{
-			filterBut.setBackground(colors.getPushedButton());
+			filterBut.setBackground(colorsRepo.getPushedButton());
 		}
 		else 
 		{
-			filterBut.setBackground(colors.getBasicBackground());
+			filterBut.setBackground(colorsRepo.getBasicBackground());
 		}
 	}
 
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(fonts.getFontBold());
+		label.setFont(fontsRepo.getFontBold());
 		return label;
 	}
 
@@ -401,7 +401,7 @@ public class Dictionary extends AbstractDictionaryTable
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

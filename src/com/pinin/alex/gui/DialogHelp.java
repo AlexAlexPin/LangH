@@ -36,9 +36,9 @@ class DialogHelp extends JDialog
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private Texts texts;
+	private TextsRepo textsRepo;
 	private Logger logger;
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor
@@ -50,13 +50,13 @@ class DialogHelp extends JDialog
 	{
 		super(owner, title, true);
 
-        texts = dataFactory.getTexts();
+        textsRepo = dataFactory.getTextsRepo();
         logger = dataFactory.getLogger();
-        fonts = dataFactory.getFonts();
+        fontsRepo = dataFactory.getFontsRepo();
 		
-		final JTextArea message = getTextArea(texts.MG_HELP_LINK);
+		final JTextArea message = getTextArea(textsRepo.MG_HELP_LINK);
 			
-		JButton openSite = getButton(texts.URL_WEBSITE, event -> openSite(texts.URL_SUPPORT));
+		JButton openSite = getButton(textsRepo.URL_WEBSITE, event -> openSite(textsRepo.URL_SUPPORT));
 			
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(message), BorderLayout.CENTER);
@@ -83,7 +83,7 @@ class DialogHelp extends JDialog
 	{
 		JButton button = new JButton(text);
 		button.addActionListener(action);
-		button.setFont(fonts.getFontPlate());
+		button.setFont(fontsRepo.getFontPlate());
 		return button;
 	}
 
@@ -91,7 +91,7 @@ class DialogHelp extends JDialog
 	{
 		JTextArea textArea = new JTextArea();
 		textArea.setText(text);
-		textArea.setFont(fonts.getFontPlate());
+		textArea.setFont(fontsRepo.getFontPlate());
 		textArea.setEditable(false);	
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);

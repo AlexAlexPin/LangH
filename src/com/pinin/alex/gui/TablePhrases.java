@@ -50,7 +50,7 @@ class TablePhrases extends JTable
 	
 	// common mains
 	private Logger logger;
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -61,15 +61,15 @@ class TablePhrases extends JTable
 	TablePhrases(TagContainer tagList, AbstractFilteredTable<Integer> workList, CommonDataFactory dataFactory)
 	{
         logger = dataFactory.getLogger();
-        fonts = dataFactory.getFonts();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// make the table
 			
 		model = new ModelPhrases(dataFactory);
 		model.addTableModelListener(event -> tagList.loadData(model.getTags())); // Updates the tags list when
 		                                                                         // the tag column has been changed
-		final Font fontP = fonts.getFontPlate();
+		final Font fontP = fontsRepo.getFontPlate();
 			
 		this.setModel(model);
 		this.setFont(fontP);
@@ -107,10 +107,10 @@ class TablePhrases extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark    = getMenuItem(texts.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT, event -> mark());
-		JMenuItem markAll = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem remove  = getMenuItem(texts.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE, event -> removeMarkedRows());
-		JMenuItem toTask  = getMenuItem(texts.BT_TO_TASK_TABLE_PL, Texts.PH_ICON_TOTASK, event -> toTask(workList));
+		JMenuItem mark    = getMenuItem(textsRepo.BT_SELECT_TABLE_PL,  TextsRepo.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll = getMenuItem(textsRepo.BT_SEL_ALL_TABLE_PL, TextsRepo.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem remove  = getMenuItem(textsRepo.BT_DELETE_TABLE_PL,  TextsRepo.PH_ICON_DELETE, event -> removeMarkedRows());
+		JMenuItem toTask  = getMenuItem(textsRepo.BT_TO_TASK_TABLE_PL, TextsRepo.PH_ICON_TOTASK, event -> toTask(workList));
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -340,7 +340,7 @@ class TablePhrases extends JTable
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;

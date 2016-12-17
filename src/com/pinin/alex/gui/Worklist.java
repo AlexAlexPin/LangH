@@ -51,8 +51,8 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private Fonts fonts;
-    private Colors colors;
+	private FontsRepo fontsRepo;
+    private ColorsRepo colorsRepo;
 
 	/**
 	 * Constructor.
@@ -61,19 +61,19 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	 */
 	public Worklist(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
-        fonts = dataFactory.getFonts();
-        colors = dataFactory.getColors();
-        Texts texts = dataFactory.getTexts();
+        fontsRepo = dataFactory.getFontsRepo();
+        colorsRepo = dataFactory.getColorsRepo();
+        TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		// header
 			
-		JLabel header = getLabel(texts.LB_HEADER_EXER_PL);
+		JLabel header = getLabel(textsRepo.LB_HEADER_EXER_PL);
 			
 		// buttons
 			
-		JButton markBut    = getButton(Texts.PH_ICON_SELECT,  texts.TIP_SELECT, event -> mark());
-		JButton markAllBut = getButton(Texts.PH_ICON_SEL_ALL, texts.TIP_SEL_ALL, event -> markAll());
-		JButton removeBut  = getButton(Texts.PH_ICON_DELETE,  texts.TIP_DELETE, event -> remove());
+		JButton markBut    = getButton(TextsRepo.PH_ICON_SELECT,  textsRepo.TIP_SELECT, event -> mark());
+		JButton markAllBut = getButton(TextsRepo.PH_ICON_SEL_ALL, textsRepo.TIP_SEL_ALL, event -> markAll());
+		JButton removeBut  = getButton(TextsRepo.PH_ICON_DELETE,  textsRepo.TIP_DELETE, event -> remove());
 			
 		JToolBar buttons = getToolBar(markBut, markAllBut, removeBut);
 			
@@ -83,7 +83,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 			
 		// add elements
 			
-		this.setBorder(dataFactory.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBordersRepo().getPanelBorder());
 		this.setLayout(new GridBagLayout());
 			
 		this.add(buttons,                new GBC(0, 0, 1, 1).setWeight(0,   0  ).setAnchor(GBC.WEST));
@@ -92,19 +92,19 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_TASK_PL, event -> openClose());
-		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_LIST));
+		JMenuItem openCloseMit = getMenuItem(textsRepo.BT_SHOW_HIDE_PL, textsRepo.HK_TASK_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_LIST));
 		
-		markMit    = getMenuItem(texts.BT_SELECT_TASK_PL,  texts.HK_SELECT_TASK_PL, event -> mark());
-		markAllMit = getMenuItem(texts.BT_SEL_ALL_TASK_PL, texts.HK_SEL_ALL_TASK_PL, event -> markAll());
-		removeMit  = getMenuItem(texts.BT_DELETE_TASK_PL,  texts.HK_DELETE_TASK_PL, event -> remove());
+		markMit    = getMenuItem(textsRepo.BT_SELECT_TASK_PL,  textsRepo.HK_SELECT_TASK_PL, event -> mark());
+		markAllMit = getMenuItem(textsRepo.BT_SEL_ALL_TASK_PL, textsRepo.HK_SEL_ALL_TASK_PL, event -> markAll());
+		removeMit  = getMenuItem(textsRepo.BT_DELETE_TASK_PL,  textsRepo.HK_DELETE_TASK_PL, event -> remove());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_TASK);
-		menu.setMnemonic(texts.MN_TASK_PL);
-		menu.setFont(fonts.getFontPlate());
+		menu.setText(textsRepo.MU_TASK);
+		menu.setMnemonic(textsRepo.MN_TASK_PL);
+		menu.setFont(fontsRepo.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -114,7 +114,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_LIST), texts.TIP_TASK_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_LIST), textsRepo.TIP_TASK_PL, event -> openClose());
 	}
 
 //
@@ -224,7 +224,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 			markMit.setEnabled(false);
 			markAllMit.setEnabled(false);
 			removeMit.setEnabled(false);
-			openCloseBut.setBackground(colors.getBasicBackground());
+			openCloseBut.setBackground(colorsRepo.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -233,7 +233,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 			markMit.setEnabled(true);
 			markAllMit.setEnabled(true);
 			removeMit.setEnabled(true);
-			openCloseBut.setBackground(colors.getPushedButton());
+			openCloseBut.setBackground(colorsRepo.getPushedButton());
 				
 			this.setVisible(true);
 		}
@@ -248,7 +248,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(fonts.getFontBold());
+		label.setFont(fontsRepo.getFontBold());
 		return label;
 	}
 
@@ -284,7 +284,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

@@ -32,7 +32,7 @@ class DialogAbout extends JDialog
 {
 	private static final long serialVersionUID = 1L;
 
-	private Fonts fonts;
+	private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor
@@ -44,10 +44,10 @@ class DialogAbout extends JDialog
 	{
 		super(owner, title, true);
 
-		fonts = dataFactory.getFonts();
+		fontsRepo = dataFactory.getFontsRepo();
 		
 		JTextPane infoPane = getTextPane();
-		infoPane.setText(dataFactory.getResourceContent(Texts.PH_INFO).toString());
+		infoPane.setText(dataFactory.getCharsFromResource(TextsRepo.PH_INFO).toString());
 		infoPane.setCaretPosition(0);
 		add(new JScrollPane(infoPane));
 			
@@ -59,7 +59,7 @@ class DialogAbout extends JDialog
 	private JTextPane getTextPane() 
 	{
 		JTextPane textPane = new JTextPane();
-		textPane.setFont(fonts.getFontPlate());
+		textPane.setFont(fontsRepo.getFontPlate());
 		textPane.setEditable(false);	
 		return textPane;
 	}

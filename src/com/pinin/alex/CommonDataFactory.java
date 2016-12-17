@@ -12,27 +12,17 @@ public interface CommonDataFactory
 
     Logger getLogger();
 
-    Texts getTexts();
+    TextsRepo getTextsRepo();
 
     Data getData();
 
-    Fonts getFonts();
+    FontsRepo getFontsRepo();
 
-    Colors getColors();
+    ColorsRepo getColorsRepo();
 
-    Borders getBorders();
+    BordersRepo getBordersRepo();
 
-    /**
-     * Returns the specified resource as an <code>ImageIcon</code>.
-     * @param resource - a path to get the resource.
-     * @return the specified resource as an <code>ImageIcon</code>.
-     */
-    ImageIcon getResource(String resource);
+    ImageIcon getIconFromResource(String resourcePath);
 
-    /**
-     * Returns the specified resource as an <code>InputStream</code>.
-     * @param resource - a path to get the resource.
-     * @return the specified resource as an <code>InputStream</code>.
-     */
-    CharSequence getResourceContent(String resource);
+    CharSequence getCharsFromResource(String resource);
 }

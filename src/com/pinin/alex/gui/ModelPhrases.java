@@ -91,7 +91,7 @@ class ModelPhrases extends AbstractTableModel
 	// common mains
 	private CommonDataFactory dataFactory; // TODO possibly not global
 	private Logger logger;
-	private Texts texts;
+	private TextsRepo textsRepo;
 
 	/**
 	 * Constructor.
@@ -101,7 +101,7 @@ class ModelPhrases extends AbstractTableModel
 	{
         this.dataFactory = dataFactory;
         logger = dataFactory.getLogger();
-        texts = dataFactory.getTexts();
+        textsRepo = dataFactory.getTextsRepo();
 
 		data = new Phrases();
 		checkbox = new ArrayList<>();
@@ -109,11 +109,11 @@ class ModelPhrases extends AbstractTableModel
 		soundFolder = "";
 		sounds = new LinkedList<>();
 		
-		icon_sound    = new ImageIcon(LangH.class.getResource(Texts.PH_ICON_SOUND));
-		icon_no_sound = new ImageIcon(LangH.class.getResource(Texts.PH_ICON_NO_SOUND));
+		icon_sound    = new ImageIcon(LangH.class.getResource(TextsRepo.PH_ICON_SOUND));
+		icon_no_sound = new ImageIcon(LangH.class.getResource(TextsRepo.PH_ICON_NO_SOUND));
 		
-		columns = new String[] {texts.LB_COL_CHECK, texts.LB_COL_NUM, texts.LB_COL_PHRASE,
-				texts.LB_COL_TRANSL, texts.LB_COL_COMMENT, texts.LB_COL_TAG, texts.LB_COL_PLAY};
+		columns = new String[] {textsRepo.LB_COL_CHECK, textsRepo.LB_COL_NUM, textsRepo.LB_COL_PHRASE,
+				textsRepo.LB_COL_TRANSL, textsRepo.LB_COL_COMMENT, textsRepo.LB_COL_TAG, textsRepo.LB_COL_PLAY};
 	}
 
 	/**
@@ -212,7 +212,7 @@ class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(texts.MG_ADD_QUESTION, texts.TL_CONF_EDIT);
+			int ok = GUI.showConfirmDialog(textsRepo.MG_ADD_QUESTION, textsRepo.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION)
 			{
 				for (Phrase each : c)
@@ -224,8 +224,8 @@ class ModelPhrases extends AbstractTableModel
 					String phrase = each.getPhrase();
 					if (data.contPhrase(phrase)) 
 					{
-						String message = texts.MG_LIST_CONT_PHRASE + " " + phrase + ". " + texts.MG_EDIT_QUESTION;
-						int ok2 = GUI.showConfirmDialog(message, texts.TL_CONF_EDIT);
+						String message = textsRepo.MG_LIST_CONT_PHRASE + " " + phrase + ". " + textsRepo.MG_EDIT_QUESTION;
+						int ok2 = GUI.showConfirmDialog(message, textsRepo.TL_CONF_EDIT);
 						if (ok2 == JOptionPane.OK_OPTION) 
 						{
 							if (data.addEdit(each) == -1) checkbox.add(false);
@@ -252,7 +252,7 @@ class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(texts.MG_REMOVE_QUESTION, texts.TL_CONF_REMOVE);
+			int ok = GUI.showConfirmDialog(textsRepo.MG_REMOVE_QUESTION, textsRepo.TL_CONF_REMOVE);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				LinkedList<Integer> ids = getMarkedIds();
@@ -306,7 +306,7 @@ class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(texts.MG_TO_PHRASE_QUESTION, texts.TL_CONF_EDIT);
+			int ok = GUI.showConfirmDialog(textsRepo.MG_TO_PHRASE_QUESTION, textsRepo.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				LinkedList<Integer> ids = getMarkedIds();
@@ -341,7 +341,7 @@ class ModelPhrases extends AbstractTableModel
             return false;
         }
 
-        String fileName = id + "." + texts.PH_EXT_SOUND;
+        String fileName = id + "." + textsRepo.PH_EXT_SOUND;
         String filePath = soundFolder + File.separator + fileName;
         File file = new File(filePath);
 
@@ -359,23 +359,23 @@ class ModelPhrases extends AbstractTableModel
 			int markedId = getMarkedId();
 			if (markedId == -1)
 			{
-				GUI.showInformDialog(texts.MG_SELECT_ROWS, texts.TL_NO_SELECTION);
+				GUI.showInformDialog(textsRepo.MG_SELECT_ROWS, textsRepo.TL_NO_SELECTION);
 				return;
 			}
 			
 			int index = data.indexOfId(markedId);
-			String message = texts.MG_EDIT_REC_QUESTION + " " + data.get(index).getPhrase() + "?";
-			int ok = GUI.showConfirmDialog(message, texts.TL_CONF_EDIT);
+			String message = textsRepo.MG_EDIT_REC_QUESTION + " " + data.get(index).getPhrase() + "?";
+			int ok = GUI.showConfirmDialog(message, textsRepo.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
-				String fileName = markedId + "." + texts.PH_EXT_SOUND;
+				String fileName = markedId + "." + textsRepo.PH_EXT_SOUND;
 				sounds.add(fileName);
 				
 				String filePath = soundFolder + File.separator + fileName;
 				sound.save(new File(filePath));
 				
 				logger.log(Level.CONFIG, "Record has been saved " + dataPath);
-				GUI.sendMessage(texts.MG_SAVED_REPORT + " " + dataPath);
+				GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + dataPath);
 			}
 			
 		}
@@ -521,7 +521,7 @@ class ModelPhrases extends AbstractTableModel
 		case COMMENT_COL: return p.getComment();
 		case TAG_COL:     return p.getTag();
 		case PLAY_COL:
-			boolean isSound = sounds.contains(p.getId() + "." + texts.PH_EXT_SOUND);
+			boolean isSound = sounds.contains(p.getId() + "." + textsRepo.PH_EXT_SOUND);
 			if (isSound) return icon_sound;
 			else         return icon_no_sound;
 		default: return "";

@@ -55,11 +55,11 @@ class ModelTerm extends AbstractTableModel
 	 */
 	ModelTerm(CommonDataFactory dataFactory)
 	{
-		Texts texts = dataFactory.getTexts();
+		TextsRepo textsRepo = dataFactory.getTextsRepo();
 
 		data = new ArrayList<>();
 		checkbox = new ArrayList<>();
-		columns =  new String[] {texts.LB_COL_CHECK, texts.LB_COL_TAG};
+		columns =  new String[] {textsRepo.LB_COL_CHECK, textsRepo.LB_COL_TAG};
 	}
 
 	void loadData(Term term) 

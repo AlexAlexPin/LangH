@@ -50,8 +50,8 @@ class TablePhrasesFiltered extends JTable
 	
 	// common mains
 	private Logger logger;
-	private Texts texts;
-    private Fonts fonts;
+	private TextsRepo textsRepo;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -61,14 +61,14 @@ class TablePhrasesFiltered extends JTable
 	TablePhrasesFiltered(TableModel model, CommonDataFactory dataFactory)
 	{
         logger = dataFactory.getLogger();
-        texts = dataFactory.getTexts();
-        fonts = dataFactory.getFonts();
+        textsRepo = dataFactory.getTextsRepo();
+        fontsRepo = dataFactory.getFontsRepo();
 
 		// make the table
 		
 		this.model = (ModelPhrases) model;
 		
-		final Font fontP = fonts.getFontPlate();
+		final Font fontP = fontsRepo.getFontPlate();
 			
 		this.setModel(model);
 		this.setFont(fontP);
@@ -106,9 +106,9 @@ class TablePhrasesFiltered extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark    = getMenuItem(texts.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT, event -> mark());
-		JMenuItem markAll = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem remove  = getMenuItem(texts.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE, event -> removeMarkedRows());
+		JMenuItem mark    = getMenuItem(textsRepo.BT_SELECT_TABLE_PL,  TextsRepo.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll = getMenuItem(textsRepo.BT_SEL_ALL_TABLE_PL, TextsRepo.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem remove  = getMenuItem(textsRepo.BT_DELETE_TABLE_PL,  TextsRepo.PH_ICON_DELETE, event -> removeMarkedRows());
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -190,7 +190,7 @@ class TablePhrasesFiltered extends JTable
 	 */
 	void addAll(Collection<? extends Integer> ids) 
 	{
-		int ok = GUI.showConfirmDialog(texts.MG_TO_TASK_QUESTION, texts.TL_CONF_SELECT);
+		int ok = GUI.showConfirmDialog(textsRepo.MG_TO_TASK_QUESTION, textsRepo.TL_CONF_SELECT);
 		if (ok == JOptionPane.OK_OPTION) 
 		{
 			filteredIds.addAll(ids);
@@ -203,7 +203,7 @@ class TablePhrasesFiltered extends JTable
 	 */
 	void removeMarkedRows() 
 	{
-		int ok = GUI.showConfirmDialog(texts.MG_REMOVE_QUESTION, texts.TL_CONF_REMOVE);
+		int ok = GUI.showConfirmDialog(textsRepo.MG_REMOVE_QUESTION, textsRepo.TL_CONF_REMOVE);
 		if (ok == JOptionPane.OK_OPTION) 
 		{
 			LinkedList<Integer> markedRows = getMarkedIds();
@@ -301,7 +301,7 @@ class TablePhrasesFiltered extends JTable
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;

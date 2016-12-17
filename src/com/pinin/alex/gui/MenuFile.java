@@ -41,8 +41,8 @@ class MenuFile extends AbstractControlledPanel
 	// common mains
     private CommonDataFactory dataFactory; // TODO possible local
 	private Logger logger;
-	private Texts texts;
-    private Fonts fonts;
+	private TextsRepo textsRepo;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructor.
@@ -54,29 +54,29 @@ class MenuFile extends AbstractControlledPanel
 	{
         this.dataFactory = dataFactory;
 		logger = dataFactory.getLogger();
-		texts = dataFactory.getTexts();
-        fonts = dataFactory.getFonts();
+		textsRepo = dataFactory.getTextsRepo();
+        fontsRepo = dataFactory.getFontsRepo();
 
 		// menu items
 
-        JMenuItem newFile = getMenuItem(texts.BT_NEW_FILE, texts.HK_NEW_FILE, event -> newFile(dic, workList));
-		newFile.setIcon(dataFactory.getResource(Texts.PH_ICON_NEW));
+        JMenuItem newFile = getMenuItem(textsRepo.BT_NEW_FILE, textsRepo.HK_NEW_FILE, event -> newFile(dic, workList));
+		newFile.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_NEW));
 
-        JMenuItem openFile = getMenuItem(texts.BT_OPEN_FILE, texts.HK_OPEN_FILE, event -> openFile(dic));
-		openFile.setIcon(dataFactory.getResource(Texts.PH_ICON_OPEN));
+        JMenuItem openFile = getMenuItem(textsRepo.BT_OPEN_FILE, textsRepo.HK_OPEN_FILE, event -> openFile(dic));
+		openFile.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_OPEN));
 
-        JMenuItem saveFile = getMenuItem(texts.BT_SAVE_FILE, texts.HK_SAVE_FILE, event -> saveFile(dic, workList));
-		saveFile.setIcon(dataFactory.getResource(Texts.PH_ICON_SAVE));
+        JMenuItem saveFile = getMenuItem(textsRepo.BT_SAVE_FILE, textsRepo.HK_SAVE_FILE, event -> saveFile(dic, workList));
+		saveFile.setIcon(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SAVE));
 
-        JMenuItem saveFileAs = getMenuItem(texts.BT_SAVE_AS_FILE, texts.HK_SAVE_AS_FILE, event -> saveFileAs(dic, workList));
-        JMenuItem exitProg = getMenuItem(texts.BT_EXIT_FILE, texts.HK_EXIT_FILE, event -> exitProgram());
+        JMenuItem saveFileAs = getMenuItem(textsRepo.BT_SAVE_AS_FILE, textsRepo.HK_SAVE_AS_FILE, event -> saveFileAs(dic, workList));
+        JMenuItem exitProg = getMenuItem(textsRepo.BT_EXIT_FILE, textsRepo.HK_EXIT_FILE, event -> exitProgram());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(texts.MU_FILE);
-		menu.setMnemonic(texts.MN_FILE);
-		menu.setFont(dataFactory.getFonts().getFontPlate());
+		menu.setText(textsRepo.MU_FILE);
+		menu.setMnemonic(textsRepo.MN_FILE);
+		menu.setFont(dataFactory.getFontsRepo().getFontPlate());
 		
 		menu.add(newFile);
 		menu.add(openFile);
@@ -88,8 +88,8 @@ class MenuFile extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		saveFileBut = getButton(dataFactory.getResource(Texts.PH_ICON_SAVE),
-				texts.TIP_SAVE_FILE, event -> saveFile(dic, workList));
+		saveFileBut = getButton(dataFactory.getIconFromResource(TextsRepo.PH_ICON_SAVE),
+				textsRepo.TIP_SAVE_FILE, event -> saveFile(dic, workList));
 	}
 
 	/**
@@ -100,7 +100,7 @@ class MenuFile extends AbstractControlledPanel
 	private void newFile(DictionaryTable dic, DictionaryTable worklist)
 	{
 		GUI.sendMessage("");
-		int ok = GUI.showConfirmDialog(texts.MG_NEW_QUESTION, texts.TL_CONF_NEW);
+		int ok = GUI.showConfirmDialog(textsRepo.MG_NEW_QUESTION, textsRepo.TL_CONF_NEW);
 		if (ok == JOptionPane.OK_OPTION)
 		{
 			dic.loadData(null);
@@ -120,7 +120,7 @@ class MenuFile extends AbstractControlledPanel
 			GUI.sendMessage("");
 			File path = dic.getPath();
 			
-			String newPath = GUI.showOpenFileDialog(texts.MG_FILE_DESCRIPT, path, texts.PH_EXT_DB);
+			String newPath = GUI.showOpenFileDialog(textsRepo.MG_FILE_DESCRIPT, path, textsRepo.PH_EXT_DB);
 			GUI.loadData(newPath);
 		}
 		catch (RuntimeException e) 
@@ -147,9 +147,9 @@ class MenuFile extends AbstractControlledPanel
 				return;
 			}
 			dic.codeFile(path);
-			GUI.sendMessage(texts.MG_SAVED_REPORT + " " + path);
+			GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + path);
 			
-			String pathTask = dataFactory.getData().getTaskPath(path.toString(), texts.PH_EXT_TSK);
+			String pathTask = dataFactory.getData().getTaskPath(path.toString(), textsRepo.PH_EXT_TSK);
 			workList.codeFile(new File(pathTask));
 		}
 		catch (Exception e) 
@@ -169,26 +169,26 @@ class MenuFile extends AbstractControlledPanel
 		{
 			GUI.sendMessage("");
 			
-			String newPath = GUI.showOpenFileDialog(texts.MG_FILE_DESCRIPT, new File(""), texts.PH_EXT_DB);
+			String newPath = GUI.showOpenFileDialog(textsRepo.MG_FILE_DESCRIPT, new File(""), textsRepo.PH_EXT_DB);
 			if (newPath.isEmpty()) return;
 			
-			String extension = "." + texts.PH_EXT_DB;
+			String extension = "." + textsRepo.PH_EXT_DB;
 			if (!newPath.endsWith(extension)) newPath += extension;
 			
 			File newPathFile = new File(newPath);
 			if (newPathFile.exists())
 			{
-				String message = newPathFile + " " + texts.MG_FILE_EXISTS;
-				int ok = GUI.showConfirmDialog(message, texts.TL_CONF_REPLACE);
+				String message = newPathFile + " " + textsRepo.MG_FILE_EXISTS;
+				int ok = GUI.showConfirmDialog(message, textsRepo.TL_CONF_REPLACE);
 				if (ok != JOptionPane.OK_OPTION) return;
 			}
 			dic.codeFile(new File(newPath));
-			GUI.sendMessage(texts.MG_SAVED_REPORT + " " + newPath);
+			GUI.sendMessage(textsRepo.MG_SAVED_REPORT + " " + newPath);
 			
 			Data data = dataFactory.getData();
 			data.putDataPath(newPath);
 			
-			String newTaskData = data.getTaskPath(newPath, texts.PH_EXT_TSK);
+			String newTaskData = data.getTaskPath(newPath, textsRepo.PH_EXT_TSK);
 			workList.codeFile(new File(newTaskData));
 		}
 		catch (Exception e) 
@@ -221,7 +221,7 @@ class MenuFile extends AbstractControlledPanel
 	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(fonts.getFontPlate());
+		item.setFont(fontsRepo.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;

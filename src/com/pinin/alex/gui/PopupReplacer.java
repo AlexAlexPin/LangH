@@ -39,7 +39,7 @@ class PopupReplacer extends JPopupMenu
 	private static final long serialVersionUID = 1L;
 
 	// common mains
-    private Fonts fonts;
+    private FontsRepo fontsRepo;
 
 	/**
 	 * Constructs this popup menu and shows it on the specified component.
@@ -50,7 +50,7 @@ class PopupReplacer extends JPopupMenu
 	void display(JTextComponent component, Replacer replacer, CommonDataFactory dataFactory)
 	{
         Logger logger = dataFactory.getLogger();
-        fonts = dataFactory.getFonts();
+        fontsRepo = dataFactory.getFontsRepo();
 
 		try
 		{
@@ -99,7 +99,7 @@ class PopupReplacer extends JPopupMenu
 	private JMenuItem getMenuItem(String text, ActionListener action) 
 	{
 		JMenuItem menuItem = new JMenuItem(text);
-		menuItem.setFont(fonts.getFontPlate());
+		menuItem.setFont(fontsRepo.getFontPlate());
 		menuItem.addActionListener(action);
 		return menuItem;
 	}

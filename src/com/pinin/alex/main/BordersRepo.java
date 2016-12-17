@@ -28,9 +28,8 @@ import javax.swing.border.*;
  * Loads and contains borders.
  */
 @SuppressWarnings("unused")
-public class Borders
+public class BordersRepo
 {
-	// borders
 	private Border panelBorder;
 	private Border elementBorder;
 	private Border fieldBorder;
@@ -38,18 +37,10 @@ public class Borders
 	private Border emptyBorder;
 	private TitledBorder correctBorder;
 	private TitledBorder wrongBorder;
-	
-	// common mains
-	private Fonts fonts;
-	
-	/**
-	 * Constructor.
-	 * @param fonts - fonts for this application.
-     * @param texts - texts for this application.
-	 */
-	public Borders(Fonts fonts, Texts texts)
-	{
-        this.fonts = fonts;
+	private FontsRepo fontsRepo;
+
+	public BordersRepo(FontsRepo fontsRepo, TextsRepo textsRepo, ColorsRepo colorsRepo) {
+        this.fontsRepo = fontsRepo;
 
 		panelBorder   = BorderFactory.createBevelBorder(0);
 		elementBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
@@ -57,17 +48,17 @@ public class Borders
 		labelBorder   = BorderFactory.createEtchedBorder(1);
 		emptyBorder   = BorderFactory.createEmptyBorder();
 			
-		Font fontP = fonts.getFontPlate();
-			
+		Font fontP = fontsRepo.getFontPlate();
+
 		correctBorder = (BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(new Color(0, 128, 0), 2), 
-				texts.MG_CORRECT_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
-		correctBorder.setTitleColor(new Color(0, 128, 0));
+				BorderFactory.createLineBorder(colorsRepo.getGreen(), 2),
+				textsRepo.MG_CORRECT_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
+		correctBorder.setTitleColor(colorsRepo.getGreen());
 			
 		wrongBorder = (BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(new Color(255, 0, 0), 2), 
-				texts.MG_WRONG_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
-		wrongBorder.setTitleColor(new Color(255, 0, 0));
+				BorderFactory.createLineBorder(colorsRepo.getRed(), 2),
+				textsRepo.MG_WRONG_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
+		wrongBorder.setTitleColor(colorsRepo.getRed());
 
         TitledBorder inTextBorder = (BorderFactory.createTitledBorder(
 				BorderFactory.createEmptyBorder(),
@@ -75,46 +66,38 @@ public class Borders
 		inTextBorder.setTitleColor(Color.LIGHT_GRAY);
 	}
 
-	public Border getPanelBorder() 
-	{
+	public Border getPanelBorder() {
 		return panelBorder;
 	}
 
-	public Border getElementBorder() 
-	{
+	public Border getElementBorder() {
 		return elementBorder;
 	}
 
-	public Border getFieldBorder() 
-	{
+	public Border getFieldBorder() {
 		return fieldBorder;
 	}
 
-	public Border getLabelBorder() 
-	{
+	public Border getLabelBorder() {
 		return labelBorder;
 	}
 
-	public Border getEmptyBorder() 
-	{
+	public Border getEmptyBorder() {
 		return emptyBorder;
 	}
 
-	public Border getCorrectBorder() 
-	{
+	public Border getCorrectBorder() {
 		return correctBorder;
 	}
 
-	public Border getWrongBorder() 
-	{
+	public Border getWrongBorder() {
 		return wrongBorder;
 	}
 
-	public Border getInTextBorder(String text) 
-	{
+	public Border getInTextBorder(String text) {
 		TitledBorder border = (BorderFactory.createTitledBorder(
 				BorderFactory.createEmptyBorder(),
-				text, TitledBorder.CENTER, TitledBorder.TOP, fonts.getFontPlate()));
+				text, TitledBorder.CENTER, TitledBorder.TOP, fontsRepo.getFontPlate()));
 		border.setTitleColor(Color.LIGHT_GRAY);
 		return border;
 	}
