@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -46,58 +46,38 @@ import com.pinin.alex.main.Common.*;
  */
 public class Phrases extends ArrayList<Phrase> 
 {
-//
-// Variables	
-//	
-	
-	/** The larger <code>id</code> attribute of elements of this object */
+	// The larger id attribute of elements of this object
 	private int largerID;
 	
-	/** The list of all <code>ID</code> attribute values of elements of this object */
+	// The list of all ID attribute values of elements of this object
 	private HashSet<Integer> IDs;
 	
-	/** The list of all <code>phrase</code> attribute values of elements of this object */
+	// The list of all phrase attribute values of elements of this object
 	private HashSet<String> phrases;
 	
-	/** The list of all tags as <code>String</code> of <code>tag</code> attribute values 
-	 * of elements of this object */
+	// The list of all tags as <String< of tag attribute values of elements of this object
 	private Term tags;
 	
-	/** The character that is used to separate elements in a file */
+	// The character that is used to separate elements in a file
 	private char delimiter;
 	
-	/** The character to replace the delimiter in case if user try to enter it */
+	// The character to replace the delimiter in case if user try to enter it
 	private char replacement;
 	
-	/** Default serial version ID */
+	// Default serial version ID
 	private static final long serialVersionUID = 1L;
-	
-//	
-//	Constructors
-//
-	
-	/**
-	 * Constructor
-	 */
-	public Phrases() 
-	{
+
+	public Phrases() {
 		delimiter = '~';
 		replacement = '^';
 		setDefault();
 	}
 
-//
-// Methods
-//
-	
-	/**
-	 * Sets variables default values
-	 */
 	private void setDefault() 
 	{
 		largerID = 0;
-		IDs = new HashSet<Integer>();
-		phrases = new HashSet<String>();
+		IDs = new HashSet<>();
+		phrases = new HashSet<>();
 		tags = new Term();
 	}
 
@@ -114,8 +94,7 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param e - the new element to be added
 	 * @return <code>true</code> if information has been added
 	 */
-	private boolean increase(Phrase e) 
-	{
+	private boolean increase(Phrase e) {
 		int ID = e.getId();
 		String phrase = e.getPhrase();
 		
@@ -137,23 +116,17 @@ public class Phrases extends ArrayList<Phrase>
 	 * the <code>largerID</code>.
 	 * @param e - the element to be removed
 	 */
-	private void decrease(Phrase e) 
-	{
+	private void decrease(Phrase e) {
 		final Integer ID = e.getId();
 		IDs.remove(ID);
-		if (ID == largerID) 
-		{
+		if (ID == largerID) {
 			largerID = 0;
-			for (Integer each : IDs) 
-			{
-				if (largerID < each) largerID = each;
-			}
+			IDs.stream().filter(each -> largerID < each).forEach(each -> largerID = each);
 		}
 		phrases.remove(e.getPhrase());
 		
 		tags.clear();
-		for (Phrase each : this) 
-		{
+		for (Phrase each : this) {
 			tags.addAll(each.getTag());
 		}
 	}
@@ -161,11 +134,9 @@ public class Phrases extends ArrayList<Phrase>
 	/**
 	 * Clears all support lists and fills them again.
 	 */
-	private void reload() 
-	{
+	private void reload() {
 		setDefault();
-		for (Phrase each : this) 
-		{
+		for (Phrase each : this) {
 			Integer ID = each.getId();
 			IDs.add(ID);
 			if (largerID > ID) largerID = ID;
@@ -173,84 +144,18 @@ public class Phrases extends ArrayList<Phrase>
 			tags.addAll(each.getTag());
 		}
 	}
-	
-	/**
-	 * Returns the current <code>largerID</code> value
-	 * @return the current <code>largerID</code> value
-	 */
-	public int getLargerID() 
-	{
+
+	public int getLargerID() {
 		return largerID;
 	}
-	
-	/**
-	 * Returns the current <code>delimiter</code> value
-	 * @return the current <code>delimiter</code> value
-	 */
-	public char getDelimiter() 
-	{
-		return delimiter;
-	}
-	
-	/**
-	 * Sets the new <code>delimiter</code> value
-	 * @param delimiter - the new value
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setDelimiter(Character delimiter) throws NullPointerException
-	{
-		if (delimiter == null) throw new NullPointerException("null value in Phrases.setDelimiter()");
-		this.delimiter = delimiter;
-	}
-	
-	/**
-	 * Returns current <code>replacement</code> value
-	 * @return current <code>replacement</code> value
-	 */
-	public char getReplasement() 
-	{
-		return replacement;
-	}
-	
-	/**
-	 * Sets the new <code>replacement</code> value
-	 * @param replacement - the new value
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setReplacement(Character replacement) throws NullPointerException
-	{
-		if (replacement == null) throw new NullPointerException("null value in Phrases.setReplacement()");
-		this.replacement = replacement;
-	}
-	
-	/**
-	 * Returns the copy of current list of phrases as <code>String[]</code>.
-	 * @return the copy of current list of phrases as <code>String[]</code>.
-	 */
-	public String[] getPhraseList() 
-	{
-		String[] sarr = new String[phrases.size()];
+
+	public String[] getTagList() {
+		String[] result = new String[tags.size()];
 		int i=0;
-		for (String each : phrases)
-		{
-			sarr[i++] = each;
+		for (String each : tags) {
+			result[i++] = each;
 		}
-		return sarr;
-	}
-	
-	/**
-	 * Returns the copy of current list of tags as <code>String[]</code>.
-	 * @return the copy of current list of tags as <code>String[]</code>.
-	 */
-	public String[] getTagList() 
-	{
-		String[] sarr = new String[tags.size()];
-		int i=0;
-		for (String each : tags)
-		{
-			sarr[i++] = each;
-		}
-		return sarr;
+		return result;
 	}
 	
 	/**
@@ -263,55 +168,18 @@ public class Phrases extends ArrayList<Phrase>
 	 * the specified element.
 	 */
 	@Override
-	public Phrase set(int index, Phrase element) throws IndexOutOfBoundsException, NullPointerException 
-	{
-		if (element == null) throw new NullPointerException("null value in Phrase.set()");
-		
+	public Phrase set(int index, Phrase phrase) throws IllegalArgumentException {
+		if (phrase == null) throw new IllegalArgumentException("Phrase is null");
 		if (index < 0 || index >= this.size())
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.set()");
+			throw new IllegalArgumentException("Size: " + this.size() + ", index: " + index + " is out of bounds");
 		
 		Phrase old = this.get(index);
 		decrease(old);
 		
-		if (increase(element)) return super.set(index, element);
+		if (increase(phrase)) return super.set(index, phrase);
 		
 		else increase(old);
-		return element;
-	}
-	
-	/**
-	 * Replaces element's <code>ID</code> attribute value at the specified position 
-	 * in this list with the specified value.<br>
-	 * <b>Note: </b>To set value it is strongly recommended to use this method rather then 
-	 * <code>this.get(...).setID(...)</code> because this method allows to correlate
-	 * new values with list of IDs.<br>
-	 * The <code>ID</code> attribute of this object must not contain the specified value. 
-	 * In the case of failure of these conditions this method does not replace value and 
-	 * returns the <code>false</code>.
-	 * @param index - index of the element
-	 * @param value - the new value
-	 * @return <code>true</code> if this list changed
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IndexOutOfBoundsException if the specified index is out of bounds
-	 */
-	public boolean setId(int index, Integer value) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (value == null) throw new NullPointerException("null value in Phrase.setId()");
-		
-		if (index < 0 || index >= this.size())
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.setID()");
-		
-		if (IDs.contains(value)) return false;
-		
-		Integer old = this.get(index).getId();
-		IDs.remove(old);
-		if (largerID == old) largerID--;
-		
-		this.get(index).setId(value);
-		IDs.add(value);
-		if (largerID < value) largerID = value;
-		
-		return true;
+		return phrase;
 	}
 	
 	/**
@@ -326,16 +194,9 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param index - index of the element
 	 * @param value - the new value
 	 * @return <code>true</code> if this list changed
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IndexOutOfBoundsException if the specified index is out of bounds
 	 */
-	public boolean setPhrase(int index, String value) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (value == null) throw new NullPointerException("null value in Phrase.setPhrase()");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.setPhrase()");
-		
+	public boolean setPhrase(int index, String value) throws IllegalArgumentException {
+        Check(index, value);
 		if (value.isEmpty() || phrases.contains(value)) return false;
 		
 		String old = this.get(index).getPhrase();
@@ -346,23 +207,16 @@ public class Phrases extends ArrayList<Phrase>
 		
 		return true;
 	}
-	
+
 	/**
 	 * Replaces element's <code>transl</code> attribute value at the specified position 
 	 * in this list with the specified value.<br>
 	 * @param index - index of the element
 	 * @param value - the new value
 	 * @return <code>true</code> if this list changed
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IndexOutOfBoundsException if the specified index is out of bounds
 	 */
-	public boolean setTransl(int index, Term value) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (value == null) throw new NullPointerException("null value in Phrase.setTransl()");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.setPhrase()");
-		
+	public boolean setTransl(int index, Term value) throws IllegalArgumentException {
+        Check(index, value);
 		this.get(index).setTransl(value);
 		return true;
 	}
@@ -373,16 +227,9 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param index - index of the element
 	 * @param value - the new value
 	 * @return <code>true</code> if this list changed
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IndexOutOfBoundsException if the specified index is out of bounds
 	 */
-	public boolean setComment(int index, Term value) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (value == null) throw new NullPointerException("null value in Phrase.setComment()");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.setPhrase()");
-		
+	public boolean setComment(int index, Term value) throws IllegalArgumentException {
+        Check(index, value);
 		this.get(index).setComment(value);
 		return true;
 	}
@@ -396,21 +243,12 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param index - index of the element
 	 * @param value - the new value
 	 * @return <code>true</code> if this list changed
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IndexOutOfBoundsException if the specified index is out of bounds
 	 */
-	public boolean setTag(int index, Term value) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (value == null) throw new NullPointerException("null value in Phrase.setTag()");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.setTag()");
-		
+	public boolean setTag(int index, Term value) throws IllegalArgumentException {
+        Check(index, value);
 		this.get(index).setTag(value);
-		
 		tags.clear();
-		for (Phrase each : this)
-		{
+		for (Phrase each : this) {
 			tags.addAll(each.getTag());
 		}
 		return true;
@@ -425,13 +263,10 @@ public class Phrases extends ArrayList<Phrase>
 	 * conditions this method does not append the specified element and returns <code>false</code>.
 	 */
 	@Override
-	public boolean add(Phrase e) throws NullPointerException 
-	{
-		if (e == null) throw new NullPointerException("null value in Phrase.add(Phrase)");
-		
-		if (!increase(e)) return false;
-		return super.add(e);
-	}
+	public boolean add(Phrase e) throws IllegalArgumentException {
+        if (e == null) throw new IllegalArgumentException("Value is null");
+        return increase(e) && super.add(e);
+    }
 	
 	/**
 	 * Inserts the specified element at the specified position in this list. 
@@ -444,14 +279,8 @@ public class Phrases extends ArrayList<Phrase>
 	 * conditions this method does not insert the specified element.
 	 */
 	@Override
-	public void add(int index, Phrase element) throws NullPointerException, IndexOutOfBoundsException 
-	{
-		if (element == null) throw new NullPointerException("null value in Phrase.add(int, Phrase)");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index 
-					+ " in Phrase.add(int, Phrase)");
-		
+	public void add(int index, Phrase element) throws IllegalArgumentException {
+        Check(index, element);
 		super.add(index, element);
 	}
 	
@@ -465,19 +294,10 @@ public class Phrases extends ArrayList<Phrase>
 	 * conditions this method does not append the specified elements and returns <code>false</code>.
 	 */
 	@Override
-	public boolean addAll(Collection<? extends Phrase> c) throws NullPointerException 
-	{
-		if (c == null) throw new NullPointerException("null value in Phrase.addAll(Collection)");
-		
-		final int sizeBef = this.size();
-		
-		for (Phrase each : c)
-		{
-			this.add(each);
-		}
-		final int sizeAft = this.size();
-		
-		return sizeBef - sizeAft == 0;
+	public boolean addAll(Collection<? extends Phrase> c) {
+		int sizeBefore = this.size();
+        c.forEach(this::add);
+		return sizeBefore == this.size();
 	}
 	
 	/**
@@ -493,29 +313,18 @@ public class Phrases extends ArrayList<Phrase>
 	 * conditions this method does not insert the specified element.
 	 */
 	@Override
-	public boolean addAll(int index, Collection<? extends Phrase> c) 
-			throws IndexOutOfBoundsException, NullPointerException 
-	{
-		if (c == null) throw new NullPointerException("null value in Phrase.addAll(int, Collection)");
-		
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index 
-					+ " in Phrase.addAll(int, Collection)");
-		
-		final int sizeBef = this.size();
+	public boolean addAll(int index, Collection<? extends Phrase> c) throws IllegalArgumentException {
+		Check(index, c);
+		int sizeBefore = this.size();
 		
 		int ind = index;
-		for (Phrase each : c) 
-		{
+		for (Phrase each : c) {
 			int sizeB = this.size();
 			this.add(ind++, each);
 			int sizeA = this.size();
 			if (sizeA > sizeB) ind++;
 		}
-		
-		final int sizeAft = this.size();
-		
-		return sizeBef - sizeAft == 0;
+		return sizeBefore == this.size();
 	}
 	
 	/**
@@ -533,89 +342,70 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param e - element to be appended to this list
 	 * @return <code>-2</code> if the specified element has not added, <code>-1</code> if
 	 * the specified element has added, <code>index</code> if the existing element has edited.
-	 * @throws NullPointerException if the specified value is <code>null</code>
 	 */
-	public int addEdit(Phrase e) throws NullPointerException 
-	{
-		if (e == null) throw new NullPointerException("null value in Phrase.addEdit()");
-		
+	public int addEdit(Phrase e) throws IllegalArgumentException {
+		Check(e);
 		if (e.isEmpty()) return -2;
 		if (this.add(e)) return -1;
-		
-		else 
-		{
-			int editIndex = -2;
-			String find = e.getPhrase();
-			for (int i=0; i<this.size(); i++) 
-			{
-				Phrase edit = this.get(i);
-				if (find.equals(edit.getPhrase())) 
-				{
-					edit.addTransl(e.getTransl());
-					edit.addComment(e.getComment());
-					edit.addTag(e.getTag());
-					editIndex = i;
-				}
-			}
 
-			tags.clear();
-			for (Phrase each : this)
-			{
-				tags.addAll(each.getTag());
-			}
-			return editIndex;
-		}
+        int result = -2;
+        String find = e.getPhrase();
+        for (int i=0; i<this.size(); i++) {
+            Phrase edit = this.get(i);
+            if (!find.equals(edit.getPhrase())) continue;
+
+            edit.addTransl(e.getTransl());
+            edit.addComment(e.getComment());
+            edit.addTag(e.getTag());
+            result = i;
+        }
+        tags.clear();
+        for (Phrase each : this) {
+            tags.addAll(each.getTag());
+        }
+        return result;
 	}
 	
 	@Override
-	public Phrase remove(int index) throws IndexOutOfBoundsException 
-	{
-		if (index < 0 || index >= this.size()) 
-			throw new IndexOutOfBoundsException("size: " + this.size() + ", index: " + index + " in Phrase.remove(int)");
-
+	public Phrase remove(int index) throws IllegalArgumentException {
+		Check(index);
 		Phrase p = super.remove(index);
 		this.decrease(p);
 		return p;
 	}
 	
 	@Override
-	public boolean remove(Object o) 
-	{
+	public boolean remove(Object o) {
 		boolean b = super.remove(o);
 		if (b) this.decrease((Phrase) o);
 		return b;
 	}
 	
 	@Override
-	public void removeRange(int fromIndex, int toIndex) throws IndexOutOfBoundsException 
-	{
+	public void removeRange(int fromIndex, int toIndex) throws IllegalArgumentException {
 		if (fromIndex < 0 || fromIndex >= this.size() || toIndex > this.size() || toIndex < fromIndex) 
-			throw new IndexOutOfBoundsException("Size: " + this.size() 
-			+ ", fromIndex: " + fromIndex + ", toIndex: " + toIndex + " in Phrase.removeRange()");
-
+			throw new IllegalArgumentException("Size: " + this.size()
+			+ ", fromIndex: " + fromIndex + ", toIndex: " + toIndex + " index is out of bounds");
 		super.removeRange(fromIndex, toIndex);
 		reload();
 	}
 	
 	@Override
-	public boolean removeIf(Predicate<? super Phrase> filter) 
-	{
+	public boolean removeIf(Predicate<? super Phrase> filter) {
 		boolean b = super.removeIf(filter);
 		if (b) reload();
 		return b;
 	}
 	
 	@Override
-	public boolean removeAll(Collection<?> c) 
-	{
+	public boolean removeAll(Collection<?> c) {
 		boolean b = super.removeAll(c);
 		if (b) reload();
 		return b;
 	}
 	
 	@Override
-	public void clear() 
-	{
+	public void clear() {
 		super.clear();
 		setDefault();
 	}
@@ -629,31 +419,23 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param comment - the element to search in <code>comment</code> attributes
 	 * @param tag - the element to search in <code>tag</code> attributes
 	 * @return the required list of indices
-	 * @throws NullPointerException in case of <code>null</code> value
 	 */
-	public int[] indexOfPart(String phrase, String transl, String comment, String tag) 
-			throws NullPointerException 
-	{
-		
+	public int[] indexOfPart(String phrase, String transl, String comment, String tag) throws IllegalArgumentException {
 		if (phrase == null || transl == null || comment == null || tag == null)
-				throw new NullPointerException("null value in Phrase.indexOfPart()");
+				throw new IllegalArgumentException("Null value");
 		
-		ArrayList<Integer> collector = new ArrayList<Integer>();
-		for (int i=0; i<this.size(); i++) 
-		{
+		ArrayList<Integer> collector = new ArrayList<>();
+		for (int i=0; i<this.size(); i++) {
 			Phrase each = this.get(i);
 			if (each.getPhrase().toLowerCase().contains(phrase.toLowerCase())
 					&& each.getTransl().toString().toLowerCase().contains(transl.toLowerCase())
 					&& each.getComment().toString().toLowerCase().contains(comment.toLowerCase())
-					&& each.getTag().toString().toLowerCase().contains(tag.toLowerCase()))
-			{
+					&& each.getTag().toString().toLowerCase().contains(tag.toLowerCase())) {
 				collector.add(i);
 			}
 		}
-		
 		int[] result = new int[collector.size()];
-		for (int i=0; i<result.length; i++)
-		{
+		for (int i=0; i<result.length; i++) {
 			result[i] = collector.get(i);
 		}
 		return result;
@@ -665,29 +447,21 @@ public class Phrases extends ArrayList<Phrase>
 	 * object.
 	 * @param t - the object with data
 	 * @return the required list of indices
-	 * @throws NullPointerException in case of <code>null</code> value
 	 */
-	public int[] indexOfTags(Term t) throws NullPointerException 
-	{
-		if (t == null) throw new NullPointerException("null value in Phrase.indexOfTags()");
-		
-		ArrayList<Integer> collector = new ArrayList<Integer>();
-		for (int i=0; i<this.size(); i++) 
-		{
+	public int[] indexOfTags(Term t) throws IllegalArgumentException {
+		Check(t);
+		ArrayList<Integer> collector = new ArrayList<>();
+		for (int i=0; i<this.size(); i++) {
 			Term eachTagRow = this.get(i).getTag();
-			for (String eachNewTag : t) 
-			{
-				if (eachTagRow.contains(eachNewTag)) 
-				{
+			for (String eachNewTag : t) {
+				if (eachTagRow.contains(eachNewTag)) {
 					collector.add(i);
 					break;
 				}
 			}
 		}
-		
 		int[] result = new int[collector.size()];
-		for (int i=0; i<result.length; i++)
-		{
+		for (int i=0; i<result.length; i++) {
 			result[i] = collector.get(i);
 		}
 		return result;
@@ -698,13 +472,10 @@ public class Phrases extends ArrayList<Phrase>
 	 * attribute of that element equals the specified <code>int</code>.
 	 * @param id - the <code>ID</code> to be found
 	 * @return the index of the element or -1 if the element has not been found
-	 * @throws NullPointerException in case of <code>null</code> value
 	 */
-	public int indexOfId(Integer id) throws NullPointerException
-	{
-		if (id == null) throw new NullPointerException("null value in Phrase.indexOfTags()");
-		for (int i=0; i<this.size(); i++)
-		{
+	public int indexOfId(Integer id) throws IllegalArgumentException {
+		Check(id);
+		for (int i=0; i<this.size(); i++) {
 			if (this.get(i).getId() == id) return i;
 		}
 		return -1;
@@ -716,11 +487,9 @@ public class Phrases extends ArrayList<Phrase>
 	 * @param s - the <code>String</code> to be checked
 	 * @return true if one of elements of this list contains the <code>String</code> in its
 	 * <code>phrase</code> attribute
-	 * @throws NullPointerException in case of <code>null</code> value
 	 */
-	public boolean contPhrase(String s) throws NullPointerException 
-	{
-		if (s == null) throw new NullPointerException("null value in Phrase.contPhrase()");
+	public boolean contPhrase(String s) throws IllegalArgumentException {
+		Check(s);
 		return phrases.contains(s);
 	}
 	
@@ -729,15 +498,13 @@ public class Phrases extends ArrayList<Phrase>
 	 * Elements of each <code>Phrase</code> object in the file must be separated
 	 * by the <code>delimiter</code> character.
 	 * @param file -  - a file to be read.
-	 * @throws NullPointerException in case of <code>null</code> value
+	 * @throws IllegalArgumentException in case of <code>null</code> value
 	 * @throws ParseFileException in case of any mistakes during the process
 	 */
-	public void parseFile(File file) throws NullPointerException, ParseFileException 
+	public void parseFile(File file) throws IllegalArgumentException, ParseFileException
 	{
-		if (file == null) throw new NullPointerException("null value in Phrase.readFile()");
-		
-		try 
-		{
+		Check(file);
+		try {
 			CharSequence fileContent = Common.getFileContent(file);
 
 			StringBuilder id      = new StringBuilder();
@@ -749,33 +516,24 @@ public class Phrases extends ArrayList<Phrase>
 			int stage = 0;  // shows which element of the Phrase object is being parsed now.
 							// 0 - id, 1 - phrase, 2 - transl, 3 - comment, 4 - tag
 			
-			for (int i=0; i<fileContent.length(); i++) 
-			{
+			for (int i=0; i<fileContent.length(); i++) {
 				final char each = fileContent.charAt(i);
 				
-				if (each == delimiter)	// if the delimiter has been met,
-				{
-					stage++;			// then move to the next stage
-				}
-				else 
-				{
-					switch (stage) 
-					{
-					case 0: id     .append(each); break;
-					case 1: phrase .append(each); break;
-					case 2: transl .append(each); break;
-					case 3: comment.append(each); break;
-					case 4: tag    .append(each); break;
+				if (each == delimiter) stage++;
+				else {
+					switch (stage) {
+                        case 0: id     .append(each); break;
+                        case 1: phrase .append(each); break;
+                        case 2: transl .append(each); break;
+                        case 3: comment.append(each); break;
+                        case 4: tag    .append(each); break;
 					}
 				}
 				
-				if (stage > 4)	// all elements of one Phrase object have been parsed
-				{				
+				if (stage > 4) {	// all elements of one Phrase object have been parsed
 					stage = 0;	// reset the stage to parse the next Phrase object
-					
-					Phrase toAdd = new Phrase();
-					try 
-					{
+					Phrase toAdd;
+					try {
 						toAdd = new Phrase(
 								Integer.parseInt(id.toString()),
 								phrase.toString(),
@@ -783,15 +541,13 @@ public class Phrases extends ArrayList<Phrase>
 								new Term().parse(comment.toString(), ";"),
 								new Term().parse(tag.toString(),     ";") );
 					}
-					catch (NumberFormatException e) 
-					{
+					catch (NumberFormatException e) {
 						this.clear();
 						throw new ParseFileException("incorrect id [" 
 								+ id + "] in Phrase.parseFile()");
 					}
 					
-					if (!this.add(toAdd)) 
-					{
+					if (!this.add(toAdd)) {
 						this.clear();
 						throw new ParseFileException("incorrect element to be added [" 
 								+ toAdd + "] in Phrase.parseFile()");
@@ -804,15 +560,13 @@ public class Phrases extends ArrayList<Phrase>
 					tag     = new StringBuilder();
 				}		
 			}
-			if (stage != 0) // the number of delimiters at the end is incorrect
-			{ 
+			if (stage != 0) { // the number of delimiters at the end is incorrect
 				this.clear();
 				throw new ParseFileException("stage at the end ["
 						+ stage + "], expects [0] in Phrase.parseFile()");
 			}
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			FileReadException ee = new FileReadException(e.getClass() + " exception in Phrase.parseFile()");
 			ee.initCause(e);
 			throw ee;
@@ -824,18 +578,14 @@ public class Phrases extends ArrayList<Phrase>
 	 * All characters that are equal the <code>delimiter</code> will be replaced
 	 * by <code>replacement</code> character.
 	 * @param file - a file to be written.
-	 * @throws NullPointerException in case of <code>null</code> value.
+	 * @throws IllegalArgumentException in case of <code>null</code> value.
 	 * @throws CodeFileException in case of any mistakes in during the process.
 	 */
-	public void codeFile(File file) throws NullPointerException, CodeFileException 
-	{
-		if (file == null) throw new NullPointerException("null value in Phrases.codeFile()");
-		
-		try
-		{
+	public void codeFile(File file) throws IllegalArgumentException, CodeFileException {
+        Check(file);
+		try {
 			StringBuilder sb = new StringBuilder();
-			for (Phrase each : this) 
-			{
+			for (Phrase each : this) {
 				sb.append(each.getId()).append(delimiter);
 				sb.append(each.getPhrase()            .replace(delimiter, replacement)).append(delimiter);
 				sb.append(each.getTransl() .toString().replace(delimiter, replacement)).append(delimiter);
@@ -844,30 +594,38 @@ public class Phrases extends ArrayList<Phrase>
 			}
 			Common.putFileContent(file, sb);
 		}
-		catch (Exception e) 
-		{
+		catch (Exception e) {
 			CodeFileException ee = new CodeFileException(e.getClass() + " exception in Phrases.codeFile()");
 			ee.initCause(e);
 			throw ee;
 		}
 	}
+
+    private <T> void Check(int index, T value) throws IllegalArgumentException {
+        Check(value);
+        Check(index);
+    }
+
+    private <T> void Check(T value) throws IllegalArgumentException {
+        if (value == null) throw new NullPointerException("Value is null");
+    }
+
+    private void Check(int index) throws IllegalArgumentException {
+        if (index < 0 || index >= this.size())
+            throw new IllegalArgumentException("Size: " + this.size() + ", index: " + index + " is out of bounds");
+    }
 	
-//
-// Exceptions
-//
-	
-	public class ParseFileException extends RuntimeException
+	@SuppressWarnings("WeakerAccess")
+    public class ParseFileException extends RuntimeException
 	{
 		public final static long serialVersionUID = 1L;
-		public ParseFileException() {}
 		public ParseFileException(String text) { super(text); }
 	}
 	
-	public class CodeFileException extends RuntimeException
+	@SuppressWarnings("WeakerAccess")
+    public class CodeFileException extends RuntimeException
 	{
 		public final static long serialVersionUID = 1L;
-		public CodeFileException() {}
 		public CodeFileException(String text) { super(text); }
 	}
-
-} // end Phrases
+}
