@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -28,7 +28,8 @@ import com.pinin.alex.*;
 /**
  * Loads and operates the main data.
  */
-public class Data 
+@SuppressWarnings({"WeakerAccess", "SpellCheckingInspection", "unused"})
+public class Data
 {
 //
 // Variables
@@ -62,39 +63,31 @@ public class Data
 	private final static String SHOW_RECORDER             = "show_recorder";
 	
 	// font sizes
-	
 	public final static int FONT_NORMAL = 12;
 	public final static int FONT_BIG    = 18;
 	public final static int FONT_HUGE   = 24;
 	
 	// common mains
-	
-	private final static Preferences PREF = LangH.getPreferences();
-	
-//
-// Constructors
-//
+	private Preferences preferences;
 
 	/**
 	 * Constructor.
+	 * @param preferences - program preferences.
 	 */
-	public Data() 
+	public Data(Preferences preferences)
 	{
+        this.preferences = preferences;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Gets from preferences and returns the size of the frame
 	 * @return the size of the frame
 	 */
 	public Dimension getSize() 
 	{
-		int frameWidth  = PREF.getInt(MAIN_FRAME_WIDTH_PREF,  0);
-		int frameHeight = PREF.getInt(MAIN_FRAME_HEIGTH_PREF, 0);
+		int frameWidth  = preferences.getInt(MAIN_FRAME_WIDTH_PREF,  0);
+		int frameHeight = preferences.getInt(MAIN_FRAME_HEIGTH_PREF, 0);
 
 		if (frameWidth  == 0 || frameHeight == 0) 
 		{
@@ -122,8 +115,8 @@ public class Data
 	public void putSize(Dimension size) throws NullPointerException
 	{
 		if (size == null) throw new NullPointerException("null value in Data.putSize()");
-		PREF.putInt(MAIN_FRAME_HEIGTH_PREF, size.height);
-		PREF.putInt(MAIN_FRAME_WIDTH_PREF,  size.width);
+		preferences.putInt(MAIN_FRAME_HEIGTH_PREF, size.height);
+		preferences.putInt(MAIN_FRAME_WIDTH_PREF,  size.width);
 	}
 	
 	/**
@@ -132,7 +125,7 @@ public class Data
 	 */
 	public int getExtendedState()
 	{
-		return PREF.getInt(MAIN_FRAME_EXT_STATE_PREF, 0);
+		return preferences.getInt(MAIN_FRAME_EXT_STATE_PREF, 0);
 	}
 	
 	/**
@@ -146,7 +139,7 @@ public class Data
 				&& extendedState != Frame.MAXIMIZED_HORIZ && extendedState != Frame.MAXIMIZED_VERT 
 				&& extendedState != Frame.MAXIMIZED_BOTH)
 			throw new IllegalArgumentException("illegal argument in Data.putExtendedState()");
-		PREF.putInt(MAIN_FRAME_EXT_STATE_PREF, extendedState);
+		preferences.putInt(MAIN_FRAME_EXT_STATE_PREF, extendedState);
 	}
 	
 	/**
@@ -164,14 +157,14 @@ public class Data
 	 */
 	public int getFontSize() 
 	{
-		return PREF.getInt(FONT_SIZE_PREF, getDefaultFontSize());
+		return preferences.getInt(FONT_SIZE_PREF, getDefaultFontSize());
 	}
 	
 	/**
 	 * Returns the default font size
 	 * @return the default font size
 	 */
-	public int getDefaultFontSize() 
+	private int getDefaultFontSize()
 	{
 		return FONT_NORMAL;
 	}
@@ -184,7 +177,7 @@ public class Data
 	public void putFontSize(int size) throws IllegalArgumentException
 	{
 		if (size < 0) throw new IllegalArgumentException("illegal argument in Data.putFontSize()");
-		PREF.putInt(FONT_SIZE_PREF, size);
+		preferences.putInt(FONT_SIZE_PREF, size);
 	}
 	
 	/**
@@ -193,7 +186,7 @@ public class Data
 	 */
 	public String getLastPath()
 	{
-		return PREF.get(LAST_PATH_PREF, "");
+		return preferences.get(LAST_PATH_PREF, "");
 	}
 	
 	/**
@@ -204,7 +197,7 @@ public class Data
 	public void putLastPath(String path) throws NullPointerException
 	{
 		if (path == null) throw new NullPointerException("null value in Data.putLastPath()");
-		PREF.put(LAST_PATH_PREF, path);
+		preferences.put(LAST_PATH_PREF, path);
 	}
 	
 	/**
@@ -213,7 +206,7 @@ public class Data
 	 */
 	public String getLanguage() 
 	{
-		return PREF.get(LANGUAGE_PREF, Texts.PH_TEXT);
+		return preferences.get(LANGUAGE_PREF, Texts.PH_TEXT);
 	}
 	
 	/**
@@ -224,7 +217,7 @@ public class Data
 	public void putLanguage(String lang) 
 	{
 		if (lang == null) throw new NullPointerException("null value in Data.putLanguage()");
-		PREF.put(LANGUAGE_PREF, lang);
+		preferences.put(LANGUAGE_PREF, lang);
 	}
 	
 	/**
@@ -233,7 +226,7 @@ public class Data
 	 */
 	public String getDataPath() 
 	{
-		return PREF.get(DATA_PATH_PREF, "");
+		return preferences.get(DATA_PATH_PREF, "");
 	}
 	
 	/**
@@ -244,7 +237,7 @@ public class Data
 	public void putDataPath(String path) throws NullPointerException
 	{
 		if (path == null) throw new NullPointerException("null value in Data.putDataPath()");
-		PREF.put(DATA_PATH_PREF, path);
+		preferences.put(DATA_PATH_PREF, path);
 	}
 	
 	/**
@@ -253,7 +246,7 @@ public class Data
 	 */
 	public boolean getExerciseState()
 	{
-		return PREF.getBoolean(SHOW_EXERCISE, false);
+		return preferences.getBoolean(SHOW_EXERCISE, false);
 	}
 	
 	/**
@@ -262,7 +255,7 @@ public class Data
 	 */
 	public void putExerciseState(boolean b)
 	{
-		PREF.putBoolean(SHOW_EXERCISE, b);
+		preferences.putBoolean(SHOW_EXERCISE, b);
 	}
 	
 	/**
@@ -271,7 +264,7 @@ public class Data
 	 */
 	public boolean getWorklistState()
 	{
-		return PREF.getBoolean(SHOW_WORKLIST, false);
+		return preferences.getBoolean(SHOW_WORKLIST, false);
 	}
 	
 	/**
@@ -280,7 +273,7 @@ public class Data
 	 */
 	public void putWorklistState(boolean b)
 	{
-		PREF.putBoolean(SHOW_WORKLIST, b);
+		preferences.putBoolean(SHOW_WORKLIST, b);
 	}
 	
 	/**
@@ -289,7 +282,7 @@ public class Data
 	 */
 	public boolean getFillerState()
 	{
-		return PREF.getBoolean(SHOW_FILLER, false);
+		return preferences.getBoolean(SHOW_FILLER, false);
 	}
 	
 	/**
@@ -298,7 +291,7 @@ public class Data
 	 */
 	public void putFillerState(boolean b)
 	{
-		PREF.putBoolean(SHOW_FILLER, b);
+		preferences.putBoolean(SHOW_FILLER, b);
 	}
 	
 	/**
@@ -307,7 +300,7 @@ public class Data
 	 */
 	public boolean getDictionaryState()
 	{
-		return PREF.getBoolean(SHOW_DICTIONARY, false);
+		return preferences.getBoolean(SHOW_DICTIONARY, false);
 	}
 	
 	/**
@@ -316,7 +309,7 @@ public class Data
 	 */
 	public void putDictionaryState(boolean b)
 	{
-		PREF.putBoolean(SHOW_DICTIONARY, b);
+		preferences.putBoolean(SHOW_DICTIONARY, b);
 	}
 	
 	/**
@@ -325,7 +318,7 @@ public class Data
 	 */
 	public boolean getTagsState()
 	{
-		return PREF.getBoolean(SHOW_TAGS, false);
+		return preferences.getBoolean(SHOW_TAGS, false);
 	}
 	
 	/**
@@ -334,7 +327,7 @@ public class Data
 	 */
 	public void putTagsState(boolean b)
 	{
-		PREF.putBoolean(SHOW_TAGS, b);
+		preferences.putBoolean(SHOW_TAGS, b);
 	}
 	
 	/**
@@ -343,7 +336,7 @@ public class Data
 	 */
 	public boolean getSearchState()
 	{
-		return PREF.getBoolean(SHOW_SEARCH, false);
+		return preferences.getBoolean(SHOW_SEARCH, false);
 	}
 	
 	/**
@@ -352,7 +345,7 @@ public class Data
 	 */
 	public void putSearchState(boolean b)
 	{
-		PREF.putBoolean(SHOW_SEARCH, b);
+		preferences.putBoolean(SHOW_SEARCH, b);
 	}
 	
 	/**
@@ -361,7 +354,7 @@ public class Data
 	 */
 	public boolean getRecorderState()
 	{
-		return PREF.getBoolean(SHOW_RECORDER, false);
+		return preferences.getBoolean(SHOW_RECORDER, false);
 	}
 	
 	/**
@@ -370,7 +363,7 @@ public class Data
 	 */
 	public void putRecorderState(boolean b)
 	{
-		PREF.putBoolean(SHOW_RECORDER, b);
+		preferences.putBoolean(SHOW_RECORDER, b);
 	}
 	
 	/**
@@ -426,5 +419,4 @@ public class Data
 			
 		return result;
 	}
-	
-} // end Data
+}

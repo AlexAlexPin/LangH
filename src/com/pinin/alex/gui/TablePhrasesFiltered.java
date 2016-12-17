@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -28,18 +28,15 @@ import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>JTable</code>. Displays the phrases list for exercises.
  */
-public class TablePhrasesFiltered extends JTable
+class TablePhrasesFiltered extends JTable
 {
-//
-// Variables
-//
-	
 	/** The model for this table */
 	private ModelPhrases model;
 	
@@ -52,25 +49,26 @@ public class TablePhrasesFiltered extends JTable
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Logger LOGGER = LangH.getLogger();
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+	private Logger logger;
+	private Texts texts;
+    private Fonts fonts;
+
 	/**
 	 * Constructor.
 	 * @param model - a model for this table.
+	 * @param dataFactory - a common data factory
 	 */
-	public TablePhrasesFiltered(TableModel model) 
+	TablePhrasesFiltered(TableModel model, CommonDataFactory dataFactory)
 	{
+        logger = dataFactory.getLogger();
+        texts = dataFactory.getTexts();
+        fonts = dataFactory.getFonts();
+
 		// make the table
 		
 		this.model = (ModelPhrases) model;
 		
-		final Font fontP = LangH.getFonts().getFontPlate();
+		final Font fontP = fonts.getFontPlate();
 			
 		this.setModel(model);
 		this.setFont(fontP);
@@ -108,9 +106,9 @@ public class TablePhrasesFiltered extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark    = getMenuItem(TXT.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT,  event -> mark());
-		JMenuItem markAll = getMenuItem(TXT.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem remove  = getMenuItem(TXT.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE,  event -> removeMarkedRows());
+		JMenuItem mark    = getMenuItem(texts.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem remove  = getMenuItem(texts.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE, event -> removeMarkedRows());
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -122,7 +120,7 @@ public class TablePhrasesFiltered extends JTable
 			
 		// add the sorter
 			
-		filteredIds = new HashSet<Integer>();
+		filteredIds = new HashSet<>();
 
 		filter = new RowFilter<TableModel, Integer>() 
 		{
@@ -134,14 +132,10 @@ public class TablePhrasesFiltered extends JTable
 			}
 		};
 			
-		sorter = new TableRowSorter<TableModel>(model);
+		sorter = new TableRowSorter<>(model);
 		this.setRowSorter(sorter);
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Loads data from the specified file.
 	 * @param file - a file with data.
@@ -155,12 +149,9 @@ public class TablePhrasesFiltered extends JTable
 			return;
 		}
 		
-		LinkedList<Integer> ids = new LinkedList<Integer>();
+		LinkedList<Integer> ids = new LinkedList<>();
 		Common.readIntFile(file, ids);
-		for (int id : ids)
-		{
-			filteredIds.add(id);
-		}
+        filteredIds.addAll(ids);
 		sorter.setRowFilter(filter);
 	}
 	
@@ -195,11 +186,11 @@ public class TablePhrasesFiltered extends JTable
 	
 	/**
 	 * Adds a new <code>Collection</code> of elements to add to the filter.
-	 * @param c - elements to be added.
+	 * @param ids - elements to be added.
 	 */
 	void addAll(Collection<? extends Integer> ids) 
 	{
-		int ok = GUI.showConfirmDialog(TXT.MG_TO_TASK_QUESTION, TXT.TL_CONF_SELECT);
+		int ok = GUI.showConfirmDialog(texts.MG_TO_TASK_QUESTION, texts.TL_CONF_SELECT);
 		if (ok == JOptionPane.OK_OPTION) 
 		{
 			filteredIds.addAll(ids);
@@ -212,7 +203,7 @@ public class TablePhrasesFiltered extends JTable
 	 */
 	void removeMarkedRows() 
 	{
-		int ok = GUI.showConfirmDialog(TXT.MG_REMOVE_QUESTION, TXT.TL_CONF_REMOVE);
+		int ok = GUI.showConfirmDialog(texts.MG_REMOVE_QUESTION, texts.TL_CONF_REMOVE);
 		if (ok == JOptionPane.OK_OPTION) 
 		{
 			LinkedList<Integer> markedRows = getMarkedIds();
@@ -228,7 +219,7 @@ public class TablePhrasesFiltered extends JTable
 	 */
 	LinkedList<Phrase> getAll()
 	{
-		LinkedList<Phrase> result = new LinkedList<Phrase>();
+		LinkedList<Phrase> result = new LinkedList<>();
 		for (int row=0; row<this.getRowCount(); row++)
 		{
 			int    id      = (int)    this.getValueAt(row, ModelPhrases.ID_COL);
@@ -248,7 +239,7 @@ public class TablePhrasesFiltered extends JTable
 	 */
 	private LinkedList<Integer> getMarkedIds()
 	{
-		LinkedList<Integer> result = new LinkedList<Integer>();
+		LinkedList<Integer> result = new LinkedList<>();
 			
 		for (int row=0; row<getRowCount(); row++) 
 		{
@@ -260,11 +251,8 @@ public class TablePhrasesFiltered extends JTable
 		}
 		return result;
 	}
-	
-	/**
-	 * Plays a sound of the current row.
-	 */
-	void playSound()
+
+	private void playSound()
 	{
 		try 
 		{
@@ -279,7 +267,7 @@ public class TablePhrasesFiltered extends JTable
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -306,24 +294,16 @@ public class TablePhrasesFiltered extends JTable
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param iconPath - an icon path for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end TablePhrasesFiltered
+}

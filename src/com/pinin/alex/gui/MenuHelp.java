@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -23,47 +23,40 @@ package com.pinin.alex.gui;
 import java.awt.event.*;
 import javax.swing.*;
 
-import com.pinin.alex.LangH;
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>JMenu</code>. One menu to operate help actions.
  */
-public class MenuHelp extends AbstractControlledPanel 
+class MenuHelp extends AbstractControlledPanel
 {
-//
-// Variables
-//
-	
 	// elements of this menu
-	
 	private JMenu menu;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private final static long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+	private Texts texts;
+    private Fonts fonts;
+
 	/**
 	 * Constructor
+	 * @param dataFactory - a common data factory
 	 */
-	public MenuHelp() 
+	MenuHelp(CommonDataFactory dataFactory)
 	{
+        texts = dataFactory.getTexts();
+        fonts = dataFactory.getFonts();
+
 		// menu items
 			
-		JMenuItem help = this.getMenuItem(TXT.BT_HELP_HELP, TXT.HK_HELP_HELP, 
-				event -> GUI.showHelpDialog(TXT.BT_HELP_HELP));
+		JMenuItem help = this.getMenuItem(texts.BT_HELP_HELP, texts.HK_HELP_HELP,
+				event -> GUI.showHelpDialog(texts.BT_HELP_HELP));
 					
-		JMenuItem about = this.getMenuItem(TXT.BT_ABOUT_HELP, TXT.HK_ABOUT_HELP, 
-				event -> GUI.showAboutDialog(TXT.BT_ABOUT_HELP));
+		JMenuItem about = this.getMenuItem(texts.BT_ABOUT_HELP, texts.HK_ABOUT_HELP,
+				event -> GUI.showAboutDialog(texts.BT_ABOUT_HELP));
 
 		// add elements
 		
@@ -72,28 +65,16 @@ public class MenuHelp extends AbstractControlledPanel
 		menu.addSeparator();
 		menu.add(about);
 			
-		menu.setText(TXT.MU_HELP);
-		menu.setMnemonic(TXT.MN_HELP);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_HELP);
+		menu.setMnemonic(texts.MN_HELP);
+		menu.setFont(fonts.getFontPlate());
 	}
-	
-//
-// Methods
-//
-	
-	/**
-	 * Returns the menu to operate this panel.
-	 * @return the menu to operate this panel.
-	 */
+
 	public JMenu getMenu()
 	{
 		return menu;
 	}
-	
-	/**
-	 * Returns tool buttons of this panel.
-	 * @return tool buttons of this panel.
-	 */
+
 	public JButton[] getToolBarButtons()
 	{
 		return new JButton[] {};
@@ -101,21 +82,13 @@ public class MenuHelp extends AbstractControlledPanel
 	
 	@Override
 	public void openClose() {}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end MenuHelp
+}

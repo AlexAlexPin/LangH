@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@ import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
 
@@ -32,12 +34,8 @@ import com.pinin.alex.main.*;
  * Extends <code>AbstractTableModel</code>. Contains a <code>Phrases</code>
  * object as the database. Allows to edit this database.
  */
-public class ModelPhrases extends AbstractTableModel 
+class ModelPhrases extends AbstractTableModel
 {
-//
-// Variables
-//
-
 	/** The database */
 	private Phrases data;
 	
@@ -67,60 +65,57 @@ public class ModelPhrases extends AbstractTableModel
 	// column identifiers
 	
 	/** A column for check boxes */
-	public final static int CHECK_COL = 0;
+	final static int CHECK_COL = 0;
 	
 	/** A column that contains <code>id</code> attribute values of <code>Phrase</code> objects.*/
-	public final static int ID_COL = 1;
+	final static int ID_COL = 1;
 	
 	/** A column that contains <code>phrase</code> attribute values of <code>Phrase</code> objects.*/
-	public final static int PHRASE_COL = 2;
+	final static int PHRASE_COL = 2;
 	
 	/** A column that contains <code>transl</code> attribute values of <code>Phrase</code> objects. */
-	public final static int TRANSL_COL = 3;
+	final static int TRANSL_COL = 3;
 	
 	/** A column that contains <code>comment</code> attribute values of <code>Phrase</code> objects. */
-	public final static int COMMENT_COL = 4;
+	final static int COMMENT_COL = 4;
 	
 	/** A column that contains <code>tag</code> attribute values of <code>Phrase</code> objects. */
-	public final static int TAG_COL = 5;
+	final static int TAG_COL = 5;
 	
 	/** A column that contains sound playing buttons.*/
-	public final static int PLAY_COL = 6;
+	final static int PLAY_COL = 6;
 	
 	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Logger LOGGER = LangH.getLogger();
-	private final Texts  TXT    = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+	private CommonDataFactory dataFactory; // TODO possibly not global
+	private Logger logger;
+	private Texts texts;
+
 	/**
 	 * Constructor.
+	 * @param dataFactory - a common data factory
 	 */
-	public ModelPhrases() 
+	ModelPhrases(CommonDataFactory dataFactory)
 	{
+        this.dataFactory = dataFactory;
+        logger = dataFactory.getLogger();
+        texts = dataFactory.getTexts();
+
 		data = new Phrases();
-		checkbox = new ArrayList<Boolean>();
+		checkbox = new ArrayList<>();
 		dataPath = new File("");
 		soundFolder = "";
-		sounds = new LinkedList<String>();
+		sounds = new LinkedList<>();
 		
 		icon_sound    = new ImageIcon(LangH.class.getResource(Texts.PH_ICON_SOUND));
 		icon_no_sound = new ImageIcon(LangH.class.getResource(Texts.PH_ICON_NO_SOUND));
 		
-		columns = new String[] {TXT.LB_COL_CHECK, TXT.LB_COL_NUM, TXT.LB_COL_PHRASE, 
-				TXT.LB_COL_TRANSL, TXT.LB_COL_COMMENT, TXT.LB_COL_TAG, TXT.LB_COL_PLAY};
+		columns = new String[] {texts.LB_COL_CHECK, texts.LB_COL_NUM, texts.LB_COL_PHRASE,
+				texts.LB_COL_TRANSL, texts.LB_COL_COMMENT, texts.LB_COL_TAG, texts.LB_COL_PLAY};
 	}
 
-//	
-// Methods
-//
-	
 	/**
 	 * Loads data from the specified file.
 	 * @param dataPath - a file to get data.
@@ -129,17 +124,17 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		try 
 		{
-			LOGGER.entering("ModelPhrases", "loadData", dataPath);
+			logger.entering("ModelPhrases", "loadData", dataPath);
 			
 			if (dataPath == null)
 			{
-				clear();
+				clearData();
 				return;
 			}
 			
 			if (!dataPath.exists())
 			{
-				LOGGER.log(Level.WARNING, "Data path does not exist");
+				logger.log(Level.WARNING, "Data path does not exist");
 				return;
 			}
 			
@@ -154,7 +149,7 @@ public class ModelPhrases extends AbstractTableModel
 				checkbox.add(false);
 			}
 			
-			soundFolder = LangH.getData().getSoundFolder(dataPath, "Sound");
+			soundFolder = dataFactory.getData().getSoundFolder(dataPath, "Sound");
 			File[] files = Common.getListFiles(new File(soundFolder), Common.GET_FILES);
 			sounds.clear();
 			
@@ -165,11 +160,11 @@ public class ModelPhrases extends AbstractTableModel
 			
 			this.fireTableDataChanged();
 			
-			LOGGER.exiting("ModelPhrases", "loadData", "No exceptions");
+			logger.exiting("ModelPhrases", "loadData", "No exceptions");
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -186,7 +181,7 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -195,9 +190,10 @@ public class ModelPhrases extends AbstractTableModel
 	 * @param id - an id of an <code>Phrase</code>.
 	 * @return a <code>Phrase</code> with the specified id.
 	 */
-	Phrase get(int id) 
+	Phrase get(int id)
 	{
-		int row = invert(data.indexOf(id));
+		@SuppressWarnings("SuspiciousMethodCalls")
+        int row = invert(data.indexOf(id));
 		
 		int    idd     = (int)    getValueAt(row, ID_COL);
 		String phrase  = (String) getValueAt(row, PHRASE_COL);
@@ -216,7 +212,7 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(TXT.MG_ADD_QUESTION, TXT.TL_CONF_EDIT);
+			int ok = GUI.showConfirmDialog(texts.MG_ADD_QUESTION, texts.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION)
 			{
 				for (Phrase each : c)
@@ -228,8 +224,8 @@ public class ModelPhrases extends AbstractTableModel
 					String phrase = each.getPhrase();
 					if (data.contPhrase(phrase)) 
 					{
-						String message = TXT.MG_LIST_CONT_PHRASE + " " + phrase + ". " + TXT.MG_EDIT_QUESTION;
-						int ok2 = GUI.showConfirmDialog(message, TXT.TL_CONF_EDIT);
+						String message = texts.MG_LIST_CONT_PHRASE + " " + phrase + ". " + texts.MG_EDIT_QUESTION;
+						int ok2 = GUI.showConfirmDialog(message, texts.TL_CONF_EDIT);
 						if (ok2 == JOptionPane.OK_OPTION) 
 						{
 							if (data.addEdit(each) == -1) checkbox.add(false);
@@ -245,7 +241,7 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -256,7 +252,7 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(TXT.MG_REMOVE_QUESTION, TXT.TL_CONF_REMOVE);
+			int ok = GUI.showConfirmDialog(texts.MG_REMOVE_QUESTION, texts.TL_CONF_REMOVE);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				LinkedList<Integer> ids = getMarkedIds();
@@ -276,7 +272,7 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -298,10 +294,7 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		String[] tags = data.getTagList();
 		Term result = new Term();
-		for (String tag : tags)
-		{
-			result.add(tag);
-		}
+        Collections.addAll(result, tags);
 		return result;
 	}
 	
@@ -313,7 +306,7 @@ public class ModelPhrases extends AbstractTableModel
 	{
 		try
 		{
-			int ok = GUI.showConfirmDialog(TXT.MG_TO_PHRASE_QUESTION, TXT.TL_CONF_EDIT);
+			int ok = GUI.showConfirmDialog(texts.MG_TO_PHRASE_QUESTION, texts.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				LinkedList<Integer> ids = getMarkedIds();
@@ -333,7 +326,7 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -343,24 +336,17 @@ public class ModelPhrases extends AbstractTableModel
 	 * @param id - an id to be used to get the sound.
 	 * @return <code>true</code> if the sound has been got successfully.
 	 */
-	boolean getSound(AudioContainer toGet, int id)
-	{
-		if (data.indexOfId(id) == -1)
-		{
-			return false;
-		}
-			
-		String fileName = id + "." + TXT.PH_EXT_SOUND;
-		String filePath = soundFolder + File.separator + fileName;
-		File file = new File(filePath);
-				
-		if (!file.exists())
-		{
-			return false;
-		}
-			
-		return toGet.load(file);
-	}
+	boolean getSound(AudioContainer toGet, int id) {
+        if (data.indexOfId(id) == -1) {
+            return false;
+        }
+
+        String fileName = id + "." + texts.PH_EXT_SOUND;
+        String filePath = soundFolder + File.separator + fileName;
+        File file = new File(filePath);
+
+        return file.exists() && toGet.load(file);
+    }
 	
 	/**
 	 * Adds the specified sound to the first marked row.
@@ -373,29 +359,29 @@ public class ModelPhrases extends AbstractTableModel
 			int markedId = getMarkedId();
 			if (markedId == -1)
 			{
-				GUI.showInformDialog(TXT.MG_SELECT_ROWS, TXT.TL_NO_SELECTION);
+				GUI.showInformDialog(texts.MG_SELECT_ROWS, texts.TL_NO_SELECTION);
 				return;
 			}
 			
 			int index = data.indexOfId(markedId);
-			String message = TXT.MG_EDIT_REC_QUESTION + " " + data.get(index).getPhrase() + "?";
-			int ok = GUI.showConfirmDialog(message, TXT.TL_CONF_EDIT);
+			String message = texts.MG_EDIT_REC_QUESTION + " " + data.get(index).getPhrase() + "?";
+			int ok = GUI.showConfirmDialog(message, texts.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
-				String fileName = markedId + "." + TXT.PH_EXT_SOUND;
+				String fileName = markedId + "." + texts.PH_EXT_SOUND;
 				sounds.add(fileName);
 				
 				String filePath = soundFolder + File.separator + fileName;
 				sound.save(new File(filePath));
 				
-				LOGGER.log(Level.CONFIG, "Record has been saved " + dataPath);
-				GUI.sendMessage(TXT.MG_SAVED_REPORT + " " + dataPath);
+				logger.log(Level.CONFIG, "Record has been saved " + dataPath);
+				GUI.sendMessage(texts.MG_SAVED_REPORT + " " + dataPath);
 			}
 			
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -406,15 +392,6 @@ public class ModelPhrases extends AbstractTableModel
 	File getPath()
 	{
 		return dataPath;
-	}
-	
-	/**
-	 * Returns the sound folder of this database.
-	 * @return the sound folder of this database.
-	 */
-	String getSoundFolder()
-	{
-		return soundFolder;
 	}
 	
 	/**
@@ -453,18 +430,7 @@ public class ModelPhrases extends AbstractTableModel
 	}
 	
 	/**
-	 * Returns Phrases.indexOfId(int) converted to rows.
-	 * @param id - an id to be found
-	 * @return Phrases.indexOfId(int) converted to rows.
-	 */
-	int indexOfId(int id)
-	{
-		return invert(data.indexOfId(id));
-	}
-	
-	/**
-	 * Inverts specified index to show the table from the last element 
-	 * @param index - an index to be inverted
+	 * Inverts specified index to show the table from the last element.
 	 * @return the inverted index
 	 */
 	private int invert(int i) 
@@ -475,7 +441,7 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		catch (RuntimeException e) 
 		{
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			System.exit(-1);
 			return 0;
 		}
@@ -487,7 +453,7 @@ public class ModelPhrases extends AbstractTableModel
 	 */
 	private LinkedList<Integer> getMarkedIds() 
 	{
-		LinkedList<Integer> result = new LinkedList<Integer>();
+		LinkedList<Integer> result = new LinkedList<>();
 			
 		for (int row=0; row<getRowCount(); row++) 
 		{
@@ -516,11 +482,8 @@ public class ModelPhrases extends AbstractTableModel
 		}
 		return -1;
 	}
-	
-	/**
-	 * Clears all data.
-	 */
-	private void clear()
+
+	private void clearData()
 	{
 		data.clear();
 		checkbox.clear();
@@ -558,7 +521,7 @@ public class ModelPhrases extends AbstractTableModel
 		case COMMENT_COL: return p.getComment();
 		case TAG_COL:     return p.getTag();
 		case PLAY_COL:
-			boolean isSound = sounds.contains(p.getId() + "." + TXT.PH_EXT_SOUND);
+			boolean isSound = sounds.contains(p.getId() + "." + texts.PH_EXT_SOUND);
 			if (isSound) return icon_sound;
 			else         return icon_no_sound;
 		default: return "";
@@ -568,7 +531,7 @@ public class ModelPhrases extends AbstractTableModel
 	@Override
 	public void setValueAt(Object obj, int rowIndex, int columnIndex) 
 	{
-		String valAsString = "";
+		String valAsString;
 		switch (columnIndex) 
 		{
 		case CHECK_COL: 
@@ -628,5 +591,4 @@ public class ModelPhrases extends AbstractTableModel
 		default:     return true;
 		}
 	}
-	
-} // end ModelPhrases
+}

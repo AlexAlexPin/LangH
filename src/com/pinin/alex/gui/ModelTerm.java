@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -23,19 +23,14 @@ package com.pinin.alex.gui;
 import java.util.*;
 import javax.swing.table.*;
 
-import com.pinin.alex.LangH;
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>AbstractTableModel</code> and allows to create a table model for <code>Term</code> object.
  */
-public class ModelTerm extends AbstractTableModel 
+class ModelTerm extends AbstractTableModel
 {
-
-//
-// Variables
-//
-
 	/** The main database. */
 	private ArrayList<String> data;
 	
@@ -44,40 +39,29 @@ public class ModelTerm extends AbstractTableModel
 	
 	/** Columns names. */
 	private String[] columns;
-	
+
 	/** The column with check boxes. */
-	public static final int CHECK_COL = 0;
+	static final int CHECK_COL = 0;
 	
 	/** The column with tags. */
-	public static final int TAG_COL = 1;
-	
+	static final int TAG_COL = 1;
+
 	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
-	
-	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
 
 	/**
 	 * Constructor
+	 * @param dataFactory - a common data factory
 	 */
-	public ModelTerm() 
+	ModelTerm(CommonDataFactory dataFactory)
 	{
-		data = new ArrayList<String>();
-		checkbox = new ArrayList<Boolean>();
-		columns =  new String[] {TXT.LB_COL_CHECK, TXT.LB_COL_TAG};
+		Texts texts = dataFactory.getTexts();
+
+		data = new ArrayList<>();
+		checkbox = new ArrayList<>();
+		columns =  new String[] {texts.LB_COL_CHECK, texts.LB_COL_TAG};
 	}
 
-// Methods
-	
-	/**
-	 * Loads the data.
-	 * @param tags - an object to get the data.
-	 */
 	void loadData(Term term) 
 	{
 		data.clear();
@@ -153,5 +137,4 @@ public class ModelTerm extends AbstractTableModel
 			default:      return true;
 		}
 	}
-	
-} // end ModelTerm
+}

@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -22,7 +22,8 @@ package com.pinin.alex.gui;
 
 import java.awt.*;
 import javax.swing.*;
-import com.pinin.alex.LangH;
+
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.main.*;
 
 /**
@@ -30,46 +31,37 @@ import com.pinin.alex.main.*;
  */
 public class Search extends JPanel implements PhraseFieldsContainer
 {
-	
-//
-// Variables
-//
-	
 	// elements of this panel
-	
 	private JTextArea findPhrase;
 	private JTextArea findTransl;
 	private JTextArea findComment;
 	private JTextArea findTag;
 	
 	// other
-	
-	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+    private Fonts fonts;
+
 	/**
 	 * Constructor.
+	 * @param dataFactory - a common data factory
 	 */
-	public Search() 
+	public Search(CommonDataFactory dataFactory)
 	{
+        fonts = dataFactory.getFonts();
+        Texts texts = dataFactory.getTexts();
+
 		// label
 			
-		JLabel label = getLabel("  " + TXT.LB_HEADER_SEARCH_PL + "  ");
+		JLabel label = getLabel("  " + texts.LB_HEADER_SEARCH_PL + "  ");
 			
 		// workspace
 			
-		findPhrase   = getTextArea(TXT.LB_COL_PHRASE);
-		findTransl   = getTextArea(TXT.LB_COL_TRANSL);
-		findComment  = getTextArea(TXT.LB_COL_COMMENT);
-		findTag      = getTextArea(TXT.LB_COL_TAG);
+		findPhrase   = getTextArea(texts.LB_COL_PHRASE);
+		findTransl   = getTextArea(texts.LB_COL_TRANSL);
+		findComment  = getTextArea(texts.LB_COL_COMMENT);
+		findTag      = getTextArea(texts.LB_COL_TAG);
 			
 		JPanel workspace = getPanel(new GridLayout(1,4), new JScrollPane(findPhrase), 
 				new JScrollPane(findTransl), new JScrollPane(findComment), new JScrollPane(findTag));
@@ -96,13 +88,7 @@ public class Search extends JPanel implements PhraseFieldsContainer
 		result[4] = findTag.getText();
 		return result;
 	}
-	
-	/**
-	 * Returns a new <code>JPanel</code> object
-	 * @param mgr - a layout manager for this object
-	 * @param components - components for this object
-	 * @return a new <code>JPanel</code> object
-	 */
+
 	private JPanel getPanel(LayoutManager mgr, JComponent... components) 
 	{
 		JPanel panel = new JPanel();
@@ -113,32 +99,22 @@ public class Search extends JPanel implements PhraseFieldsContainer
 		}
 		return panel;
 	}
-	
-	/**
-	 * Returns a new <code>JTextArea</code> object
-	 * @return a new <code>JTextArea</code> object
-	 */
+
 	private JTextArea getTextArea(String tip)
 	{
 		JTextArea textArea = new JTextArea();
-		textArea.setFont(LangH.getFonts().getFontPlate());
+		textArea.setFont(fonts.getFontPlate());
 		textArea.setToolTipText(tip);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "doNothing");
 		return textArea;
 	}
-	
-	/**
-	 * Returns a new <code>JLabel</code> object
-	 * @param text - a text for this object
-	 * @return a new <code>JLabel</code> object
-	 */
+
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(LangH.getFonts().getFontPlate());
+		label.setFont(fonts.getFontPlate());
 		return label;
 	}
-	
-} // end Search
+}

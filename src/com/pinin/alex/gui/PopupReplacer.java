@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -25,40 +25,34 @@ import java.awt.event.*;
 import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.text.*;
-import com.pinin.alex.LangH;
+
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>JPopupMenu</code> and contains a popup menu with the set of
  * replacements of the one letter before the parent component's caret.
  */
-public class PopupReplacer extends JPopupMenu 
+class PopupReplacer extends JPopupMenu
 {
-//
-// Variables
-//
-	
 	// other
-	
-	/** Default serial version ID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	// common mains
-	
-	private final Logger LOGGER = LangH.getLogger();
-	
-//
-// Methods
-// 
-	
+    private Fonts fonts;
+
 	/**
 	 * Constructs this popup menu and shows it on the specified component.
 	 * @param component - a component that contains this component
 	 * @param replacer - a database to get values
+	 * @param dataFactory - a common data factory
 	 */
-	public void display(JTextComponent component, Replacer replacer) 
+	void display(JTextComponent component, Replacer replacer, CommonDataFactory dataFactory)
 	{
-		try 
+        Logger logger = dataFactory.getLogger();
+        fonts = dataFactory.getFonts();
+
+		try
 		{
 			// get position of the component's caret as x and y coordinates
 			// Note: call this method before making selection to prevent the null value
@@ -98,22 +92,15 @@ public class PopupReplacer extends JPopupMenu
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, ActionListener action) 
 	{
 		JMenuItem menuItem = new JMenuItem(text);
-		menuItem.setFont(LangH.getFonts().getFontPlate());
+		menuItem.setFont(fonts.getFontPlate());
 		menuItem.addActionListener(action);
 		return menuItem;
 	}
-	
-} // end PopupReplacer
+}

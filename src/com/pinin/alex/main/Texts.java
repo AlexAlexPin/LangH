@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -21,38 +21,32 @@
 package com.pinin.alex.main;
 
 import java.util.*;
-import com.pinin.alex.*;
 
 /**
  * Loads and contains all texts.
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Texts
 {
-//
-// Constructors
-//
-	
 	/**
-	 * Constructor
+	 * Constructor.
+	 * @param textsSource - a texts for this program.
 	 */
-	public Texts()
+	public Texts(CharSequence textsSource)
 	{
-		String path = LangH.getData().getLanguage();
-		CharSequence csq = LangH.getResourceContent(path);
-		
 		final int KEY = 1;
 		final int VALUE = 2;
 		final int COMMENT = 3;
 		
 		int stage = KEY;
 		
-		HashMap<String, String> hm = new HashMap<String, String>();
+		HashMap<String, String> hm = new HashMap<>();
 		StringBuilder key = new StringBuilder();
 		StringBuilder value = new StringBuilder();
 		
-		for (int i=0; i<csq.length(); i++)
+		for (int i=0; i<textsSource.length(); i++)
 		{
-			char c = csq.charAt(i);
+			char c = textsSource.charAt(i);
 			switch (c)
 			{
 				case '*': 
@@ -354,11 +348,11 @@ public class Texts
 		URL_WEBSITE 			= hm.get("URL_WEBSITE");
 		URL_SUPPORT 			= hm.get("URL_SUPPORT");
 	}
-	
+
 //
 // Methods
-//	
-	
+//
+
 	/**
 	 * Returns the first <code>char</code> from <code>String</code>.
 	 * @param map - a map to get value.

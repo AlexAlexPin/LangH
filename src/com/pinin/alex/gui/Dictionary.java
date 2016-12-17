@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -33,21 +33,14 @@ import com.pinin.alex.main.*;
  */
 public class Dictionary extends AbstractDictionaryTable
 {
-//
-// Variables
-//
 	// elements of this panel
-	
 	private Search search;
 	private TablePhrases table;
 	private JButton filterBut;
 	private JButton findBut;
 	
 	// elements of this menu
-	
 	private JMenu menu;
-	private JMenu menuTags;
-	private JMenu menuSearch;
 	private JMenuItem markMit;
 	private JMenuItem markAllMit;
 	private JMenuItem removeMit;
@@ -56,19 +49,16 @@ public class Dictionary extends AbstractDictionaryTable
 	private JMenuItem findMit;
 	
 	// tool bar buttons
-	
 	private JButton openCloseBut;
 	private JButton openCloseTagBut;
 	private JButton openCloseSearchBut;
 	
 	// other
-	
-	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
+	private Colors colors;
+	private Fonts fonts;
 	
 //
 // Constructor
@@ -77,33 +67,37 @@ public class Dictionary extends AbstractDictionaryTable
 	/**
 	 * Constructor.
 	 */ 
-	public Dictionary() 
-	{	
-		Tags tags = new Tags(this);
-		search = new Search();
+	public Dictionary(CommonDataFactory dataFactory)
+	{
+		Texts texts = dataFactory.getTexts();
+		colors = dataFactory.getColors();
+		fonts = dataFactory.getFonts();
+
+		Tags tags = new Tags(this, dataFactory);
+		search = new Search(dataFactory);
 		
 		// header
 			
-		JLabel header = this.getLabel(TXT.LB_HEADER_TABLE_PL);
+		JLabel header = this.getLabel(texts.LB_HEADER_TABLE_PL);
 			
 		// buttons
 			
-		JButton mark    = getButton(Texts.PH_ICON_SELECT,  TXT.TIP_SELECT,       event -> mark());
-		JButton markAll = getButton(Texts.PH_ICON_SEL_ALL, TXT.TIP_SEL_ALL,      event -> markAll());
-		JButton remove  = getButton(Texts.PH_ICON_DELETE,  TXT.TIP_DELETE,       event -> removeMarkedRows());
-		JButton toTask  = getButton(Texts.PH_ICON_TOTASK,  TXT.TIP_TOTASK,       event -> toTask(GUI.getWorklist()));
-		filterBut       = getButton(Texts.PH_ICON_FILTER,  TXT.TIP_CLEAR_FILTER, event -> clearFilter());
-		findBut         = getButton(Texts.PH_ICON_SEARCH,  TXT.TIP_FIND,         event -> showOnly());
+		JButton mark    = getButton(Texts.PH_ICON_SELECT,  texts.TIP_SELECT, event -> mark());
+		JButton markAll = getButton(Texts.PH_ICON_SEL_ALL, texts.TIP_SEL_ALL, event -> markAll());
+		JButton remove  = getButton(Texts.PH_ICON_DELETE,  texts.TIP_DELETE, event -> removeMarkedRows());
+		JButton toTask  = getButton(Texts.PH_ICON_TOTASK,  texts.TIP_TOTASK, event -> toTask(GUI.getWorklist()));
+		filterBut       = getButton(Texts.PH_ICON_FILTER,  texts.TIP_CLEAR_FILTER, event -> clearFilter());
+		findBut         = getButton(Texts.PH_ICON_SEARCH,  texts.TIP_FIND, event -> showOnly());
 			
 		JToolBar buttons = getToolBar(mark, markAll, remove, toTask, filterBut, findBut);
 			
 		// table
 			
-		table = new TablePhrases(tags, GUI.getWorklist());
+		table = new TablePhrases(tags, GUI.getWorklist(), dataFactory);
 		
 		// add elements
 			
-		this.setBorder(LangH.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBorders().getPanelBorder());
 		this.setLayout(new GridBagLayout());
 					
 		this.add(buttons,                new GBC(0, 0, 1, 1).setWeight(0,   0  ).setAnchor(GBC.WEST));
@@ -114,39 +108,39 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_ADD_PL, event -> openClose());
-		openCloseMit.setIcon(LangH.getResource(Texts.PH_ICON_BOOK));
+		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_ADD_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_BOOK));
 		
-		markMit    = getMenuItem(TXT.BT_SELECT_TABLE_PL,  TXT.HK_SELECT_TABLE_PL,  event -> mark());
-		markAllMit = getMenuItem(TXT.BT_SEL_ALL_TABLE_PL, TXT.HK_SEL_ALL_TABLE_PL, event -> markAll());
-		removeMit  = getMenuItem(TXT.BT_DELETE_TABLE_PL,  TXT.HK_DELETE_TABLE_PL,  event -> removeMarkedRows());
-		toTaskMit  = getMenuItem(TXT.BT_TO_TASK_TABLE_PL, TXT.HK_TO_TASK_TABLE_PL, event -> toTask(GUI.getWorklist()));
-		filterMit  = getMenuItem(TXT.BT_FILTER_TABLE_PL,  TXT.HK_TO_TASK_TABLE_PL, event -> clearFilter());
+		markMit    = getMenuItem(texts.BT_SELECT_TABLE_PL,  texts.HK_SELECT_TABLE_PL, event -> mark());
+		markAllMit = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, texts.HK_SEL_ALL_TABLE_PL, event -> markAll());
+		removeMit  = getMenuItem(texts.BT_DELETE_TABLE_PL,  texts.HK_DELETE_TABLE_PL, event -> removeMarkedRows());
+		toTaskMit  = getMenuItem(texts.BT_TO_TASK_TABLE_PL, texts.HK_TO_TASK_TABLE_PL, event -> toTask(GUI.getWorklist()));
+		filterMit  = getMenuItem(texts.BT_FILTER_TABLE_PL,  texts.HK_TO_TASK_TABLE_PL, event -> clearFilter());
 		
 		// menu tags
-		
-		menuTags = tags.getMenu();
+
+		JMenu menuTags = tags.getMenu();
 		
 		// menu search
 		
-		JMenuItem openCloseSearchMit = getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_SEARCH_PL, 
+		JMenuItem openCloseSearchMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_SEARCH_PL,
 				event -> openCloseSearch(search));
-		openCloseSearchMit.setIcon(LangH.getResource(Texts.PH_ICON_SEARCH));
+		openCloseSearchMit.setIcon(dataFactory.getResource(Texts.PH_ICON_SEARCH));
 		
-		findMit = getMenuItem(TXT.BT_FIND_SEARCH_PL,   TXT.BT_FIND_SEARCH_PL,   event -> showOnly());
-		
-		menuSearch = new JMenu();
-		menuSearch.setText(TXT.BT_SEARCH_PL);
-		menuSearch.setFont(LangH.getFonts().getFontPlate());
+		findMit = getMenuItem(texts.BT_FIND_SEARCH_PL,   texts.BT_FIND_SEARCH_PL, event -> showOnly());
+
+		JMenu menuSearch = new JMenu();
+		menuSearch.setText(texts.BT_SEARCH_PL);
+		menuSearch.setFont(fonts.getFontPlate());
 		menuSearch.add(openCloseSearchMit);
 		menuSearch.add(findMit);
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_TABLE);
-		menu.setMnemonic(TXT.MN_TABLE_PL);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_TABLE);
+		menu.setMnemonic(texts.MN_TABLE_PL);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -161,13 +155,13 @@ public class Dictionary extends AbstractDictionaryTable
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(LangH.getResource(Texts.PH_ICON_BOOK),
-				TXT.TIP_TABLE_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_BOOK),
+				texts.TIP_TABLE_PL, event -> openClose());
 		
 		openCloseTagBut = tags.getOpenCloseButton();
 		
-		openCloseSearchBut = getButton(LangH.getResource(Texts.PH_ICON_SEARCH), 
-				TXT.TIP_SEARCH_PL, event -> openCloseSearch(search));
+		openCloseSearchBut = getButton(dataFactory.getResource(Texts.PH_ICON_SEARCH),
+				texts.TIP_SEARCH_PL, event -> openCloseSearch(search));
 		
 		// close panels
 		
@@ -189,7 +183,7 @@ public class Dictionary extends AbstractDictionaryTable
 	/**
 	 * Puts marks in check boxes in selected rows
 	 */
-	public void mark() 
+	private void mark()
 	{
 		table.mark();
 	}
@@ -197,7 +191,7 @@ public class Dictionary extends AbstractDictionaryTable
 	/**
 	 * Puts marks in check boxes in all visible rows
 	 */
-	public void markAll() 
+	private void markAll()
 	{
 		table.markAll();
 	}
@@ -211,18 +205,18 @@ public class Dictionary extends AbstractDictionaryTable
 	/**
 	 * Removes marked rows.
 	 */
-	public void removeMarkedRows() 
+	private void removeMarkedRows()
 	{
 		table.removeMarkedRows();
 	}
 	
 	/**
 	 * Puts marked rows to the task list.
-	 * @param worklist - an object to exchange data.
+	 * @param workList - an object to exchange data.
 	 */
-	public void toTask(AbstractFilteredTable<Integer> worklist)
+	private void toTask(AbstractFilteredTable<Integer> workList)
 	{
-		table.toTask(worklist);
+		table.toTask(workList);
 	}
 	
 	@Override
@@ -247,27 +241,24 @@ public class Dictionary extends AbstractDictionaryTable
 	 * Gets the list of phrases with parts of texts specified in workspace fields. 
 	 * Shows only phrases from the list in the table.
 	 */
-	public void showOnly() 
+	private void showOnly()
 	{
 		String[] s = search.getFields();
 		table.applyFilter(s[1], s[2], s[3], s[4]);
-		turnFilterButton(true);
+		turnFilterButtonBackground(true);
 	}
 	
 	@Override
 	public void showOnly(Term tags) 
 	{
 		table.applyFilter(tags);
-		this.turnFilterButton(true);
+		this.turnFilterButtonBackground(true);
 	}
-	
-	/**
-	 * Removes all filters and shows all data.
-	 */
-	public void clearFilter() 
+
+	private void clearFilter()
 	{
 		table.clearFilter();
-		this.turnFilterButton(false);
+		this.turnFilterButtonBackground(false);
 	}
 	
 	@Override
@@ -296,28 +287,17 @@ public class Dictionary extends AbstractDictionaryTable
 	
 	@Override
 	public Collection<Phrase> getAll() { return null;}
-	
-	/**
-	 * Returns the menu to operate this panel.
-	 * @return the menu to operate this panel.
-	 */
+
 	public JMenu getMenu()
 	{
 		return menu;
 	}
-	
-	/**
-	 * Returns tool buttons of this panel.
-	 * @return tool buttons of this panel.
-	 */
+
 	public JButton[] getToolBarButtons()
 	{
 		return new JButton[] {openCloseBut, openCloseTagBut, openCloseSearchBut};
 	}
-	
-	/**
-	 * Opens and closes menu items of this menu.
-	 */
+
 	public void openClose() 
 	{
 		if (this.isVisible()) // close items
@@ -328,7 +308,7 @@ public class Dictionary extends AbstractDictionaryTable
 			toTaskMit.setEnabled(false);
 			filterMit.setEnabled(false);
 			
-			openCloseBut.setBackground(LangH.getColors().getBasicBackground());
+			openCloseBut.setBackground(colors.getBasicBackground());
 			openCloseTagBut.setEnabled(false);
 			openCloseSearchBut.setEnabled(false);
 				
@@ -342,7 +322,7 @@ public class Dictionary extends AbstractDictionaryTable
 			toTaskMit.setEnabled(true);
 			filterMit.setEnabled(true);
 			
-			openCloseBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseBut.setBackground(colors.getPushedButton());
 			openCloseTagBut.setEnabled(true);
 			openCloseSearchBut.setEnabled(true);
 				
@@ -350,17 +330,14 @@ public class Dictionary extends AbstractDictionaryTable
 		}
 		GUI.infoPanelVisibility();
 	}
-	
-	/**
-	 * Opens and closes menu items of this menu
-	 */
+
 	private void openCloseSearch(JComponent search)
 	{
 		if (search.isVisible()) // close items
 		{
 			findMit.setEnabled(false);
 			findBut.setEnabled(false);
-			openCloseSearchBut.setBackground(LangH.getColors().getBasicBackground());
+			openCloseSearchBut.setBackground(colors.getBasicBackground());
 			search.setVisible(false);
 			
 		}
@@ -368,45 +345,30 @@ public class Dictionary extends AbstractDictionaryTable
 		{
 			findMit.setEnabled(true);
 			findBut.setEnabled(true);
-			openCloseSearchBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseSearchBut.setBackground(colors.getPushedButton());
 			search.setVisible(true);
 		}
 	}
-	
-	/**
-	 * Changes background of the filter button
-	 * @param turnOn - if <code>true</code> background is pushed
-	 */
-	private void turnFilterButton(boolean turnOn) 
+
+	private void turnFilterButtonBackground(boolean turnOn)
 	{
 		if (turnOn)
 		{
-			filterBut.setBackground(LangH.getColors().getPushedButton());
+			filterBut.setBackground(colors.getPushedButton());
 		}
 		else 
 		{
-			filterBut.setBackground(LangH.getColors().getBasicBackground());
+			filterBut.setBackground(colors.getBasicBackground());
 		}
 	}
-	
-	/**
-	 * Returns a new <code>JLabel</code> object
-	 * @param text - a text for this object
-	 * @return a new <code>JLabel</code> object
-	 */
+
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(LangH.getFonts().getFontBold());
+		label.setFont(fonts.getFontBold());
 		return label;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param labelPath - a path of label for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
 	private JButton getButton(String labelPath, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -415,13 +377,7 @@ public class Dictionary extends AbstractDictionaryTable
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -430,12 +386,7 @@ public class Dictionary extends AbstractDictionaryTable
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JToolBar</code> object
-	 * @param components - components for this object
-	 * @return a new <code>JToolBar</code> object
-	 */
+
 	private JToolBar getToolBar(Component... components) 
 	{
 		JToolBar bar = new JToolBar();
@@ -446,21 +397,13 @@ public class Dictionary extends AbstractDictionaryTable
 		}
 		return bar;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end Dictionary
+}

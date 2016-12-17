@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -24,144 +24,98 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import com.pinin.alex.LangH;
-
 /**
  * Loads and contains borders.
  */
-public class Borders 
+@SuppressWarnings("unused")
+public class Borders
 {
-//
-// Variables
-//
 	// borders
-	
 	private Border panelBorder;
 	private Border elementBorder;
 	private Border fieldBorder;
 	private Border labelBorder;
 	private Border emptyBorder;
-	
 	private TitledBorder correctBorder;
 	private TitledBorder wrongBorder;
-	private TitledBorder inTextBorder;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
+	private Fonts fonts;
 	
 	/**
 	 * Constructor.
+	 * @param fonts - fonts for this application.
+     * @param texts - texts for this application.
 	 */
-	public Borders() 
+	public Borders(Fonts fonts, Texts texts)
 	{
+        this.fonts = fonts;
+
 		panelBorder   = BorderFactory.createBevelBorder(0);
 		elementBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
 		fieldBorder   = BorderFactory.createEtchedBorder();
 		labelBorder   = BorderFactory.createEtchedBorder(1);
 		emptyBorder   = BorderFactory.createEmptyBorder();
 			
-		Font fontP = LangH.getFonts().getFontPlate();
+		Font fontP = fonts.getFontPlate();
 			
 		correctBorder = (BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(new Color(0, 128, 0), 2), 
-				TXT.MG_CORRECT_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
+				texts.MG_CORRECT_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
 		correctBorder.setTitleColor(new Color(0, 128, 0));
 			
 		wrongBorder = (BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(new Color(255, 0, 0), 2), 
-				TXT.MG_WRONG_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
+				texts.MG_WRONG_ANSW, TitledBorder.CENTER, TitledBorder.TOP, fontP));
 		wrongBorder.setTitleColor(new Color(255, 0, 0));
 
-		inTextBorder = (BorderFactory.createTitledBorder( 
+        TitledBorder inTextBorder = (BorderFactory.createTitledBorder(
 				BorderFactory.createEmptyBorder(),
 				"", TitledBorder.CENTER, TitledBorder.TOP, fontP));
 		inTextBorder.setTitleColor(Color.LIGHT_GRAY);
 	}
 
-//
-// Methods
-//
-	
-	/**
-	 * Returns a border for panels.
-	 * @return a border for panels.
-	 */
 	public Border getPanelBorder() 
 	{
 		return panelBorder;
 	}
-	
-	/**
-	 * Returns a border for elements.
-	 * @return a border for elements.
-	 */
+
 	public Border getElementBorder() 
 	{
 		return elementBorder;
 	}
-	
-	/**
-	 * Returns a border for fields.
-	 * @return a border for fields.
-	 */
+
 	public Border getFieldBorder() 
 	{
 		return fieldBorder;
 	}
-	
-	/**
-	 * Returns a border for labels.
-	 * @return a border for labels.
-	 */
+
 	public Border getLabelBorder() 
 	{
 		return labelBorder;
 	}
-	
-	
-	/**
-	 * Returns an empty border.
-	 * @return an empty border.
-	 */
+
 	public Border getEmptyBorder() 
 	{
 		return emptyBorder;
 	}
-	
-	/**
-	 * Returns a border for correct answers.
-	 * @return a border for correct answers.
-	 */
+
 	public Border getCorrectBorder() 
 	{
 		return correctBorder;
 	}
-	
-	/**
-	 * Returns a border for incorrect answers.
-	 * @return a border for incorrect answers.
-	 */
+
 	public Border getWrongBorder() 
 	{
 		return wrongBorder;
 	}
-	
-	/**
-	 * Returns a border with the specified text inside.
-	 * @return a border with the specified text inside.
-	 */
+
 	public Border getInTextBorder(String text) 
 	{
 		TitledBorder border = (BorderFactory.createTitledBorder(
 				BorderFactory.createEmptyBorder(),
-				text, TitledBorder.CENTER, TitledBorder.TOP, LangH.getFonts().getFontPlate()));
+				text, TitledBorder.CENTER, TitledBorder.TOP, fonts.getFontPlate()));
 		border.setTitleColor(Color.LIGHT_GRAY);
 		return border;
 	}
-	
-} // end Borders
+}

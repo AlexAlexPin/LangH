@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
 
@@ -33,64 +35,55 @@ import com.pinin.alex.main.*;
  */
 public class Worklist extends AbstractFilteredTable<Integer>
 {
-//
-// Variables
-//
-	
-	// elements of this panel
-	
-	/** The table for this panel. */
+	// The table for this panel.
 	private TablePhrasesFiltered table;
 	
 	// elements of this menu
-	
 	private JMenu menu;
 	private JMenuItem markMit;
 	private JMenuItem markAllMit;
 	private JMenuItem removeMit;
 	
 	// tool bar buttons
-	
 	private JButton openCloseBut;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
+	private Fonts fonts;
+    private Colors colors;
 
-//
-// Constructor
-//
-	
 	/**
 	 * Constructor.
 	 * @param dic - an object to exchange data.
+     * @param dataFactory - a common data factory,
 	 */
-	public Worklist(DictionaryTable dic) 
+	public Worklist(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
+        fonts = dataFactory.getFonts();
+        colors = dataFactory.getColors();
+        Texts texts = dataFactory.getTexts();
+
 		// header
 			
-		JLabel header = getLabel(TXT.LB_HEADER_EXER_PL);
+		JLabel header = getLabel(texts.LB_HEADER_EXER_PL);
 			
 		// buttons
 			
-		JButton markBut    = getButton(Texts.PH_ICON_SELECT,  TXT.TIP_SELECT,  event -> mark());
-		JButton markAllBut = getButton(Texts.PH_ICON_SEL_ALL, TXT.TIP_SEL_ALL, event -> markAll());
-		JButton removeBut  = getButton(Texts.PH_ICON_DELETE,  TXT.TIP_DELETE,  event -> remove());
+		JButton markBut    = getButton(Texts.PH_ICON_SELECT,  texts.TIP_SELECT, event -> mark());
+		JButton markAllBut = getButton(Texts.PH_ICON_SEL_ALL, texts.TIP_SEL_ALL, event -> markAll());
+		JButton removeBut  = getButton(Texts.PH_ICON_DELETE,  texts.TIP_DELETE, event -> remove());
 			
 		JToolBar buttons = getToolBar(markBut, markAllBut, removeBut);
 			
 		// table
 			
-		table = new TablePhrasesFiltered(dic.getTable().getModel());
+		table = new TablePhrasesFiltered(dic.getTable().getModel(), dataFactory);
 			
 		// add elements
 			
-		this.setBorder(LangH.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBorders().getPanelBorder());
 		this.setLayout(new GridBagLayout());
 			
 		this.add(buttons,                new GBC(0, 0, 1, 1).setWeight(0,   0  ).setAnchor(GBC.WEST));
@@ -99,19 +92,19 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_TASK_PL, event -> openClose());
-		openCloseMit.setIcon(LangH.getResource(Texts.PH_ICON_LIST));
+		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_TASK_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_LIST));
 		
-		markMit    = getMenuItem(TXT.BT_SELECT_TASK_PL,  TXT.HK_SELECT_TASK_PL,  event -> mark());
-		markAllMit = getMenuItem(TXT.BT_SEL_ALL_TASK_PL, TXT.HK_SEL_ALL_TASK_PL, event -> markAll());
-		removeMit  = getMenuItem(TXT.BT_DELETE_TASK_PL,  TXT.HK_DELETE_TASK_PL,  event -> remove());
+		markMit    = getMenuItem(texts.BT_SELECT_TASK_PL,  texts.HK_SELECT_TASK_PL, event -> mark());
+		markAllMit = getMenuItem(texts.BT_SEL_ALL_TASK_PL, texts.HK_SEL_ALL_TASK_PL, event -> markAll());
+		removeMit  = getMenuItem(texts.BT_DELETE_TASK_PL,  texts.HK_DELETE_TASK_PL, event -> remove());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_TASK);
-		menu.setMnemonic(TXT.MN_TASK_PL);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_TASK);
+		menu.setMnemonic(texts.MN_TASK_PL);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -121,7 +114,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(LangH.getResource(Texts.PH_ICON_LIST), TXT.TIP_TASK_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_LIST), texts.TIP_TASK_PL, event -> openClose());
 	}
 
 //
@@ -133,19 +126,13 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	{
 		table.loadData(file);
 	}
-	
-	/**
-	 * Puts marks in check boxes in selecteWd rows.
-	 */
-	public void mark() 
+
+	private void mark()
 	{
 		table.mark();
 	}
-	
-	/**
-	 * Puts marks in check boxes in all visible rows.
-	 */
-	public void markAll() 
+
+    private void markAll()
 	{
 		table.markAll();
 	}
@@ -174,7 +161,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	}
 	
 	@Override
-	public void addAll(Collection <? extends Phrase> c) {};
+	public void addAll(Collection <? extends Phrase> c) {}
 	
 	@Override
 	public int length()
@@ -237,7 +224,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 			markMit.setEnabled(false);
 			markAllMit.setEnabled(false);
 			removeMit.setEnabled(false);
-			openCloseBut.setBackground(LangH.getColors().getBasicBackground());
+			openCloseBut.setBackground(colors.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -246,7 +233,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 			markMit.setEnabled(true);
 			markAllMit.setEnabled(true);
 			removeMit.setEnabled(true);
-			openCloseBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseBut.setBackground(colors.getPushedButton());
 				
 			this.setVisible(true);
 		}
@@ -261,16 +248,10 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	private JLabel getLabel(String text) 
 	{
 		JLabel label = new JLabel(text, JLabel.CENTER);
-		label.setFont(LangH.getFonts().getFontBold());
+		label.setFont(fonts.getFontBold());
 		return label;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param labelPath - a path of label for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
 	private JButton getButton(String labelPath, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -279,13 +260,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -294,12 +269,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JToolBar</code> object
-	 * @param components - components for this object
-	 * @return a new <code>JToolBar</code> object
-	 */
+
 	private JToolBar getToolBar(Component... components) 
 	{
 		JToolBar bar = new JToolBar();
@@ -310,18 +280,11 @@ public class Worklist extends AbstractFilteredTable<Integer>
 		}
 		return bar;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

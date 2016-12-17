@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.function.Function;
 import java.util.logging.*;
+import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.table.*;
 import com.pinin.alex.*;
@@ -33,12 +35,8 @@ import com.pinin.alex.main.*;
 /**
  * Extends <code>JTable</code>. Displays <code>ModelPhrases</code>.
  */
-public class TablePhrases extends JTable 
+class TablePhrases extends JTable
 {
-//
-// Variables
-//
-	
 	/** The model for this table. */
 	private ModelPhrases model;
 	
@@ -51,27 +49,27 @@ public class TablePhrases extends JTable
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Logger LOGGER = LangH.getLogger();
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+	private Logger logger;
+    private Fonts fonts;
+
 	/**
 	 * Constructor.
-	 * @param taglist - an object to exchange data.
-	 * @param worklist - an object to exchange data.
+	 * @param tagList - an object to exchange data.
+	 * @param workList - an object to exchange data.
+	 * @param dataFactory - a common data factory.
 	 */ 
-	public TablePhrases(TagContainer taglist, AbstractFilteredTable<Integer> worklist)
+	TablePhrases(TagContainer tagList, AbstractFilteredTable<Integer> workList, CommonDataFactory dataFactory)
 	{
+        logger = dataFactory.getLogger();
+        fonts = dataFactory.getFonts();
+        Texts texts = dataFactory.getTexts();
+
 		// make the table
 			
-		model = new ModelPhrases();
-		model.addTableModelListener(event -> taglist.loadData(model.getTags())); // Updates the tags list when
+		model = new ModelPhrases(dataFactory);
+		model.addTableModelListener(event -> tagList.loadData(model.getTags())); // Updates the tags list when
 		                                                                         // the tag column has been changed
-		final Font fontP = LangH.getFonts().getFontPlate();
+		final Font fontP = fonts.getFontPlate();
 			
 		this.setModel(model);
 		this.setFont(fontP);
@@ -109,10 +107,10 @@ public class TablePhrases extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark    = getMenuItem(TXT.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT,  event -> mark());
-		JMenuItem markAll = getMenuItem(TXT.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem remove  = getMenuItem(TXT.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE,  event -> removeMarkedRows());
-		JMenuItem toTask  = getMenuItem(TXT.BT_TO_TASK_TABLE_PL, Texts.PH_ICON_TOTASK,  event -> toTask(worklist));
+		JMenuItem mark    = getMenuItem(texts.BT_SELECT_TABLE_PL,  Texts.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll = getMenuItem(texts.BT_SEL_ALL_TABLE_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem remove  = getMenuItem(texts.BT_DELETE_TABLE_PL,  Texts.PH_ICON_DELETE, event -> removeMarkedRows());
+		JMenuItem toTask  = getMenuItem(texts.BT_TO_TASK_TABLE_PL, Texts.PH_ICON_TOTASK, event -> toTask(workList));
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -126,7 +124,7 @@ public class TablePhrases extends JTable
 			
 		// add the sorter
 			
-		filteredIds = new HashSet<Integer>();
+		filteredIds = new HashSet<>();
 
 		filter = new RowFilter<AbstractTableModel, Integer>() 
 		{
@@ -138,16 +136,12 @@ public class TablePhrases extends JTable
 			}
 		};
 			
-		sorter = new TableRowSorter<AbstractTableModel>(model);
+		sorter = new TableRowSorter<>(model);
 		sorter.setRowFilter(filter);
 		this.setRowSorter(sorter);
 		this.clearFilter();
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Loads data from the specified file.
 	 * @param file - a file with data.
@@ -189,26 +183,13 @@ public class TablePhrases extends JTable
 	}
 	
 	/**
-	 * Returns a <code>Phrase</code> from the specified row.
-	 * @param row - a row to get <code>Phrase</code>.
-	 * @return a <code>Phrase</code> from the specified row.
-	 */
-	Phrase get(int row) 
-	{
-		return model.get(row);
-	}
-	
-	/**
 	 * Adds new elements.
 	 * @param c - new elements.
 	 */
 	void addAll(Collection <? extends Phrase> c)
 	{
 		model.addAll(c);
-		for (Phrase each : c)
-		{
-			filteredIds.add(each.getId());
-		}
+        filteredIds.addAll(c.stream().map((Function<Phrase, Integer>) Phrase::getId).collect(Collectors.toList()));
 		sorter.setRowFilter(filter);
 	}
 	
@@ -269,7 +250,7 @@ public class TablePhrases extends JTable
 	/**
 	 * Plays a sound of the current row.
 	 */
-	void playSound()
+	private void playSound()
 	{
 		try 
 		{
@@ -284,7 +265,7 @@ public class TablePhrases extends JTable
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -355,21 +336,13 @@ public class TablePhrases extends JTable
 	{
 		model.codeFile(file);
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param iconPath - an icon path for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end TablePhrases
+}

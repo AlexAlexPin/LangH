@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -30,60 +30,56 @@ import com.pinin.alex.main.*;
 /**
  * Extends <code>JPanel</code>. Allows to add new phrases to the database.
  */
-public class Filler extends AbstractControlledPanel 
+class Filler extends AbstractControlledPanel
 {
-//
-// Variables
-//
-	
 	// elements of this panel
-	
 	private JTextArea addPhrase;
 	private JTextArea addTransl;
 	private JTextArea addComment;
 	private JTextArea addTag;
 	
 	// elements of this menu
-	
 	private JMenu menu;
 	private JMenuItem addMit;
 	
 	// tool bar buttons
-	
 	private JButton openCloseBut;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//
-	
+	private Texts texts;
+	private Fonts fonts;
+    private Borders borders;
+    private Colors colors;
+
 	/**
 	 * Constructor.
 	 * @param dic - an object to exchange data.
+     * @param dataFactory - a common data factory.
 	 */
-	public Filler(DictionaryTable dic) 
+	Filler(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
+        texts = dataFactory.getTexts();
+        fonts = dataFactory.getFonts();
+        borders = dataFactory.getBorders();
+        colors = dataFactory.getColors();
+
 		// workspace
 			
-		addPhrase  = getTextArea(TXT.LB_HEADER_ADD_PHRASE);
-		addTransl  = getTextArea(TXT.LB_HEADER_ADD_TRANSL);
-		addComment = getTextArea(TXT.LB_HEADER_ADD_COMM);
-		addTag     = getTextArea(TXT.LB_HEADER_ADD_TAG);
+		addPhrase  = getTextArea(texts.LB_HEADER_ADD_PHRASE);
+		addTransl  = getTextArea(texts.LB_HEADER_ADD_TRANSL);
+		addComment = getTextArea(texts.LB_HEADER_ADD_COMM);
+		addTag     = getTextArea(texts.LB_HEADER_ADD_TAG);
 			
 		JPanel workspace = getPanel(new GridLayout(1,4), new JScrollPane(addPhrase), 
 				new JScrollPane(addTransl), new JScrollPane(addComment), new JScrollPane(addTag));
 			
 		// buttons
 			
-		JButton addBut = getButton(Texts.PH_ICON_ADDNEW, TXT.TIP_ADD, event -> add(dic));
+		JButton addBut = getButton(
+		        dataFactory.getResource(Texts.PH_ICON_ADDNEW), texts.TIP_ADD, event -> add(dic));
 			
 		JToolBar buttons = getToolBar(addBut);
 			
@@ -94,27 +90,27 @@ public class Filler extends AbstractControlledPanel
 			
 		// add elements
 			
-		this.setBorder(LangH.getBorders().getPanelBorder());
+		this.setBorder(borders.getPanelBorder());
 		this.setLayout(new BorderLayout());
 			
 		this.add(headPanel,    BorderLayout.NORTH);
 		this.add(workspace,    BorderLayout.CENTER);
 
-		this.setToolTipText(TXT.TIP_ADD_HELP);
+		this.setToolTipText(texts.TIP_ADD_HELP);
 		
 		// menu items
 		
-		JMenuItem openCloseMit = this.getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_ADD_PL, event -> openClose());
-		openCloseMit.setIcon(LangH.getResource(Texts.PH_ICON_ADD));
+		JMenuItem openCloseMit = this.getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_ADD_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_ADD));
 		
-		addMit = this.getMenuItem(TXT.BT_NEW_ADD_PL, TXT.HK_NEW_ADD_PL, event -> add(dic));
+		addMit = this.getMenuItem(texts.BT_NEW_ADD_PL, texts.HK_NEW_ADD_PL, event -> add(dic));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_ADD);
-		menu.setMnemonic(TXT.MN_ADD_PL);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_ADD);
+		menu.setMnemonic(texts.MN_ADD_PL);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -122,7 +118,7 @@ public class Filler extends AbstractControlledPanel
 		
 		// tool buttons
 		
-		openCloseBut = getButton(LangH.getResource(Texts.PH_ICON_ADD), TXT.TIP_ADD_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_ADD), texts.TIP_ADD_PL, event -> openClose());
 	}
 	
 //
@@ -132,7 +128,6 @@ public class Filler extends AbstractControlledPanel
 	/**
 	 * Adds new phrases to the database.<br>
 	 * Allows to add a few phrases and translates separated by the newline character.
-	 * @param container - an object to exchange data.
 	 */
 	public void add(DictionaryTable dic) 
 	{
@@ -167,7 +162,7 @@ public class Filler extends AbstractControlledPanel
 			 (phraseSplit.length != commentSplit.length && !noComment) ||
 			 (phraseSplit.length != tagSplit    .length && !noTag)     )
 		{
-			GUI.showErrorDialog(TXT.MG_ERROR_ADD, TXT.TL_ERROR);
+			GUI.showErrorDialog(texts.MG_ERROR_ADD, texts.TL_ERROR);
 			return;
 		}
 			
@@ -175,7 +170,7 @@ public class Filler extends AbstractControlledPanel
 		
 		int sizeBefore = dic.length();
 		
-		LinkedList<Phrase> phrases = new LinkedList<Phrase>();
+		LinkedList<Phrase> phrases = new LinkedList<>();
 		for (int i=0; i<phraseSplit.length; i++) 
 		{
 			final Phrase p = new Phrase(
@@ -225,24 +220,18 @@ public class Filler extends AbstractControlledPanel
 		if (this.isVisible()) // close items
 		{
 			addMit.setEnabled(false);
-			openCloseBut.setBackground(LangH.getColors().getBasicBackground());	
+			openCloseBut.setBackground(colors.getBasicBackground());
 			this.setVisible(false);
 		}
 		else // open items
 		{
 			addMit.setEnabled(true);
-			openCloseBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseBut.setBackground(colors.getPushedButton());
 			this.setVisible(true);
 		}
 		GUI.infoPanelVisibility();
 	}
-	
-	/**
-	 * Returns a new <code>JPanel</code> object
-	 * @param mgr - a layout manager for this object
-	 * @param components - components for this object
-	 * @return a new <code>JPanel</code> object
-	 */
+
 	private JPanel getPanel(LayoutManager mgr, JComponent... components) 
 	{
 		JPanel panel = new JPanel();
@@ -262,34 +251,22 @@ public class Filler extends AbstractControlledPanel
 	private JTextArea getTextArea(String header) 
 	{
 		JTextArea textArea = new JTextArea();
-		textArea.setFont(LangH.getFonts().getFontPlate());
+		textArea.setFont(fonts.getFontPlate());
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		textArea.setBorder(LangH.getBorders().getInTextBorder(header));
+		textArea.setBorder(borders.getInTextBorder(header));
 		return textArea;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param labelPath - a path of label for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
-	private JButton getButton(String labelPath, String tip, ActionListener action) 
-	{
-		JButton button = new JButton();
-		button.setIcon(LangH.getResource(labelPath));
-		button.setToolTipText(tip);
-		button.addActionListener(action);
-		return button;
-	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
+//	private JButton getButton(String labelPath, String tip, ActionListener action)
+//	{
+//		JButton button = new JButton();
+//		button.setIcon(CommonDataFactoryImpl.getResource(labelPath));
+//		button.setToolTipText(tip);
+//		button.addActionListener(action);
+//		return button;
+//	}
+
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -298,12 +275,7 @@ public class Filler extends AbstractControlledPanel
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JToolBar</code> object
-	 * @param components - components for this object
-	 * @return a new <code>JToolBar</code> object
-	 */
+
 	private JToolBar getToolBar(Component... components) 
 	{
 		JToolBar bar = new JToolBar();
@@ -314,18 +286,11 @@ public class Filler extends AbstractControlledPanel
 		}
 		return bar;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
 		item.addActionListener(action);
 		return item;

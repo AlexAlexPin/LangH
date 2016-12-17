@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -35,12 +35,7 @@ import com.pinin.alex.main.*;
  */
 public class GUI extends JFrame 
 {
-//
-// Variables
-//
-	
 	// elements of this frame
-	
 	private static AbstractDictionaryTable dictionary;
 	private static AbstractFilteredTable<Integer> worklist;
 	private static AbstractControlledPanel filler;
@@ -65,28 +60,29 @@ public class GUI extends JFrame
 	private final static long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private static Logger LOGGER = LangH.getLogger();
-	private static Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//	
-	
+	private static CommonDataFactory dataFactory; // TODO possibly not global
+	private static Logger logger;
+	private static Texts texts;
+
 	/**
 	 * Constructor
+	 * @param dataFactory - a common data factory.
 	 */
-	public GUI() 
+	public GUI(CommonDataFactory dataFactory)
 	{
+        GUI.dataFactory = dataFactory;
+        logger = dataFactory.getLogger();
+        texts = dataFactory.getTexts();
+
 		thisFrame = this;
 			
-		Data data = LangH.getData();
+		Data data = dataFactory.getData();
 		
 		this.setSize(data.getSize());
 		this.setExtendedState(data.getExtendedState());	
 		this.setLocationRelativeTo(null);
-		this.setIconImage(LangH.getResource(Texts.PH_ICON_TITLE).getImage());
-		this.setTitle(TXT.TL_TITLE);
+		this.setIconImage(dataFactory.getResource(Texts.PH_ICON_TITLE).getImage());
+		this.setTitle(texts.TL_TITLE);
 		this.setLayout(new GridBagLayout());
 			
 		// catch the extended state changing
@@ -112,15 +108,15 @@ public class GUI extends JFrame
 			
 		// panels
 		
-		dictionary = new Dictionary();
-		worklist   = new Worklist(dictionary);
-		filler     = new Filler(dictionary);
-		exercise   = new Exercise(worklist);
-		recorder   = new Recorder(dictionary);
+		dictionary = new Dictionary(dataFactory);
+		worklist   = new Worklist(dictionary, dataFactory);
+		filler     = new Filler(dictionary, dataFactory);
+		exercise   = new Exercise(worklist, dataFactory);
+		recorder   = new Recorder(dictionary, dataFactory);
 			
-		AbstractControlledPanel menuFile = new MenuFile(dictionary, worklist);
-		AbstractControlledPanel menuEdit = new MenuEdit(dictionary, worklist);
-		AbstractControlledPanel menuHelp = new MenuHelp();
+		AbstractControlledPanel menuFile = new MenuFile(dictionary, worklist, dataFactory);
+		AbstractControlledPanel menuEdit = new MenuEdit(dataFactory);
+		AbstractControlledPanel menuHelp = new MenuHelp(dataFactory);
 			
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(menuFile.getMenu());
@@ -146,7 +142,7 @@ public class GUI extends JFrame
 		
 		message = new JTextField("");
 		message.setEditable(false);
-		message.setFont(LangH.getFonts().getFontPlate());
+		message.setFont(dataFactory.getFonts().getFontPlate());
 		message.setHorizontalAlignment(JTextField.LEFT);
 		message.setBorder(BorderFactory.createEtchedBorder());
 		
@@ -180,11 +176,7 @@ public class GUI extends JFrame
 		
 		loadData(data.getDataPath());
 	}
-	
-//
-// Methods
-//	
-	
+
 	/**
 	 * Returns the current worklist.
 	 * @return the current worklist.
@@ -227,10 +219,10 @@ public class GUI extends JFrame
 	static void exit()
 	{
 		GUI.sendMessage("");
-		int ok = GUI.showConfirmDialog(TXT.MG_EXIT_QUESTION, TXT.TL_CONF_EXIT);
+		int ok = GUI.showConfirmDialog(texts.MG_EXIT_QUESTION, texts.TL_CONF_EXIT);
 		if (ok == JOptionPane.OK_OPTION)
 		{
-			Data data = LangH.getData();
+			Data data = dataFactory.getData();
 			data.putSize(thisFrame.getSize());
 			data.putExtendedState(thisFrame.getExtendedState());
 			data.putDictionaryState(dictionary.isVisible());
@@ -238,7 +230,7 @@ public class GUI extends JFrame
 			data.putFillerState(filler.isVisible());
 			data.putExerciseState(exercise.isVisible());
 			data.putRecorderState(recorder.isVisible());
-			LOGGER.log(Level.CONFIG, "Program has been finished");
+			logger.log(Level.CONFIG, "Program has been finished");
 			System.exit(0);
 		}
 	}
@@ -254,16 +246,16 @@ public class GUI extends JFrame
 		File dataPathFile = new File(dataPath);
 		if (!dataPathFile.exists())
 		{
-			sendMessage(TXT.MG_NO_DB);
+			sendMessage(texts.MG_NO_DB);
 			return;
 		}
 		
-		Data data = LangH.getData();
-		String taskPath = data.getTaskPath(dataPath, TXT.PH_EXT_TSK);
+		Data data = dataFactory.getData();
+		String taskPath = data.getTaskPath(dataPath, texts.PH_EXT_TSK);
 		dictionary.loadData(dataPathFile);
 		worklist.loadData(new File(taskPath));
 		data.putDataPath(dataPath);
-		sendMessage(TXT.MG_DB_LOADED + " " + dataPath);
+		sendMessage(texts.MG_DB_LOADED + " " + dataPath);
 	}
 	
 	/**
@@ -328,7 +320,7 @@ public class GUI extends JFrame
 	 */
 	static void showSettingDialog(String title)
 	{
-		JDialog d = new DialogSetting(thisFrame, title);
+		JDialog d = new DialogSetting(thisFrame, title, dataFactory);
 		d.setVisible(true);
 	}
 	
@@ -338,7 +330,7 @@ public class GUI extends JFrame
 	 */
 	static void showHelpDialog(String title)
 	{
-		JDialog d = new DialogHelp (thisFrame, title);
+		JDialog d = new DialogHelp (thisFrame, title, dataFactory);
 		d.setVisible(true);
 	}
 	
@@ -349,7 +341,7 @@ public class GUI extends JFrame
 	 */
 	static void showAboutDialog(String title)
 	{
-		JDialog d = new DialogAbout (thisFrame, title);
+		JDialog d = new DialogAbout (thisFrame, title, dataFactory);
 		d.setVisible(true);
 	}
 	
@@ -374,5 +366,4 @@ public class GUI extends JFrame
 			toolBar.add(each);
 		}
 	}
-	
-} // end GUI
+}

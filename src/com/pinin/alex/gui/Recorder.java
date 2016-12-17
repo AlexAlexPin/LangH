@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -24,96 +24,92 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.logging.*;
 import javax.swing.*;
-import com.pinin.alex.LangH;
+
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>JPanel</code>. Allows to record sound.
  */
-public class Recorder extends AbstractControlledPanel
+class Recorder extends AbstractControlledPanel
 {
-//
-// Variables
-//
-	
 	// data
-	
-	/** An object that allows to work with sounds. */
 	private Sound audio;
 	
 	// elements of this panel
-	
 	private JButton captureBut;
 	private JButton stopBut;
 	
 	// elements of this menu
-	
-	JMenu menu;
+	private JMenu menu;
 	private JMenuItem captureMit;
 	private JMenuItem stopMit;
 	private JMenuItem playMit;
 	private JMenuItem saveMit;
 	
 	// tool bar buttons
-	
 	private JButton openCloseBut;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
-	private final Logger LOGGER = LangH.getLogger();
-	
-//
-// Constructors
-//
+	private Texts texts;
+	private Logger logger;
+    private Fonts fonts;
+    private Colors colors;
 	
 	/**
 	 * Constructor.
 	 * @param dic - an object to exchange data.
 	 */
-	public Recorder(DictionaryTable dic) 
+	Recorder(DictionaryTable dic, CommonDataFactory dataFactory)
 	{
+        texts = dataFactory.getTexts();
+        logger = dataFactory.getLogger();
+        fonts = dataFactory.getFonts();
+        colors = dataFactory.getColors();
+
 		// data
-			
+
 		audio = new Sound();
 			
 		// buttons
 			
-		captureBut = getButton(Texts.PH_ICON_REC,  TXT.TIP_REC_SOUND,  event -> capture());
-		stopBut    = getButton(Texts.PH_ICON_STOP, TXT.TIP_STOP_SOUND, event -> stop());
+		captureBut = getButton(dataFactory.getResource(
+		        Texts.PH_ICON_REC),  texts.TIP_REC_SOUND, event -> capture(), false);
+		stopBut = getButton(dataFactory.getResource(
+		        Texts.PH_ICON_STOP), texts.TIP_STOP_SOUND, event -> stop(), false);
 		stopBut.setEnabled(false);
 			
-		JButton playBut = getButton(Texts.PH_ICON_PLAY, TXT.TIP_PLAY_SOUND, event -> play());
-		JButton saveBut = getButton(Texts.PH_ICON_SAVE, TXT.TIP_SAVE_SOUND, event -> save(dic));
+		JButton playBut = getButton(dataFactory.getResource(
+		        Texts.PH_ICON_PLAY), texts.TIP_PLAY_SOUND, event -> playSound(), false);
+		JButton saveBut = getButton(dataFactory.getResource(
+		        Texts.PH_ICON_SAVE), texts.TIP_SAVE_SOUND, event -> saveSound(dic), false);
 			
 		JPanel buttons = getPanel(new GridLayout(1,4), captureBut, stopBut, playBut, saveBut);
 			
 		// add elements
 			
-		this.setBorder(LangH.getBorders().getPanelBorder());
+		this.setBorder(dataFactory.getBorders().getPanelBorder());
 		this.add(buttons);
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_SOUND_PL, event -> openClose());
-		openCloseMit.setIcon(LangH.getResource(Texts.PH_ICON_SOUND));
+		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_SOUND_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_SOUND));
 		
-		captureMit = getMenuItem(TXT.BT_REC_SOUND_PL,  TXT.HK_REC_SOUND_PL,  event -> capture());
-		stopMit    = getMenuItem(TXT.BT_STOP_SOUND_PL, TXT.HK_STOP_SOUND_PL, event -> stop());
-		playMit    = getMenuItem(TXT.BT_PLAY_SOUND_PL, TXT.HK_PLAY_SOUND_PL, event -> play());	
-		saveMit    = getMenuItem(TXT.BT_SAVE_SOUND_PL, TXT.HK_SAVE_SOUND_PL, event -> save(dic));
+		captureMit = getMenuItem(texts.BT_REC_SOUND_PL,  texts.HK_REC_SOUND_PL, event -> capture());
+		stopMit    = getMenuItem(texts.BT_STOP_SOUND_PL, texts.HK_STOP_SOUND_PL, event -> stop());
+		playMit    = getMenuItem(texts.BT_PLAY_SOUND_PL, texts.HK_PLAY_SOUND_PL, event -> playSound());
+		saveMit    = getMenuItem(texts.BT_SAVE_SOUND_PL, texts.HK_SAVE_SOUND_PL, event -> saveSound(dic));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_SOUND);
-		menu.setMnemonic(TXT.MN_SOUND_PL);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_SOUND);
+		menu.setMnemonic(texts.MN_SOUND_PL);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -124,21 +120,18 @@ public class Recorder extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(LangH.getResource(Texts.PH_ICON_SOUND), TXT.TIP_SOUND_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getResource(
+		        Texts.PH_ICON_SOUND), texts.TIP_SOUND_PL, event -> openClose(), true);
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Runs sound recording. Unblocks and blocks related menu items and buttons.
 	 */
-	public void capture() 
+	private void capture()
 	{
 		try 
 		{
-			GUI.sendMessage(TXT.MG_RECORDING);
+			GUI.sendMessage(texts.MG_RECORDING);
 			captureBut.setEnabled(false);
 			captureMit.setEnabled(false);
 			stopBut.setEnabled(true);
@@ -147,18 +140,18 @@ public class Recorder extends AbstractControlledPanel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
 	/**
 	 * Finishes sound recording. Unblocks and blocks related menu items and buttons.
 	 */
-	public void stop() 
+	private void stop()
 	{
 		try 
 		{
-			GUI.sendMessage(TXT.MG_RECORDED);
+			GUI.sendMessage(texts.MG_RECORDED);
 			captureBut.setEnabled(true);
 			captureMit.setEnabled(true);
 			stopBut.setEnabled(false);
@@ -167,14 +160,11 @@ public class Recorder extends AbstractControlledPanel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
-	
-	/**
-	 * Plays a recorded sound.
-	 */
-	public void play() 
+
+    private void playSound()
 	{
 		try
 		{
@@ -183,7 +173,7 @@ public class Recorder extends AbstractControlledPanel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -191,33 +181,22 @@ public class Recorder extends AbstractControlledPanel
 	 * Saves the recorded sound to the file.
 	 * @param dic - an object to exchange data.
 	 */
-	public void save(DictionaryTable dic) 
+	private void saveSound(DictionaryTable dic)
 	{
 		if (audio == null) return;
 		dic.addSound(audio);
 	}
-	
-	/**
-	 * Returns the menu to operate this panel.
-	 * @return the menu to operate this panel.
-	 */
+
 	public JMenu getMenu()
 	{
 		return menu;
 	}
-	
-	/**
-	 * Returns tool buttons of this panel.
-	 * @return tool buttons of this panel.
-	 */
+
 	public JButton[] getToolBarButtons()
 	{
 		return new JButton[] {openCloseBut};
 	}
-	
-	/**
-	 * Opens and closes menu items of this menu.
-	 */
+
 	public void openClose()
 	{
 		if (this.isVisible()) // close items
@@ -226,7 +205,7 @@ public class Recorder extends AbstractControlledPanel
 			stopMit.setEnabled(false);
 			playMit.setEnabled(false);
 			saveMit.setEnabled(false);
-			openCloseBut.setBackground(LangH.getColors().getBasicBackground());
+			openCloseBut.setBackground(colors.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -236,49 +215,22 @@ public class Recorder extends AbstractControlledPanel
 			stopMit.setEnabled(true);
 			playMit.setEnabled(true);
 			saveMit.setEnabled(true);
-			openCloseBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseBut.setBackground(colors.getPushedButton());
 				
 			this.setVisible(true);
 		}
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object
-	 * @param iconPath - a path of icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
-	private JButton getButton(String iconPath, String tip, ActionListener action) 
-	{
-		JButton button = new JButton();
-		button.setIcon(LangH.getResource(iconPath));
-		button.setToolTipText(tip);
-		button.addActionListener(action);
-		button.setContentAreaFilled(false);
-		return button;
-	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
-	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
+
+	private JButton getButton(ImageIcon icon, String tip, ActionListener action, boolean contentAreaFillen)
 	{
 		JButton button = new JButton();
 		button.setIcon(icon);
 		button.setToolTipText(tip);
 		button.addActionListener(action);
+        button.setContentAreaFilled(contentAreaFillen);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JPanel</code> object
-	 * @param mgr - a layout manager for this object
-	 * @param components - components for this object
-	 * @return a new <code>JPanel</code> object
-	 */
+
 	private JPanel getPanel(LayoutManager mgr, JComponent... components) 
 	{
 		JPanel panel = new JPanel();
@@ -289,21 +241,13 @@ public class Recorder extends AbstractControlledPanel
 		}
 		return panel;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
-	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
+
+	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
-		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
+		item.setFont(fonts.getFontPlate());
+		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end Recorder
+}

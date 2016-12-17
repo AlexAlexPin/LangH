@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -21,73 +21,46 @@
 package com.pinin.alex.main;
 
 import java.awt.*;
-import com.pinin.alex.*;
 
 /**
  * Contains main fonts.
  */
-public class Fonts 
+@SuppressWarnings("unused")
+public class Fonts
 {
-//
-// Variables
-//
 	// fonts
-	
 	private Font fontPlate;	
 	private Font fontBold;	
 	private Font fontItalic;
 	
 	// font sizes
-	
 	public final static int FONT_NORMAL = 12;
 	public final static int FONT_BIG    = 18;
 	public final static int FONT_HUGE   = 24;
-	
-//
-// Constructors
-//
 
 	/**
 	 * Constructor.
+	 * @param fontSize - a size for all fonts for this application.
 	 */
-	public Fonts() 
+	public Fonts(int fontSize)
 	{
-		int fontSize = LangH.getData().getFontSize();
-			
 		fontPlate  = new Font(Font.DIALOG, Font.PLAIN,  fontSize);
 		fontBold   = new Font(Font.DIALOG, Font.BOLD,   fontSize);
 		fontItalic = new Font(Font.DIALOG, Font.ITALIC, fontSize);
 	}
-	
-//
-// Methods
-//
-	
-	/**
-	 * Returns the plate font
-	 * @return the plate font
-	 */
+
 	public Font getFontPlate() 
 	{
 		return fontPlate;
 	}
-	
-	/**
-	 * Returns the bold font
-	 * @return the bold font
-	 */
+
 	public Font getFontBold() 
 	{
 		return fontBold;
 	}
-	
-	/**
-	 * Returns the italic font
-	 * @return the italic font
-	 */
+
 	public Font getFontItalic() 
 	{
 		return fontItalic;
 	}
-	
-} // end Fonts
+}

@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -24,44 +24,40 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
 
 /**
  * Extends <code>JTable</code>. Displays the tag list.
  */
-public class TableTerm extends JTable 
+class TableTerm extends JTable
 {
-
-//
-// Variables
-//
-	
 	/** The model for this table */
 	private ModelTerm model;
-	
+
 	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
 	
 	// common mains
-	private final Texts TXT = LangH.getTexts();
-	
-//
-// Constructors
-//	
-	
+    private Fonts fonts;
+
 	/**
 	 * Constructor.
 	 * @param dictionary - an object to exchange data.
+	 * @param dataFactory - a common data factory.
 	 */
-	public TableTerm(DictionaryTable dictionary) 
+	TableTerm(DictionaryTable dictionary, CommonDataFactory dataFactory)
 	{
+        fonts = dataFactory.getFonts();
+        Texts texts = dataFactory.getTexts();
+
 		// make the table
 			
-		model = new ModelTerm();
+		model = new ModelTerm(dataFactory);
 		this.setModel(model);
 			
-		final Font fontP = LangH.getFonts().getFontPlate();
+		final Font fontP = fonts.getFontPlate();
 			
 		this.setFont(fontP);	
 		this.getTableHeader().setFont(fontP);
@@ -79,10 +75,10 @@ public class TableTerm extends JTable
 			
 		// add the popup menu
 			
-		JMenuItem mark     = getMenuItem(TXT.BT_SELECT_TAG_PL,  Texts.PH_ICON_SELECT,  event -> mark());	
-		JMenuItem markAll  = getMenuItem(TXT.BT_SEL_ALL_TAG_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
-		JMenuItem find     = getMenuItem(TXT.BT_FIND_TAG_PL,    Texts.PH_ICON_SEARCH,  event -> find(dictionary));
-		JMenuItem toPhrase = getMenuItem(TXT.BT_TO_PHRASE_TAG_PL, Texts.PH_ICON_TOPHR, event -> toPhrase(dictionary));
+		JMenuItem mark     = getMenuItem(texts.BT_SELECT_TAG_PL,  Texts.PH_ICON_SELECT, event -> mark());
+		JMenuItem markAll  = getMenuItem(texts.BT_SEL_ALL_TAG_PL, Texts.PH_ICON_SEL_ALL, event -> markAll());
+		JMenuItem find     = getMenuItem(texts.BT_FIND_TAG_PL,    Texts.PH_ICON_SEARCH, event -> find(dictionary));
+		JMenuItem toPhrase = getMenuItem(texts.BT_TO_PHRASE_TAG_PL, Texts.PH_ICON_TOPHR, event -> toPhrase(dictionary));
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -94,11 +90,7 @@ public class TableTerm extends JTable
 			
 		this.setComponentPopupMenu(popup);
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Loads the data.
 	 * @param term - an object to get the data.
@@ -157,11 +149,7 @@ public class TableTerm extends JTable
 		Term tags = getSelectedTags();
 		component.addTags(tags);
 	}
-	
-	/**
-	 * Returns <code>Term</code> with tags from marked rows.
-	 * @return <code>Term</code> with tags from marked rows.
-	 */
+
 	private Term getSelectedTags() 
 	{	
 		Term result = new Term();
@@ -177,21 +165,13 @@ public class TableTerm extends JTable
 		this.repaint();
 		return result;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param iconPath - an icon path for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
+
 	private JMenuItem getMenuItem(String text, String iconPath, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
+		item.setFont(fonts.getFontPlate());
 		item.setIcon(new ImageIcon(LangH.class.getResource(iconPath)));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end TableTerm
+}

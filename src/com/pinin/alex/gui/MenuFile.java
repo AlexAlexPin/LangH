@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -27,65 +27,56 @@ import javax.swing.*;
 import com.pinin.alex.*;
 import com.pinin.alex.main.*;
 
-public class MenuFile extends AbstractControlledPanel
+class MenuFile extends AbstractControlledPanel
 {
-//
-// Variables
-//	
 	// elements of this menu
+	private JMenu menu;
 
-	JMenu menu;
-	private JMenuItem newFile;
-	private JMenuItem openFile;
-	private JMenuItem saveFile;
-	private JMenuItem saveFileAs;
-	private JMenuItem exitProg;
-	
 	// tool bar buttons
-	
 	private JButton saveFileBut;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private final static long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Logger LOGGER = LangH.getLogger();
-	private final Texts TXT = LangH.getTexts();
+    private CommonDataFactory dataFactory; // TODO possible local
+	private Logger logger;
+	private Texts texts;
+    private Fonts fonts;
 
-//
-// Constructors
-//
-	
 	/**
 	 * Constructor.
-	 * @param - dic - an object to exchange data.
-	 * @param worklist - an object to exchange data.
+	 * @param dic - an object to exchange data.
+	 * @param workList - an object to exchange data.
+     * @param dataFactory - a common data factory
 	 */
-	public MenuFile(DictionaryTable dic, DictionaryTable worklist)
+	MenuFile(DictionaryTable dic, DictionaryTable workList, CommonDataFactory dataFactory)
 	{
+        this.dataFactory = dataFactory;
+		logger = dataFactory.getLogger();
+		texts = dataFactory.getTexts();
+        fonts = dataFactory.getFonts();
+
 		// menu items
-		
-		newFile = getMenuItem(TXT.BT_NEW_FILE, TXT.HK_NEW_FILE, event -> newFile(dic, worklist));
-		newFile.setIcon(LangH.getResource(Texts.PH_ICON_NEW));
-		
-		openFile = getMenuItem(TXT.BT_OPEN_FILE, TXT.HK_OPEN_FILE, event -> openFile(dic, worklist));
-		openFile.setIcon(LangH.getResource(Texts.PH_ICON_OPEN));
-		
-		saveFile = getMenuItem(TXT.BT_SAVE_FILE, TXT.HK_SAVE_FILE, event -> saveFile(dic, worklist));
-		saveFile.setIcon(LangH.getResource(Texts.PH_ICON_SAVE));
-		
-		saveFileAs = getMenuItem(TXT.BT_SAVE_AS_FILE, TXT.HK_SAVE_AS_FILE, event -> saveFileAs(dic, worklist));
-		exitProg   = getMenuItem(TXT.BT_EXIT_FILE,    TXT.HK_EXIT_FILE,    event -> exitProg());
+
+        JMenuItem newFile = getMenuItem(texts.BT_NEW_FILE, texts.HK_NEW_FILE, event -> newFile(dic, workList));
+		newFile.setIcon(dataFactory.getResource(Texts.PH_ICON_NEW));
+
+        JMenuItem openFile = getMenuItem(texts.BT_OPEN_FILE, texts.HK_OPEN_FILE, event -> openFile(dic));
+		openFile.setIcon(dataFactory.getResource(Texts.PH_ICON_OPEN));
+
+        JMenuItem saveFile = getMenuItem(texts.BT_SAVE_FILE, texts.HK_SAVE_FILE, event -> saveFile(dic, workList));
+		saveFile.setIcon(dataFactory.getResource(Texts.PH_ICON_SAVE));
+
+        JMenuItem saveFileAs = getMenuItem(texts.BT_SAVE_AS_FILE, texts.HK_SAVE_AS_FILE, event -> saveFileAs(dic, workList));
+        JMenuItem exitProg = getMenuItem(texts.BT_EXIT_FILE, texts.HK_EXIT_FILE, event -> exitProgram());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_FILE);
-		menu.setMnemonic(TXT.MN_FILE);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_FILE);
+		menu.setMnemonic(texts.MN_FILE);
+		menu.setFont(dataFactory.getFonts().getFontPlate());
 		
 		menu.add(newFile);
 		menu.add(openFile);
@@ -97,58 +88,53 @@ public class MenuFile extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		saveFileBut = getButton(LangH.getResource(Texts.PH_ICON_SAVE), 
-				TXT.TIP_SAVE_FILE, event -> saveFile(dic, worklist));
+		saveFileBut = getButton(dataFactory.getResource(Texts.PH_ICON_SAVE),
+				texts.TIP_SAVE_FILE, event -> saveFile(dic, workList));
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Makes a new document.
 	 * @param dic - an object to exchange data.
 	 * @param worklist - an object to exchange data.
 	 */
-	public void newFile(DictionaryTable dic, DictionaryTable worklist)
+	private void newFile(DictionaryTable dic, DictionaryTable worklist)
 	{
 		GUI.sendMessage("");
-		int ok = GUI.showConfirmDialog(TXT.MG_NEW_QUESTION, TXT.TL_CONF_NEW);
+		int ok = GUI.showConfirmDialog(texts.MG_NEW_QUESTION, texts.TL_CONF_NEW);
 		if (ok == JOptionPane.OK_OPTION)
 		{
 			dic.loadData(null);
 			worklist.loadData(null);
-			LangH.getData().putDataPath("");
+            dataFactory.getData().putDataPath("");
 		}
 	}
 	
 	/**
 	 * Opens a new file.
 	 * @param dic - an object to exchange data.
-	 * @param worklist - an object to exchange data.
 	 */
-	public void openFile(DictionaryTable dic, DictionaryTable worklist)
+    private void openFile(DictionaryTable dic)
 	{
 		try
 		{
 			GUI.sendMessage("");
 			File path = dic.getPath();
 			
-			String newPath = GUI.showOpenFileDialog(TXT.MG_FILE_DESCRIPT, path, TXT.PH_EXT_DB);
+			String newPath = GUI.showOpenFileDialog(texts.MG_FILE_DESCRIPT, path, texts.PH_EXT_DB);
 			GUI.loadData(newPath);
 		}
 		catch (RuntimeException e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
 	/**
 	 * Saves current data.
 	 * @param dic - an object to exchange data.
-	 * @param worklist - an object to exchange data.
+	 * @param workList - an object to exchange data.
 	 */
-	public void saveFile(DictionaryTable dic, DictionaryTable worklist)
+    private void saveFile(DictionaryTable dic, DictionaryTable workList)
 	{
 		try
 		{
@@ -157,81 +143,73 @@ public class MenuFile extends AbstractControlledPanel
 			
 			if (path.getPath().isEmpty())
 			{
-				saveFileAs(dic, worklist);
+				saveFileAs(dic, workList);
 				return;
 			}
 			dic.codeFile(path);
-			GUI.sendMessage(TXT.MG_SAVED_REPORT + " " + path);
+			GUI.sendMessage(texts.MG_SAVED_REPORT + " " + path);
 			
-			String pathTask = LangH.getData().getTaskPath(path.toString(), TXT.PH_EXT_TSK);
-			worklist.codeFile(new File(pathTask));
+			String pathTask = dataFactory.getData().getTaskPath(path.toString(), texts.PH_EXT_TSK);
+			workList.codeFile(new File(pathTask));
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param dic - an object to exchange data.
-	 * @param worklist - an object to exchange data.
+	 * @param workList - an object to exchange data.
 	 */
-	public void saveFileAs(DictionaryTable dic, DictionaryTable worklist)
+	private void saveFileAs(DictionaryTable dic, DictionaryTable workList)
 	{
 		try
 		{
 			GUI.sendMessage("");
 			
-			String newPath = GUI.showOpenFileDialog(TXT.MG_FILE_DESCRIPT, new File(""), TXT.PH_EXT_DB);
+			String newPath = GUI.showOpenFileDialog(texts.MG_FILE_DESCRIPT, new File(""), texts.PH_EXT_DB);
 			if (newPath.isEmpty()) return;
 			
-			String extension = "." + TXT.PH_EXT_DB;
+			String extension = "." + texts.PH_EXT_DB;
 			if (!newPath.endsWith(extension)) newPath += extension;
 			
 			File newPathFile = new File(newPath);
 			if (newPathFile.exists())
 			{
-				String message = newPathFile + " " + TXT.MG_FILE_EXISTS;
-				int ok = GUI.showConfirmDialog(message, TXT.TL_CONF_REPLACE);
+				String message = newPathFile + " " + texts.MG_FILE_EXISTS;
+				int ok = GUI.showConfirmDialog(message, texts.TL_CONF_REPLACE);
 				if (ok != JOptionPane.OK_OPTION) return;
 			}
 			dic.codeFile(new File(newPath));
-			GUI.sendMessage(TXT.MG_SAVED_REPORT + " " + newPath);
+			GUI.sendMessage(texts.MG_SAVED_REPORT + " " + newPath);
 			
-			Data data = LangH.getData();
+			Data data = dataFactory.getData();
 			data.putDataPath(newPath);
 			
-			String newTaskData = data.getTaskPath(newPath, TXT.PH_EXT_TSK);
-			worklist.codeFile(new File(newTaskData));
+			String newTaskData = data.getTaskPath(newPath, texts.PH_EXT_TSK);
+			workList.codeFile(new File(newTaskData));
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
 	/**
 	 * Closes this program.
 	 */
-	public void exitProg()
+	private void exitProgram()
 	{
 		GUI.exit();
 	}
-	
-	/**
-	 * Returns the menu to operate this panel.
-	 * @return the menu to operate this panel.
-	 */
+
 	public JMenu getMenu()
 	{
 		return menu;
 	}
-	
-	/**
-	 * Returns tool buttons of this panel.
-	 * @return tool buttons of this panel.
-	 */
+
 	public JButton[] getToolBarButtons()
 	{
 		return new JButton[] {saveFileBut};
@@ -239,29 +217,16 @@ public class MenuFile extends AbstractControlledPanel
 	
 	@Override
 	public void openClose() {}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
-	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
+
+	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
-		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
+		item.setFont(fonts.getFontPlate());
+		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -270,5 +235,4 @@ public class MenuFile extends AbstractControlledPanel
 		button.addActionListener(action);
 		return button;
 	}
-	
-} // end MenuFile
+}

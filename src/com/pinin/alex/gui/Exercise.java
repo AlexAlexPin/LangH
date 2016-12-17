@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.text.*;
 import com.pinin.alex.*;
 import com.pinin.alex.main.*;
@@ -35,10 +34,6 @@ import com.pinin.alex.main.*;
  */
 public class Exercise extends AbstractControlledPanel 
 {
-//
-// Variables
-//
-	
 	// data objects
 	
 	/** An object that contains all exercises. */
@@ -83,57 +78,63 @@ public class Exercise extends AbstractControlledPanel
 	
 	// common mains
 	
-	private final Texts TXT = LangH.getTexts();
-	private final Logger LOGGER = LangH.getLogger();
+	private Texts texts;
+	private Logger logger;
+    private Fonts fonts;
+    private Borders borders;
+    private Colors colors;
 
-//
-// Constructors
-//
-	
 	/**
 	 * Constructor.
-	 * @param worklist - an object to exchange data.
+	 * @param workList - an object to exchange data.
+	 * @param dataFactory - a common data factory.
 	 */
-	public Exercise(DictionaryTable worklist) 
+	public Exercise(DictionaryTable workList, CommonDataFactory dataFactory)
 	{
+        texts = dataFactory.getTexts();
+        logger = dataFactory.getLogger();
+        fonts = dataFactory.getFonts();
+        borders = dataFactory.getBorders();
+        colors = dataFactory.getColors();
+
 		// buttons
-	
-		JButton playBut  = getButton(Texts.PH_ICON_SOUND, TXT.TIP_EXER_PLAY,  event -> exerPlay(worklist));
-		JButton enterBut = getButton(Texts.PH_ICON_ENTER, TXT.TIP_EXER_ENTER, event -> exerEnter(worklist));
-		JButton helpBut  = getButton(Texts.PH_ICON_HELP,  TXT.TIP_EXER_HELP,  event -> exerHelp());
-		JButton runBut   = getButton(Texts.PH_ICON_RUN,   TXT.TIP_EXER_RUN,   event -> exerRun(worklist));
+
+		JButton playBut  = getButton(
+		        dataFactory.getResource(Texts.PH_ICON_SOUND), texts.TIP_EXER_PLAY, event -> exerPlay(workList));
+		JButton enterBut = getButton(
+                dataFactory.getResource(Texts.PH_ICON_ENTER), texts.TIP_EXER_ENTER, event -> exerEnter(workList));
+		JButton helpBut  = getButton(
+                dataFactory.getResource(Texts.PH_ICON_HELP),  texts.TIP_EXER_HELP, event -> exerHelp());
+		JButton runBut   = getButton(
+                dataFactory.getResource(Texts.PH_ICON_RUN),   texts.TIP_EXER_RUN, event -> exerRun(workList));
 		
-		exercises = getComboBox(TXT.BT_BY_PHRASE_EXER_PL, TXT.BT_BY_TRANSL_EXER_PL, 
-					TXT.BT_BY_PH_SND_EXER_PL, TXT.BT_BY_TR_SND_EXER_PL);
+		exercises = getComboBox(texts.BT_BY_PHRASE_EXER_PL, texts.BT_BY_TRANSL_EXER_PL,
+					texts.BT_BY_PH_SND_EXER_PL, texts.BT_BY_TR_SND_EXER_PL);
 		
-		exercises.setFont(LangH.getFonts().getFontPlate());
-		exercises.setToolTipText(TXT.TIP_EXER_CHOOSE);
+		exercises.setFont(fonts.getFontPlate());
+		exercises.setToolTipText(texts.TIP_EXER_CHOOSE);
 			
 		JToolBar buttons = getToolBar(exercises, new JLabel("  "), runBut, enterBut, playBut, helpBut);
 			
 		// workspace
 			
 		taskField = getTextPane(false);
-		taskField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_TASK));
+		taskField.setBorder(borders.getInTextBorder(texts.LB_HEADER_TASK));
 		taskField.setBackground(Color.WHITE);
 	
 		answField = getTextPane(true);
-		answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
+		answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
 		answField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "doNothing");
-		answField.addCaretListener(new CaretListener() 
-		{
-			public void caretUpdate(CaretEvent arg0) 
-			{
-				GUI.sendMessage("");
-				answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
-			}
-		});
+		answField.addCaretListener(arg0 -> {
+            GUI.sendMessage("");
+            answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+        });
 			
 		JPanel workspace = getPanel(new GridLayout(1,2), new JScrollPane(taskField), new JScrollPane(answField));
 			
 		// add elements
 		
-		this.setBorder(LangH.getBorders().getPanelBorder());
+		this.setBorder(borders.getPanelBorder());
 		this.setLayout(new BorderLayout());
 			
 		final JPanel headPanel = new JPanel(new BorderLayout());
@@ -144,20 +145,20 @@ public class Exercise extends AbstractControlledPanel
 		
 		// menu items
 		
-		JMenuItem openCloseMit = getMenuItem(TXT.BT_SHOW_HIDE_PL, TXT.HK_EXER_PL, event -> openClose());
-		openCloseMit.setIcon(LangH.getResource(Texts.PH_ICON_EXER));
+		JMenuItem openCloseMit = getMenuItem(texts.BT_SHOW_HIDE_PL, texts.HK_EXER_PL, event -> openClose());
+		openCloseMit.setIcon(dataFactory.getResource(Texts.PH_ICON_EXER));
 		
-		runMit   = getMenuItem(TXT.BT_RUN_EXER_PL,   TXT.HK_RUN_EXER_PL,   event -> exerRun(worklist));
-		enterMit = getMenuItem(TXT.BT_ENTER_EXER_PL, TXT.HK_ENTER_EXER_PL, event -> exerEnter(worklist));
-		playMit  = getMenuItem(TXT.BT_PLAY_EXER_PL,  TXT.HK_PLAY_EXER_PL,  event -> exerPlay(worklist));
-		helpMit  = getMenuItem(TXT.BT_HELP_EXER_PL,  TXT.HK_HELP_EXER_PL,  event -> exerHelp());
+		runMit   = getMenuItem(texts.BT_RUN_EXER_PL,   texts.HK_RUN_EXER_PL, event -> exerRun(workList));
+		enterMit = getMenuItem(texts.BT_ENTER_EXER_PL, texts.HK_ENTER_EXER_PL, event -> exerEnter(workList));
+		playMit  = getMenuItem(texts.BT_PLAY_EXER_PL,  texts.HK_PLAY_EXER_PL, event -> exerPlay(workList));
+		helpMit  = getMenuItem(texts.BT_HELP_EXER_PL,  texts.HK_HELP_EXER_PL, event -> exerHelp());
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_EXER);
-		menu.setMnemonic(TXT.MN_EXER_PL);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_EXER);
+		menu.setMnemonic(texts.MN_EXER_PL);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(openCloseMit);
 		menu.addSeparator();
@@ -168,18 +169,18 @@ public class Exercise extends AbstractControlledPanel
 		
 		// tool bar buttons
 		
-		openCloseBut = getButton(LangH.getResource(Texts.PH_ICON_EXER), TXT.TIP_EXER_PL, event -> openClose());
+		openCloseBut = getButton(dataFactory.getResource(Texts.PH_ICON_EXER), texts.TIP_EXER_PL, event -> openClose());
 	}
 	
 	/**
 	 * Runs a chosen exercise.
 	 * @param dic - an object to exchange data.
 	 */
-	public void exerRun(DictionaryTable dic) 
+	private void exerRun(DictionaryTable dic)
 	{
 		if (tasks != null)
 		{
-			int ok = GUI.showConfirmDialog(TXT.MG_NEW_TASK_QUESTON, TXT.TL_CONF_TASK);
+			int ok = GUI.showConfirmDialog(texts.MG_NEW_TASK_QUESTON, texts.TL_CONF_TASK);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
 				chooseExer(dic);
@@ -194,7 +195,7 @@ public class Exercise extends AbstractControlledPanel
 	/**
 	 * Plays the sound of the current task if it exists.
 	 */
-	public void exerPlay(DictionaryTable dic) 
+	private void exerPlay(DictionaryTable dic)
 	{
 		if (tasks == null) return;
 		
@@ -218,7 +219,7 @@ public class Exercise extends AbstractControlledPanel
 	/**
 	 * Runs the tasks help method.
 	 */
-	public void exerHelp() 
+	private void exerHelp()
 	{
 		try 
 		{
@@ -228,7 +229,7 @@ public class Exercise extends AbstractControlledPanel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -236,7 +237,7 @@ public class Exercise extends AbstractControlledPanel
 	 * Enters an answer and checks a result.
 	 * @param dic - an object to exchange data.
 	 */
-	public void exerEnter(DictionaryTable dic) 
+    private void exerEnter(DictionaryTable dic)
 	{
 		if (tasks == null) return;	
 		
@@ -247,9 +248,9 @@ public class Exercise extends AbstractControlledPanel
 		switch (check) 
 		{
 		case Task.WRONG_ANSW:	// incorrect answer
-			answField.setBorder(LangH.getBorders().getWrongBorder());
+			answField.setBorder(borders.getWrongBorder());
 			answField.requestFocus();
-			GUI.sendMessage(TXT.MG_WRONG_ANSW + " (" + TXT.MG_ATTEMPT + tasks.getAttempt() + ")");
+			GUI.sendMessage(texts.MG_WRONG_ANSW + " (" + texts.MG_ATTEMPT + tasks.getAttempt() + ")");
 			break;	
 			
 		case Task.RIGHT_ANSW:	// correct answer and there are more questions
@@ -271,19 +272,19 @@ public class Exercise extends AbstractControlledPanel
 				exerByTranslSound(dic);
 				break;
 			}
-			answField.setBorder(LangH.getBorders().getCorrectBorder());
-			GUI.sendMessage(TXT.MG_CORRECT_ANSW + " (" + TXT.MG_REST + " " + tasks.getRestOfPhrases() + ")");
+			answField.setBorder(borders.getCorrectBorder());
+			GUI.sendMessage(texts.MG_CORRECT_ANSW + " (" + texts.MG_REST + " " + tasks.getRestOfPhrases() + ")");
 			break;
 				
 		case Task.RIGHT_ANSW_FIN:	// correct answer and the last question	
 			
 			if (option != BY_PHRASE_SOUND && option != BY_TRANSL_SOUND) playSound(dic);
 	
-			taskField.setText(TXT.MG_DONE + " (" + TXT.MG_PHRASES + " " + numOfExer + ", "
-					+ TXT.MG_MISTAKES + " " + tasks.getNumOfMistakes() + ")");
+			taskField.setText(texts.MG_DONE + " (" + texts.MG_PHRASES + " " + numOfExer + ", "
+					+ texts.MG_MISTAKES + " " + tasks.getNumOfMistakes() + ")");
 				
 			answField.setText("");
-			answField.setBorder(LangH.getBorders().getCorrectBorder());
+			answField.setBorder(borders.getCorrectBorder());
 			answField.requestFocus();
 
 			tasks = null;
@@ -299,22 +300,22 @@ public class Exercise extends AbstractControlledPanel
 	{
 		String exer = exercises.getItemAt(exercises.getSelectedIndex());
 			
-		if (exer.equals(TXT.BT_BY_PHRASE_EXER_PL)) 
+		if (exer.equals(texts.BT_BY_PHRASE_EXER_PL))
 		{
 			loadData(dic);
 			exerByPhrase();
 		}
-		if (exer.equals(TXT.BT_BY_TRANSL_EXER_PL)) 
+		if (exer.equals(texts.BT_BY_TRANSL_EXER_PL))
 		{
 			loadData(dic);
 			exerByTransl();
 		}
-		if (exer.equals(TXT.BT_BY_PH_SND_EXER_PL)) 
+		if (exer.equals(texts.BT_BY_PH_SND_EXER_PL))
 		{
 			loadData(dic);
 			exerByPhraseSound(dic);
 		}
-		if (exer.equals(TXT.BT_BY_TR_SND_EXER_PL)) 
+		if (exer.equals(texts.BT_BY_TR_SND_EXER_PL))
 		{
 			loadData(dic);
 			exerByTranslSound(dic);
@@ -329,7 +330,7 @@ public class Exercise extends AbstractControlledPanel
 	{
 		try 
 		{
-			ArrayList<Phrase> data = new ArrayList<Phrase>();
+			ArrayList<Phrase> data = new ArrayList<>();
 			data.addAll(dic.getAll());
 			tasks = new Task(data);
 			numOfExer = data.size();
@@ -337,7 +338,7 @@ public class Exercise extends AbstractControlledPanel
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -351,16 +352,16 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_PHRASE;
 			
 			task = tasks.doExercise(Task.OPTION_BY_PHRASE);
-			answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
+			answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
 			answField.requestFocus();
 			
-			GUI.sendMessage(TXT.MG_BY_PHRASE_INFO);
+			GUI.sendMessage(texts.MG_BY_PHRASE_INFO);
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -374,16 +375,16 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_TRANSL;
 			
 			task = tasks.doExercise(Task.OPTION_BY_TRANSL);
-			answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
+			answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
 			answField.requestFocus();
 			
-			GUI.sendMessage(TXT.MG_BY_TRANSL_INFO);
+			GUI.sendMessage(texts.MG_BY_TRANSL_INFO);
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -398,7 +399,7 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_PHRASE_SOUND;
 			
 			task = tasks.doExercise(Task.OPTION_BY_PHRASE);
-			if (task == "") return;
+			if ("".equals(task)) return;
 			
 			if (!playSound(dic)) // play sound as a task
 			{
@@ -406,16 +407,16 @@ public class Exercise extends AbstractControlledPanel
 			}
 			else 
 			{
-				answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
-				taskField.setText(TXT.MG_SOUND_INFO);
+				answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+				taskField.setText(texts.MG_SOUND_INFO);
 				answField.setText("");
 				answField.requestFocus();
-				GUI.sendMessage(TXT.MG_BY_PH_SND_INFO);
+				GUI.sendMessage(texts.MG_BY_PH_SND_INFO);
 			}
 		}
 		catch (RuntimeException e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -430,7 +431,7 @@ public class Exercise extends AbstractControlledPanel
 			option = BY_TRANSL_SOUND;
 			
 			task = tasks.doExercise(Task.OPTION_BY_TRANSL);
-			if (task == "") return;
+			if ("".equals(task)) return;
 			
 			if (!playSound(dic)) // play sound as a task
 			{	
@@ -438,16 +439,16 @@ public class Exercise extends AbstractControlledPanel
 			}
 			else 
 			{
-				answField.setBorder(LangH.getBorders().getInTextBorder(TXT.LB_HEADER_ASWER));
-				taskField.setText(TXT.MG_SOUND_INFO);
+				answField.setBorder(borders.getInTextBorder(texts.LB_HEADER_ASWER));
+				taskField.setText(texts.MG_SOUND_INFO);
 				answField.setText("");
 				answField.requestFocus();
-				GUI.sendMessage(TXT.MG_BY_TR_SND_INFO);
+				GUI.sendMessage(texts.MG_BY_TR_SND_INFO);
 			}
 		}
 		catch (Exception e) 
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			logger.log(Level.WARNING, e.getMessage(), e);
 		}
 	}
 	
@@ -493,7 +494,7 @@ public class Exercise extends AbstractControlledPanel
 			enterMit.setEnabled(false);
 			playMit.setEnabled(false);
 			helpMit.setEnabled(false);
-			openCloseBut.setBackground(LangH.getColors().getBasicBackground());
+			openCloseBut.setBackground(colors.getBasicBackground());
 				
 			this.setVisible(false);
 		}
@@ -503,23 +504,17 @@ public class Exercise extends AbstractControlledPanel
 			enterMit.setEnabled(true);
 			playMit.setEnabled(true);
 			helpMit.setEnabled(true);
-			openCloseBut.setBackground(LangH.getColors().getPushedButton());
+			openCloseBut.setBackground(colors.getPushedButton());
 				
 			this.setVisible(true);
 		}
 		GUI.infoPanelVisibility();
 	}
-	
-	
-	/**
-	 * Returns a new <code>JTextArea</code> object
-	 * @param isEditable - is this object editable or not
-	 * @return a new <code>JTextArea</code> object
-	 */
+
 	private JTextPane getTextPane(boolean isEditable) 
 	{
 		JTextPane textPane = new JTextPane();
-		textPane.setFont(LangH.getFonts().getFontPlate());
+		textPane.setFont(fonts.getFontPlate());
 		textPane.setEditable(isEditable);
 			
 		StyledDocument doc = textPane.getStyledDocument();
@@ -529,13 +524,7 @@ public class Exercise extends AbstractControlledPanel
 			
 		return textPane;
 	}
-	
-	/**
-	 * Returns a new <code>JPanel</code> object
-	 * @param mgr - a layout manager for this object
-	 * @param components - components for this object
-	 * @return a new <code>JPanel</code> object
-	 */
+
 	private JPanel getPanel(LayoutManager mgr, JComponent... components) {
 	
 		JPanel panel = new JPanel();
@@ -546,28 +535,16 @@ public class Exercise extends AbstractControlledPanel
 		}
 		return panel;
 	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param labelPath - a path of label for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
-	private JButton getButton(String labelPath, String tip, ActionListener action) 
-	{
-		JButton button = new JButton();
-		button.setIcon(LangH.getResource(labelPath));
-		button.setToolTipText(tip);
-		button.addActionListener(action);
-		return button;
-	}
-	
-	/**
-	 * Returns a new <code>JButton</code> object with specified parameters
-	 * @param icon - an icon for this object
-	 * @param tip - a tip text for this object
-	 * @param action - an action for this object
-	 */
+//
+//	private JButton getButton(String labelPath, String tip, ActionListener action)
+//	{
+//		JButton button = new JButton();
+//		button.setIcon(CommonDataFactoryImpl.getResource(labelPath));
+//		button.setToolTipText(tip);
+//		button.addActionListener(action);
+//		return button;
+//	}
+
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 
 	{
 		JButton button = new JButton();
@@ -576,12 +553,7 @@ public class Exercise extends AbstractControlledPanel
 		button.addActionListener(action);
 		return button;
 	}
-	
-	/**
-	 * Returns a new <code>JToolBar</code> object
-	 * @param components - components for this object
-	 * @return a new <code>JToolBar</code> object
-	 */
+
 	private JToolBar getToolBar(Component... components) 
 	{
 		JToolBar bar = new JToolBar();
@@ -592,36 +564,23 @@ public class Exercise extends AbstractControlledPanel
 		}
 		return bar;
 	}
-	
-	/**
-	 * Returns a new <code>JComboBox</code> object
-	 * @param components - components for this object
-	 * @return a new <code>JComboBox</code> object
-	 */
+
 	private JComboBox<String> getComboBox(String... components) 
 	{
-		JComboBox<String> box = new JComboBox<String>();
+		JComboBox<String> box = new JComboBox<>();
 		for (String each : components)
 		{
 			box.addItem(each);
 		}
 		return box;
 	}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
-	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
+
+	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action)
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
-		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
+		item.setFont(fonts.getFontPlate());
+		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end Exercise
+}

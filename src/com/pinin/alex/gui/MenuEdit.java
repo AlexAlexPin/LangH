@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -27,108 +27,81 @@ import javax.swing.text.*;
 import com.pinin.alex.*;
 import com.pinin.alex.main.*;
 
-public class MenuEdit extends AbstractControlledPanel
+class MenuEdit extends AbstractControlledPanel
 {
-//
-// Variables
-//	
-	
 	// data
-	
-	Replacer repl;
+	private Replacer replacer;
 	
 	// elements of this menu
-
-	JMenu menu;
-	private JMenuItem replace;
-	private JMenuItem settings;
+	private JMenu menu;
 	
 	// other
-	
-	/** Default serial version ID. */
 	private final static long serialVersionUID = 1L;
 	
 	// common mains
-	
-	private final Texts TXT = LangH.getTexts();
+    private CommonDataFactory dataFactory;
+	private Texts texts;
+    private Fonts fonts;
 
-//
-// Constructors
-//
-	
 	/**
 	 * Constructor.
-	 * @param - dic - an object to exchange data.
-	 * @param worklist - an object to exchange data.
+     * @param dataFactory - a common data factory
 	 */
-	public MenuEdit(DictionaryTable dic, DictionaryTable worklist)
+	MenuEdit(CommonDataFactory dataFactory)
 	{
-		
-		repl = new Replacer();
-		CharSequence csq = LangH.getResourceContent(Texts.PH_REPLACE);
-		repl.parseSequence(csq);
+        this.dataFactory = dataFactory;
+		texts = dataFactory.getTexts();
+        fonts = dataFactory.getFonts();
+
+		replacer = new Replacer();
+		CharSequence replaces = dataFactory.getResourceContent(Texts.PH_REPLACE);
+		replacer.parseSequence(replaces);
 		
 		// menu items
-		
-		replace = getMenuItem(TXT.BT_REPL_EDIT, TXT.HK_REPL_EDIT, event -> replace());
-		replace.setIcon(LangH.getResource(Texts.PH_ICON_REPL));
-				
-		settings = getMenuItem(TXT.BT_SET_EDIT, TXT.HK_SET_EDIT, event -> settings());
-		settings.setIcon(LangH.getResource(Texts.PH_ICON_SETT));
+
+		JMenuItem replace = getMenuItem(texts.BT_REPL_EDIT, texts.HK_REPL_EDIT, event -> clearData());
+		replace.setIcon(dataFactory.getResource(Texts.PH_ICON_REPL));
+
+		JMenuItem settings = getMenuItem(texts.BT_SET_EDIT, texts.HK_SET_EDIT, event -> showOpenDialog());
+		settings.setIcon(dataFactory.getResource(Texts.PH_ICON_SETT));
 		
 		// menu
 		
 		menu = new JMenu();
-		menu.setText(TXT.MU_EDIT);
-		menu.setMnemonic(TXT.MN_EDIT);
-		menu.setFont(LangH.getFonts().getFontPlate());
+		menu.setText(texts.MU_EDIT);
+		menu.setMnemonic(texts.MN_EDIT);
+		menu.setFont(fonts.getFontPlate());
 		
 		menu.add(replace);
 		menu.addSeparator();
 		menu.add(settings);
 	}
-	
-//
-// Methods
-//
-	
+
 	/**
 	 * Clears all data and allows to fill the new database
 	 */
-	public void replace() 
+	private void clearData()
 	{
 		Component comp = GUI.getFocusOwnerSt();
 
-		JTextComponent tComp = null;
+		JTextComponent tComp;
 		if (comp instanceof JTextComponent) 
 		{			
 			tComp = (JTextComponent) comp;
-			new PopupReplacer().display(tComp, repl);
+			new PopupReplacer().display(tComp, replacer, dataFactory);
 		}
 	}
-	
-	/**
-	 * Shows the open dialog and opens the chosen file
-	 * @param frame - the main frame of this GUI 
-	 */
-	public void settings() 
+
+	private void showOpenDialog()
 	{
-		GUI.showSettingDialog(TXT.BT_SET_EDIT);
+		GUI.showSettingDialog(texts.BT_SET_EDIT);
 	}
-	
-	/**
-	 * Returns the menu to operate this panel.
-	 * @return the menu to operate this panel.
-	 */
+
 	public JMenu getMenu()
 	{
 		return menu;
 	}
-	
-	/**
-	 * Returns tool buttons of this panel.
-	 * @return tool buttons of this panel.
-	 */
+
 	public JButton[] getToolBarButtons()
 	{
 		return new JButton[] {};
@@ -136,21 +109,13 @@ public class MenuEdit extends AbstractControlledPanel
 	
 	@Override
 	public void openClose() {}
-	
-	/**
-	 * Returns a new <code>JMenuItem</code> object
-	 * @param text - a text for this object
-	 * @param key_Komb - a key combination for this object
-	 * @param action - an action for this object
-	 * @return a new <code>JMenuItem</code> object
-	 */
-	private JMenuItem getMenuItem(String text, String key_Komb, ActionListener action) 
+    
+	private JMenuItem getMenuItem(String text, String keyCombination, ActionListener action) 
 	{
 		JMenuItem item = new JMenuItem(text);
-		item.setFont(LangH.getFonts().getFontPlate());
-		item.setAccelerator(KeyStroke.getKeyStroke(key_Komb));
+		item.setFont(fonts.getFontPlate());
+		item.setAccelerator(KeyStroke.getKeyStroke(keyCombination));
 		item.addActionListener(action);
 		return item;
 	}
-	
-} // end MenuEdit
+} 
