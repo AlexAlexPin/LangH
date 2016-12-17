@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //  LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -34,44 +34,26 @@ package com.pinin.alex.main;
  * <code>Term tag</code> - the set of tags;<br>
  * </blockquote><p>
  */
-public class Phrase implements Comparable <Phrase> 
+@SuppressWarnings("WeakerAccess")
+public class Phrase implements Comparable <Phrase>
 {
-//
-// Variables
-//
+	// An attribute for easier representation this element in other objects
+	private Integer id = 0;
 	
-	/** An attribute for easier representation this element in other objects */
-	private Integer id;
+	// The main attribute that contains the phrase itself.
+	// It can be empty in case of using the default constructor only
+	private String phrase = "";
 	
-	/** The main attribute that contains the phrase itself.
-	 * It can be empty in case of using the default constructor only */
-	private String phrase;
+	// The set of translations
+	private Term transl = new Term();
 	
-	/** The set of translations */
-	private Term transl;
+	// The set of comments
+	private Term comment = new Term();
 	
-	/** The set of comments */
-	private Term comment;
-	
-	/** The set of tags */
-	private Term tag;
+	// The set of tags
+	private Term tag = new Term();
 
-//
-// Constructors
-//
-
-	/**
-	 * Constructor.<br>
-	 * <code>id<code> = 0, other attributes values are empty
-	 */
-	public Phrase() 
-	{
-		id = 0;
-		phrase = new String();
-		transl = new Term();
-		comment = new Term();
-		tag = new Term();
-	}
+	public Phrase() {}
 	
 	/**
 	 * Constructor<br>
@@ -84,191 +66,85 @@ public class Phrase implements Comparable <Phrase>
 	 * @throws NullPointerException in case of <code>null</code> value.
 	 * @throws IllegalArgumentException if the new <code>phrase</code> value is empty.
 	 */
-	public Phrase(Integer id, String phrase, Term transl, Term comment, Term tag) 
-			throws NullPointerException, IllegalArgumentException
-	{
-		if (id == null || phrase  == null || transl  == null || comment == null || tag == null)
-			throw new NullPointerException("null value in Phrase constructor");
-		
-		if (phrase.isEmpty()) 
-			throw new IllegalArgumentException("phrase value is empty in Phrase constructor");
-		
-		this.id = id;
-		this.phrase = phrase;
-		this.transl = transl;
-		this.comment = comment;
-		this.tag = tag;
+	public Phrase(Integer id, String phrase, Term transl, Term comment, Term tag) throws IllegalArgumentException {
+		setId(id);
+        setPhrase(phrase);
+        setTransl(transl);
+        setComment(comment);
+        setTag(tag);
 	}
-	
-//
-// Methods
-// 
-	
-	/**
-	 * Returns the <code>id</code> attribute value.
-	 * @return the <code>id</code> attribute value.
-	 */
-	public int getId() 
-	{
+
+	public int getId() {
 		return id;
 	}
-	
-	/**
-	 * Sets the <code>id</code> attribute value.
-	 * @param id - the new value.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setId(Integer id) throws NullPointerException
-	{
-		if (id == null) throw new NullPointerException("null value in Phrase.setid()");
+
+	public void setId(Integer id) throws NullPointerException{
+		if (id == null) throw new NullPointerException("ID is null");
 		this.id = id;
 	}
-	
-	/**
-	 * Returns the <code>phrase</code> attribute value.
-	 * @return the <code>phrase</code> attribute value.
-	 */
-	public String getPhrase() 
-	{
+
+	public String getPhrase() {
 		return phrase;
 	}
-	
-	/**
-	 * Sets the <code>phrase</code> attribute value.
-	 * @param phrase - the new value. Can not be empty or <code>null</code>.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IllegalArgumentException if the new <code>phrase</code> value is empty.
-	 */
-	public void setPhrase(String phrase) throws NullPointerException, IllegalArgumentException 
-	{
-		if (phrase == null) throw new NullPointerException("null value in Phrase.setPhrase()");
-		if (phrase.isEmpty()) throw new IllegalArgumentException("phrase value is empty in Phrase.setPhrase()");
+
+	public void setPhrase(String phrase) throws IllegalArgumentException {
+		if (phrase == null || phrase.isEmpty()) throw new IllegalArgumentException("Phrase is null or empty");
 		this.phrase = phrase;
 	}
-	
-	/**
-	 * Returns the <code>transl</code> attribute value.
-	 * @return the <code>transl</code> attribute value.
-	 */
-	public Term getTransl() 
-	{
+
+	public Term getTransl() {
 		return (Term) transl.clone();
 	}
-	
-	/**
-	 * Sets the <code>transl</code> attribute value.<br>
-	 * In case of <code>null</code> value will be initialized by default value.
-	 * @param transl - the new value. Can be empty or <code>null</code>.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setTransl(Term transl) throws NullPointerException
-	{
-		if (transl == null) throw new NullPointerException("null value in Phrase.setTransl()");
+
+	public void setTransl(Term transl) throws IllegalArgumentException {
+		if (transl == null) throw new IllegalArgumentException("Translation is null");
 		this.transl = transl;
 	}
-	
-	/**
-	 * Add the new element to the <code>transl</code> attribute.
-	 * @param transl - the new element to be added.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void addTransl(Term transl) throws NullPointerException
-	{
-		if (transl == null) throw new NullPointerException("null value in Phrase.addTransl()");
-		for (String each : transl) this.transl.add(each);
+
+	public void addTransl(Term transl) throws IllegalArgumentException {
+		if (transl == null) throw new IllegalArgumentException("Translation is null");
+        this.transl.addAll(transl);
 	}
-	
-	/**
-	 * Returns the <code>comment</code> attribute value.
-	 * @return the <code>comment</code> attribute value.
-	 */
-	public Term getComment() 
-	{
+
+	public Term getComment() {
 		return (Term) comment.clone();
 	}
-	
-	/**
-	 * Sets the <code>comment</code> attribute value.<br>
-	 * In case of <code>null</code> value will be initialized by default value.
-	 * @param comment - the new value. Can be empty or <code>null</code>.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setComment(Term comment) throws NullPointerException
-	{
-		if (comment == null) throw new NullPointerException("null value in Phrase.setComment()");
+
+	public void setComment(Term comment) throws IllegalArgumentException {
+		if (comment == null) throw new IllegalArgumentException("Comment is null");
 		this.comment = comment;
 	}
-	
-	/**
-	 * Add the new element to the <code>comment</code> attribute.
-	 * @param comment - the new element to be added.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void addComment(Term comment) throws NullPointerException
-	{
-		if (comment == null) throw new NullPointerException("null value in Phrase.addComment()");
-		for (String each : comment) this.comment.add(each);
+
+	public void addComment(Term comment) throws IllegalArgumentException {
+		if (comment == null) throw new IllegalArgumentException("Comment is null");
+        this.comment.addAll(comment);
 	}
-	
-	/**
-	 * Returns the <code>tag</code> attribute value.
-	 * @return the <code>tag</code> attribute value.
-	 */
-	public Term getTag() 
-	{
+
+	public Term getTag() {
 		return (Term) tag.clone();
 	}
-	
-	/**
-	 * Sets the <code>tag</code> attribute value.<br>
-	 * In case of <code>null</code> value will be initialized by default value.
-	 * @param tag - the new value. Can be empty or <code>null</code>.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void setTag(Term tag) throws NullPointerException
-	{
-		if (tag == null) throw new NullPointerException("null value in Phrase.setTag()");
+
+	public void setTag(Term tag) throws IllegalArgumentException {
+		if (tag == null) throw new IllegalArgumentException("Tag is null");
 		this.tag = tag;
 	}
-	
-	/**
-	 * Add the new element to the <code>tag</code> attribute.
-	 * @param tag - the new element to be added.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 */
-	public void addTag(Term tag) throws NullPointerException
-	{
-		if (tag == null) throw new NullPointerException("null value in Phrase.addTag()");
-		for (String each : tag) this.tag.add(each);
+
+	public void addTag(Term tag) throws IllegalArgumentException {
+        if (tag == null) throw new IllegalArgumentException("Tag is null");
+        this.tag.addAll(tag);
 	}
-	
-	/**
-	 * Returns true if this object contains no elements.<br>
-	 * The <code>id</code> element is not considered.
-	 * @return true if this object contains no elements otherwise false
-	 */
-	public boolean isEmpty() 
-	{
+
+	public boolean isEmpty() {
 		return phrase.isEmpty() && transl.isEmpty() && comment.isEmpty() && tag.isEmpty();
 	}
-	
-//
-// Implementation Comparable
-//
-	
+
 	@Override
-	public int compareTo(Phrase other) 
-	{
+	public int compareTo(Phrase other) {
 		return this.phrase.compareTo(other.phrase);
 	}
-	
-//	
-// Extending Object
-//	
-	
+
 	@Override
-	public int hashCode() 
-	{
+	public int hashCode() {
 		return 7 * id
 			+ 13 * phrase.hashCode()
 			+ 17 * transl.hashCode()
@@ -277,8 +153,7 @@ public class Phrase implements Comparable <Phrase>
 	}
 	
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return getClass().getName()
 			+ "[id: "      + id      + "]"
 			+ "[phrase: "  + phrase  + "]"
@@ -288,19 +163,17 @@ public class Phrase implements Comparable <Phrase>
 	}
 
 	@Override
-	public boolean equals(Object other) 
-	{
+	public boolean equals(Object other) {
 		if (this == other) return true;
 		if (other == null) return false;
 		if (getClass() != other.getClass()) return false;
 		
 		Phrase aOther = (Phrase) other;
 		
-		return id == aOther.id
+		return id.equals(aOther.id)
 				&& phrase.equals(aOther.phrase)
 				&& transl.equals(aOther.transl)
 				&& comment.equals(aOther.comment)
 				&& tag.equals(aOther.tag);
 	}
-	
-} // end Phrase
+}

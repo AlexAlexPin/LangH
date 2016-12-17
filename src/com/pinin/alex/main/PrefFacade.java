@@ -25,7 +25,7 @@ import java.io.*;
 import java.util.prefs.*;
 
 /**
- * Loads and operates the main data.
+ * Loads and operates with saved preferences.
  */
 public class PrefFacade
 {
