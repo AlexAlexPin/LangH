@@ -186,7 +186,7 @@ public class Phrases extends ArrayList<Phrase>
 	 * Replaces element's <code>phrase</code> attribute value at the specified position 
 	 * in this list with the specified value.<br>
 	 * <b>Note: </b>To set value it is strongly recommended to use this method rather then 
-	 * <code>this.get(...).setPhrase(...)</code> because this method allows to correlate
+	 * <code>this.findContaining(...).setPhrase(...)</code> because this method allows to correlate
 	 * new values with list of phrases.<br>
 	 * The new value must not be empty. The <code>phrases</code> attribute of this object 
 	 * must not contain the specified value. In the case of failure of these conditions 
@@ -238,7 +238,7 @@ public class Phrases extends ArrayList<Phrase>
 	 * Replaces element's <code>tag</code> attribute value at the specified position 
 	 * in this list with the specified value.<br>
 	 * <b>Note: </b>To set value it is strongly recommended to use this method rather then 
-	 * <code>this.get(...).setTag(...)</code> because this method allows to correlate
+	 * <code>this.findContaining(...).setTag(...)</code> because this method allows to correlate
 	 * new values with list of tags.<br>
 	 * @param index - index of the element
 	 * @param value - the new value

@@ -185,7 +185,7 @@ public class PrefFacade
 	/**
 	 * Constructs and returns the path of the folder with sounds
 	 * @param path - data path.
-	 * @param toAdd - a <code>String</code> to add to get a new path
+	 * @param toAdd - a <code>String</code> to add to findContaining a new path
 	 * @return the path of the folder with sounds
 	 * @throws NullPointerException in case of <code>null</code> value.
 	 */
@@ -196,7 +196,7 @@ public class PrefFacade
 		String dataPath = path.getAbsolutePath();
 			
 		int extPoint = dataPath.lastIndexOf(".");
-		String result = "";
+		String result;
 			
 		if (extPoint == -1 || extPoint == 0 || extPoint == dataPath.length()-1) {
 			result = dataPath + toAdd;
@@ -206,7 +206,8 @@ public class PrefFacade
 		}
 			
 		File resultDir = new File(result);
-		if (!resultDir.exists()) resultDir.mkdirs();
+		if (!resultDir.exists()) //noinspection ResultOfMethodCallIgnored
+			resultDir.mkdirs();
 			
 		return result;
 	}

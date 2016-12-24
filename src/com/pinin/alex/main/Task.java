@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //  LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ import java.util.*;
  * 1. Initialize this object using <code>ArrayList<'Phrase> via constructor</code>;<br>
  * 2. Optionally: set the value of increasing of a prompt via <code>setHelpOpenLenght()</code>;<br>
  * 3. Call <code>doExercise(int option)</code> using one of options;<br>
- * 4. Optionally: call <code>help()</code> to get a prompt;<br>
+ * 4. Optionally: call <code>help()</code> to findContaining a prompt;<br>
  * 5. Call <code>enter(String answer)</code> using <code>String</code> to check answer;<br>
  * 6. Check <code>enter(String answer)</code> result.
  */

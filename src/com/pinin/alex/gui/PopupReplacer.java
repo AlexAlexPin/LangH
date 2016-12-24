@@ -44,7 +44,7 @@ class PopupReplacer extends JPopupMenu
 	/**
 	 * Constructs this popup menu and shows it on the specified component.
 	 * @param component - a component that contains this component
-	 * @param replacer - a database to get values
+	 * @param replacer - a database to findContaining values
 	 * @param dataFactory - a common data factory
 	 */
 	void display(JTextComponent component, Replacer replacer, CommonDataFactory dataFactory)
@@ -54,7 +54,7 @@ class PopupReplacer extends JPopupMenu
 
 		try
 		{
-			// get position of the component's caret as x and y coordinates
+			// findContaining position of the component's caret as x and y coordinates
 			// Note: call this method before making selection to prevent the null value
 			
 			Point position = component.getCaret().getMagicCaretPosition();
@@ -64,12 +64,12 @@ class PopupReplacer extends JPopupMenu
 			int pos = component.getCaretPosition();
 			component.select(pos-1, pos);
 			
-			// get the selected character and its replSet
+			// findContaining the selected character and its replSet
 			
 			String  selection = component.getSelectedText();
 			if (selection == null) return;
 			
-			ReplSet replSet   = replacer.get(selection);
+			ReplSet replSet   = replacer.findContaining(selection);
 			if (replSet.isEmpty()) return;
 			
 			// remove all components to make a new buttons for the specific character
@@ -79,10 +79,10 @@ class PopupReplacer extends JPopupMenu
 			
 			for (int i=0; i<replSet.size(); i++) 
 			{
-				// get a replacement
+				// findContaining a replacement
 				
 				final String replacement = replSet.getReplacement(selection, i);
-				
+
 				// add the new button
 				
 				this.add(getMenuItem(replacement, event -> component.replaceSelection(replacement)));

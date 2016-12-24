@@ -53,9 +53,8 @@ class MenuEdit extends AbstractControlledPanel
 		textsRepo = dataFactory.getTextsRepo();
         fontsRepo = dataFactory.getFontsRepo();
 
-		replacer = new Replacer();
 		CharSequence replaces = dataFactory.getCharsFromResource(TextsRepo.PH_REPLACE);
-		replacer.parseSequence(replaces);
+		replacer = new Replacer(replaces);
 		
 		// menu items
 
