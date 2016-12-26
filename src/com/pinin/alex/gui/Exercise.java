@@ -330,7 +330,7 @@ public class Exercise extends AbstractControlledPanel
 	{
 		try 
 		{
-			ArrayList<Phrase> data = new ArrayList<>();
+			ArrayList<PhraseSet> data = new ArrayList<>();
 			data.addAll(dic.getAll());
 			tasks = new Task(data);
 			numOfExer = data.size();

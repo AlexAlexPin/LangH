@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -57,13 +57,13 @@ public interface DictionaryTable
 	 * Returns a list of all components of this container.
 	 * @return a list of all components of this container.
 	 */
-	Collection<Phrase> getAll();
+	Collection<PhraseSet> getAll();
 	
 	/**
 	 * Adds new elements.
 	 * @param c - new elements.
 	 */
-	void addAll(Collection <? extends Phrase> c);
+	void addAll(Collection <? extends PhraseSet> c);
 	
 	/**
 	 * Returns a number of kept phrases.

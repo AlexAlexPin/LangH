@@ -217,9 +217,9 @@ class TablePhrasesFiltered extends JTable
 	 * Returns a list of all phrases in this table.
 	 * @return a list of all phrases in this table.
 	 */
-	LinkedList<Phrase> getAll()
+	LinkedList<PhraseSet> getAll()
 	{
-		LinkedList<Phrase> result = new LinkedList<>();
+		LinkedList<PhraseSet> result = new LinkedList<>();
 		for (int row=0; row<this.getRowCount(); row++)
 		{
 			int    id      = (int)    this.getValueAt(row, ModelPhrases.ID_COL);
@@ -228,7 +228,7 @@ class TablePhrasesFiltered extends JTable
 			Term   comment = (Term) this.getValueAt(row, ModelPhrases.COMMENT_COL);
 			Term   tag     = (Term) this.getValueAt(row, ModelPhrases.TAG_COL);
 			
-			result.add(new Phrase(id, phrase, transl, comment, tag));
+			result.add(new PhraseSet(id, phrase, transl, comment, tag));
 		}
 		return result;
 	}

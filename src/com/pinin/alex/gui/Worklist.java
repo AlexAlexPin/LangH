@@ -155,13 +155,13 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	}
 	
 	@Override
-	public Collection<Phrase> getAll()
+	public Collection<PhraseSet> getAll()
 	{
 		return table.getAll();
 	}
 	
 	@Override
-	public void addAll(Collection <? extends Phrase> c) {}
+	public void addAll(Collection <? extends PhraseSet> c) {}
 	
 	@Override
 	public int length()

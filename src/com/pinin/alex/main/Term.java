@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ package com.pinin.alex.main;
 import java.util.LinkedHashSet;
 
 /**
- * Represents a virtual set of addition information for the <code>Phrase</code> object
+ * Represents a virtual set of addition information for the <code>PhraseSet</code> object
  * and may content set of <code>String</code> objects.
  */
 public class Term extends LinkedHashSet<String> 
@@ -76,7 +76,9 @@ public class Term extends LinkedHashSet<String>
 		this.add(line);
 		return this;
 	}
-	
+
+
+
 //
 // Extending Object
 //

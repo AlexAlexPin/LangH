@@ -170,10 +170,10 @@ class Filler extends AbstractControlledPanel
 		
 		int sizeBefore = dic.length();
 		
-		LinkedList<Phrase> phrases = new LinkedList<>();
+		LinkedList<PhraseSet> phrases = new LinkedList<>();
 		for (int i=0; i<phraseSplit.length; i++) 
 		{
-			final Phrase p = new Phrase(
+			final PhraseSet p = new PhraseSet(
 				0,
 				phraseSplit[i],
 				noTransl  ? new Term() : new Term().parse(translSplit[i] , ";"),

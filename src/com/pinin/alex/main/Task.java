@@ -23,20 +23,20 @@ package com.pinin.alex.main;
 import java.util.*;
 
 /**
- * Contains a set of exercises and allow to apply them to a list of <code>Phrase</code> objects.<br>
+ * Contains a set of exercises and allow to apply them to a list of <code>PhraseSet</code> objects.<br>
  * Attributes of this object:
  * <blockquote>
- * <code>ArrayList<'Phrase> list</code> - the database for exercises. 
+ * <code>ArrayList<'PhraseSet> list</code> - the database for exercises.
  * This class takes phrases from this database and puts them into the exercises. 
  * Element are removed from the database random way while the database is not empty;<br>
- * <code>Phrase testing</code> - the phrase what is being used in one if exercise right now;<br>
+ * <code>PhraseSet testing</code> - the phrase what is being used in one if exercise right now;<br>
  * <code>int option</code> - lets to choose a type of exercise;<br>
  * <code>int attempt</code> - the attempt of doing the current exercise;<br>
  * <code>int helpLength</code> - the length of the prompt in number of characters;<br>
  * <code>int helpOpenLenght</code> - the value of increasing of <code>helpLength</code>;<br>
  * <code>int numOfMistakes</code> - the number of mistakes during all exercises;<br>
  * <code>boolean added</code> - if <code>testing</code> has been put back to the database or not.
- * Phrase is being put back if there is a mistake in the exercise with this phrase;<br>
+ * PhraseSet is being put back if there is a mistake in the exercise with this phrase;<br>
  * <code>final int OPTION_BY_PHRASE = 1</code> - an option to choose "By phrase" exercise;<br>
  * <code>final int OPTION_BY_TRANSL = 2</code> - an option to choose "By translation" exercise;<br>
  * <code>final int WRONG_ANSW = -1</code> - a result if an answer is wrong;<br>
@@ -44,7 +44,7 @@ import java.util.*;
  * <code>final int RIGHT_ANSW_FIN = 1</code> - a result if an answer is correct and there are not more questions.<br>
  * </blockquote><p>
  * Algorithm:<br>
- * 1. Initialize this object using <code>ArrayList<'Phrase> via constructor</code>;<br>
+ * 1. Initialize this object using <code>ArrayList<'PhraseSet> via constructor</code>;<br>
  * 2. Optionally: set the value of increasing of a prompt via <code>setHelpOpenLenght()</code>;<br>
  * 3. Call <code>doExercise(int option)</code> using one of options;<br>
  * 4. Optionally: call <code>help()</code> to findContaining a prompt;<br>
@@ -62,10 +62,10 @@ public class Task
 	 * puts them into the exercises. Elements are being removed from the database random way
 	 * while the database is not empty.
 	 */
-	private ArrayList<Phrase> list;
+	private ArrayList<PhraseSet> list;
 	
 	/** The phrase what is being used in one if exercise right now. */
-	private Phrase testing;
+	private PhraseSet testing;
 	
 	/** Lets to choose a type of exercise. */
 	private int option;
@@ -84,7 +84,7 @@ public class Task
 
 	/**
 	 * If <code>testing</code> has been put back to the database or not.
-	 * Phrase is being put back if there is a mistake in the exercise with this phrase.
+	 * PhraseSet is being put back if there is a mistake in the exercise with this phrase.
 	 */
 	private boolean added;
 	
@@ -119,12 +119,12 @@ public class Task
 	 * being removed from the copy random way while it is not empty.
 	 * @throws NullPointerException if the specified list is <code>null</code>
 	 */
-	public Task(ArrayList<Phrase> list) throws NullPointerException 
+	public Task(ArrayList<PhraseSet> list) throws NullPointerException
 	{
 		if (list == null) throw new NullPointerException("null value in Task constructor");
 		
-		this.list = new ArrayList<Phrase>();
-		for (Phrase each : list) 
+		this.list = new ArrayList<PhraseSet>();
+		for (PhraseSet each : list)
 		{
 			this.list.add(each);
 		}
@@ -272,12 +272,12 @@ public class Task
 	}
 	
 	/**
-	 * Returns the copy of <code>Phrase</code> object that is being processed now
-	 * @return the copy of <code>Phrase</code> object that is being processed now
+	 * Returns the copy of <code>PhraseSet</code> object that is being processed now
+	 * @return the copy of <code>PhraseSet</code> object that is being processed now
 	 */
-	public Phrase getPhrase() 
+	public PhraseSet getPhrase()
 	{
-		return new Phrase(testing.getId(), testing.getPhrase(), 
+		return new PhraseSet(testing.getId(), testing.getPhrase(),
 				testing.getTransl(), testing.getComment(), testing.getTag());
 	}
 	

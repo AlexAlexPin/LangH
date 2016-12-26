@@ -22,20 +22,9 @@ package com.pinin.alex.main;
 
 /**
  * Element that represents a virtual foreign phrase and contains the identifier, the phrase itself
- * and sets of translations, comments, and tags.<br>
- * Attributes of this object:<br>
- * <blockquote>
- * <code>int id</code> - an attribute for easier representation this element in other objects;<br>
- * It case of using the default constructor it equals 0;<br>
- * <code>String phrase</code> - the main attribute that contains the phrase itself. 
- * It can be empty in case of using the default constructor only;<br>
- * <code>Term transl</code> - the set of translations;<br>
- * <code>Term comment</code> - the set of comments;<br>
- * <code>Term tag</code> - the set of tags;<br>
- * </blockquote><p>
+ * and sets of translations, comments, and tags.
  */
-@SuppressWarnings("WeakerAccess")
-public class Phrase implements Comparable <Phrase>
+public class PhraseSet implements Comparable <PhraseSet>
 {
 	// An attribute for easier representation this element in other objects
 	private Integer id = 0;
@@ -53,20 +42,9 @@ public class Phrase implements Comparable <Phrase>
 	// The set of tags
 	private Term tag = new Term();
 
-	public Phrase() {}
-	
-	/**
-	 * Constructor<br>
-	 * In case of <code>null</code> values will be initialized by default values.
-	 * @param id - the new <code>id</code> value
-	 * @param phrase - the new <code>phrase</code> value. Can not be empty or <code>null</code>.
-	 * @param transl - the new <code>transl</code> value. Can be empty or <code>null</code>.
-	 * @param comment - the new <code>comment</code> value. Can be empty or <code>null</code>.
-	 * @param tag - the new <code>tag</code> value. Can be empty or <code>null</code>.
-	 * @throws NullPointerException in case of <code>null</code> value.
-	 * @throws IllegalArgumentException if the new <code>phrase</code> value is empty.
-	 */
-	public Phrase(Integer id, String phrase, Term transl, Term comment, Term tag) throws IllegalArgumentException {
+	public PhraseSet() {}
+
+	public PhraseSet(int id, String phrase, Term transl, Term comment, Term tag) throws IllegalArgumentException {
 		setId(id);
         setPhrase(phrase);
         setTransl(transl);
@@ -78,8 +56,7 @@ public class Phrase implements Comparable <Phrase>
 		return id;
 	}
 
-	public void setId(Integer id) throws NullPointerException{
-		if (id == null) throw new NullPointerException("ID is null");
+	public void setId(int id) throws NullPointerException{
 		this.id = id;
 	}
 
@@ -87,59 +64,60 @@ public class Phrase implements Comparable <Phrase>
 		return phrase;
 	}
 
-	public void setPhrase(String phrase) throws IllegalArgumentException {
-		if (phrase == null || phrase.isEmpty()) throw new IllegalArgumentException("Phrase is null or empty");
+	void setPhrase(String phrase) throws IllegalArgumentException {
+		CheckNull(phrase);
+		if (phrase.isEmpty()) throw new IllegalArgumentException("Value can not be empty");
 		this.phrase = phrase;
 	}
 
-	public Term getTransl() {
+	Term getTransl() {
 		return (Term) transl.clone();
 	}
 
-	public void setTransl(Term transl) throws IllegalArgumentException {
-		if (transl == null) throw new IllegalArgumentException("Translation is null");
+	void setTransl(Term transl) throws IllegalArgumentException {
+		CheckNull(transl);
 		this.transl = transl;
 	}
 
-	public void addTransl(Term transl) throws IllegalArgumentException {
-		if (transl == null) throw new IllegalArgumentException("Translation is null");
+	void addTransl(Term transl) throws IllegalArgumentException {
+		CheckNull(transl);
         this.transl.addAll(transl);
 	}
 
-	public Term getComment() {
+	Term getComment() {
 		return (Term) comment.clone();
 	}
 
-	public void setComment(Term comment) throws IllegalArgumentException {
-		if (comment == null) throw new IllegalArgumentException("Comment is null");
+	void setComment(Term comment) throws IllegalArgumentException {
+		CheckNull(comment);
 		this.comment = comment;
 	}
 
-	public void addComment(Term comment) throws IllegalArgumentException {
-		if (comment == null) throw new IllegalArgumentException("Comment is null");
+	void addComment(Term comment) throws IllegalArgumentException {
+		CheckNull(comment);
         this.comment.addAll(comment);
 	}
 
-	public Term getTag() {
+	Term getTag() {
 		return (Term) tag.clone();
 	}
 
-	public void setTag(Term tag) throws IllegalArgumentException {
-		if (tag == null) throw new IllegalArgumentException("Tag is null");
+	void setTag(Term tag) throws IllegalArgumentException {
+		CheckNull(tag);
 		this.tag = tag;
 	}
 
-	public void addTag(Term tag) throws IllegalArgumentException {
-        if (tag == null) throw new IllegalArgumentException("Tag is null");
+	void addTag(Term tag) throws IllegalArgumentException {
+        CheckNull(tag);
         this.tag.addAll(tag);
 	}
 
-	public boolean isEmpty() {
+	boolean isEmpty() {
 		return phrase.isEmpty() && transl.isEmpty() && comment.isEmpty() && tag.isEmpty();
 	}
 
 	@Override
-	public int compareTo(Phrase other) {
+	public int compareTo(PhraseSet other) {
 		return this.phrase.compareTo(other.phrase);
 	}
 
@@ -168,12 +146,16 @@ public class Phrase implements Comparable <Phrase>
 		if (other == null) return false;
 		if (getClass() != other.getClass()) return false;
 		
-		Phrase aOther = (Phrase) other;
+		PhraseSet aOther = (PhraseSet) other;
 		
 		return id.equals(aOther.id)
 				&& phrase.equals(aOther.phrase)
 				&& transl.equals(aOther.transl)
 				&& comment.equals(aOther.comment)
 				&& tag.equals(aOther.tag);
+	}
+
+	private void CheckNull(Object o) {
+		if (o == null) throw new IllegalArgumentException("Value can not be null");
 	}
 }

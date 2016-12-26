@@ -67,19 +67,19 @@ class ModelPhrases extends AbstractTableModel
 	/** A column for check boxes */
 	final static int CHECK_COL = 0;
 	
-	/** A column that contains <code>id</code> attribute values of <code>Phrase</code> objects.*/
+	/** A column that contains <code>id</code> attribute values of <code>PhraseSet</code> objects.*/
 	final static int ID_COL = 1;
 	
-	/** A column that contains <code>phrase</code> attribute values of <code>Phrase</code> objects.*/
+	/** A column that contains <code>phrase</code> attribute values of <code>PhraseSet</code> objects.*/
 	final static int PHRASE_COL = 2;
 	
-	/** A column that contains <code>transl</code> attribute values of <code>Phrase</code> objects. */
+	/** A column that contains <code>transl</code> attribute values of <code>PhraseSet</code> objects. */
 	final static int TRANSL_COL = 3;
 	
-	/** A column that contains <code>comment</code> attribute values of <code>Phrase</code> objects. */
+	/** A column that contains <code>comment</code> attribute values of <code>PhraseSet</code> objects. */
 	final static int COMMENT_COL = 4;
 	
-	/** A column that contains <code>tag</code> attribute values of <code>Phrase</code> objects. */
+	/** A column that contains <code>tag</code> attribute values of <code>PhraseSet</code> objects. */
 	final static int TAG_COL = 5;
 	
 	/** A column that contains sound playing buttons.*/
@@ -141,7 +141,7 @@ class ModelPhrases extends AbstractTableModel
 			this.dataPath = dataPath;
 			
 			data.clear();
-			data.parseFile(dataPath);
+			data.fillFromFile(dataPath);
 			
 			checkbox.clear();
 			for (int i=0; i<data.size(); i++)
@@ -186,14 +186,14 @@ class ModelPhrases extends AbstractTableModel
 	}
 	
 	/**
-	 * Returns a <code>Phrase</code> with the specified id.
-	 * @param id - an id of an <code>Phrase</code>.
-	 * @return a <code>Phrase</code> with the specified id.
+	 * Returns a <code>PhraseSet</code> with the specified id.
+	 * @param id - an id of an <code>PhraseSet</code>.
+	 * @return a <code>PhraseSet</code> with the specified id.
 	 */
-	Phrase get(int id)
+	PhraseSet get(int id)
 	{
 		@SuppressWarnings("SuspiciousMethodCalls")
-        int row = invert(data.indexOf(id));
+        int row = invert(data.indexOfId(id));
 		
 		int    idd     = (int)    getValueAt(row, ID_COL);
 		String phrase  = (String) getValueAt(row, PHRASE_COL);
@@ -201,28 +201,28 @@ class ModelPhrases extends AbstractTableModel
 		Term   comment = (Term)   getValueAt(row, COMMENT_COL);
 		Term   tags    = (Term)   getValueAt(row, TAG_COL);
 	
-		return new Phrase(idd, phrase, transl, comment, tags);
+		return new PhraseSet(idd, phrase, transl, comment, tags);
 	}
 	
 	/**
 	 * Adds new elements.
 	 * @param c - new elements.
 	 */
-	void addAll(Collection <? extends Phrase> c)
+	void addAll(Collection <? extends PhraseSet> c)
 	{
 		try
 		{
 			int ok = GUI.showConfirmDialog(textsRepo.MG_ADD_QUESTION, textsRepo.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION)
 			{
-				for (Phrase each : c)
+				for (PhraseSet each : c)
 				{
-					int id = data.getLargerID()+1;
+					int id = data.getBiggestID()+1;
 					if (id < 0) id = 1;
 					each.setId(id);
 					
 					String phrase = each.getPhrase();
-					if (data.contPhrase(phrase)) 
+					if (data.containsPhrase(phrase))
 					{
 						String message = textsRepo.MG_LIST_CONT_PHRASE + " " + phrase + ". " + textsRepo.MG_EDIT_QUESTION;
 						int ok2 = GUI.showConfirmDialog(message, textsRepo.TL_CONF_EDIT);
@@ -317,7 +317,7 @@ class ModelPhrases extends AbstractTableModel
 						if ((int) getValueAt(row, ID_COL) == id)
 						{
 							int index = data.indexOfId(id);
-							data.get(index).addTag(tags);
+							data.addTag(index, tags);
 						}
 					}
 				}
@@ -364,7 +364,7 @@ class ModelPhrases extends AbstractTableModel
 			}
 			
 			int index = data.indexOfId(markedId);
-			String message = textsRepo.MG_EDIT_REC_QUESTION + " " + data.get(index).getPhrase() + "?";
+			String message = textsRepo.MG_EDIT_REC_QUESTION + " " + data.getPhrase(index) + "?";
 			int ok = GUI.showConfirmDialog(message, textsRepo.TL_CONF_EDIT);
 			if (ok == JOptionPane.OK_OPTION) 
 			{
@@ -511,17 +511,17 @@ class ModelPhrases extends AbstractTableModel
     @Override
 	public Object getValueAt(int rowIndex, int columnIndex)
     {
-    	Phrase p = data.get(invert(rowIndex));
+    	int index = invert(rowIndex);
 		switch (columnIndex) 
 		{
 		case CHECK_COL:   return checkbox.get(rowIndex);
-		case ID_COL:	  return p.getId();
-		case PHRASE_COL:  return p.getPhrase();
-		case TRANSL_COL:  return p.getTransl();
-		case COMMENT_COL: return p.getComment();
-		case TAG_COL:     return p.getTag();
+		case ID_COL:	  return data.getId(index);
+		case PHRASE_COL:  return data.getPhrase(index);
+		case TRANSL_COL:  return data.getTransl(index);
+		case COMMENT_COL: return data.getComment(index);
+		case TAG_COL:     return data.getTag(index);
 		case PLAY_COL:
-			boolean isSound = sounds.contains(p.getId() + "." + textsRepo.PH_EXT_SOUND);
+			boolean isSound = sounds.contains(data.getId(index) + "." + textsRepo.PH_EXT_SOUND);
 			if (isSound) return icon_sound;
 			else         return icon_no_sound;
 		default: return "";

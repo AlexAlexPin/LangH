@@ -69,8 +69,8 @@ public class ReplSet
 	@Override
 	public String toString() {
 		return getClass().getName()
-			+ "[text: "          + text          + "]"
-			+ "[replacements: "  + Arrays.toString(replacements) + "]";
+			+ "[text: " + text + "]"
+			+ "[replacements: " + Arrays.toString(replacements) + "]";
 	}
 
 	@Override

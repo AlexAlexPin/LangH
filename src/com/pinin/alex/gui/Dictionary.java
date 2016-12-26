@@ -197,7 +197,7 @@ public class Dictionary extends AbstractDictionaryTable
 	}
 	
 	@Override
-	public void addAll(Collection <? extends Phrase> c)
+	public void addAll(Collection <? extends PhraseSet> c)
 	{
 		table.addAll(c);
 	}
@@ -286,7 +286,7 @@ public class Dictionary extends AbstractDictionaryTable
 	}
 	
 	@Override
-	public Collection<Phrase> getAll() { return null;}
+	public Collection<PhraseSet> getAll() { return null;}
 
 	public JMenu getMenu()
 	{

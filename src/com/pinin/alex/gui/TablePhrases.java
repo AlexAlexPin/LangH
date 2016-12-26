@@ -186,10 +186,10 @@ class TablePhrases extends JTable
 	 * Adds new elements.
 	 * @param c - new elements.
 	 */
-	void addAll(Collection <? extends Phrase> c)
+	void addAll(Collection <? extends PhraseSet> c)
 	{
 		model.addAll(c);
-        filteredIds.addAll(c.stream().map((Function<Phrase, Integer>) Phrase::getId).collect(Collectors.toList()));
+        filteredIds.addAll(c.stream().map((Function<PhraseSet, Integer>) PhraseSet::getId).collect(Collectors.toList()));
 		sorter.setRowFilter(filter);
 	}
 	
