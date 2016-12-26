@@ -29,15 +29,16 @@ import javax.swing.table.*;
 import com.pinin.alex.CommonDataFactory;
 import com.pinin.alex.LangH;
 import com.pinin.alex.main.*;
+import com.pinin.alex.main.Dictionary;
 
 /**
- * Extends <code>AbstractTableModel</code>. Contains a <code>Phrases</code>
+ * Extends <code>AbstractTableModel</code>. Contains a <code>Dictionary</code>
  * object as the database. Allows to edit this database.
  */
 class ModelPhrases extends AbstractTableModel
 {
 	/** The database */
-	private Phrases data;
+	private Dictionary data;
 	
 	/** The column with check boxes */
 	private ArrayList<Boolean> checkbox;
@@ -103,7 +104,7 @@ class ModelPhrases extends AbstractTableModel
         logger = dataFactory.getLogger();
         textsRepo = dataFactory.getTextsRepo();
 
-		data = new Phrases();
+		data = new Dictionary();
 		checkbox = new ArrayList<>();
 		dataPath = new File("");
 		soundFolder = "";
@@ -395,12 +396,12 @@ class ModelPhrases extends AbstractTableModel
 	}
 	
 	/**
-	 * Returns Phrases.indexOfPart(String, String, String, String) converted to rows.
+	 * Returns Dictionary.indexOfPart(String, String, String, String) converted to rows.
 	 * @param phrase - a value to search in among phrases.
 	 * @param transl - a value to search in among translations.
 	 * @param comment - a value to search in among comments.
 	 * @param tag - a value to search in among tags.
-	 * @return Phrases.indexOfPart(String, String, String, String) converted to rows.
+	 * @return Dictionary.indexOfPart(String, String, String, String) converted to rows.
 	 */
 	int[] indexOfPart(String phrase, String transl, String comment, String tag)
 	{
@@ -414,9 +415,9 @@ class ModelPhrases extends AbstractTableModel
 	}
 	
 	/**
-	 * Returns Phrases.indexOfTags(Term) converted to rows.
+	 * Returns Dictionary.indexOfTags(Term) converted to rows.
 	 * @param tags - an object to be found.
-	 * @return Phrases.indexOfTags(Term) converted to rows.
+	 * @return Dictionary.indexOfTags(Term) converted to rows.
 	 */
 	int[] indexOfTags(Term tags)
 	{
@@ -551,7 +552,7 @@ class ModelPhrases extends AbstractTableModel
 			break;
 		case TAG_COL:
 			valAsString = ((String) obj).replace("\n", " ");
-			data.setTag(invert(rowIndex), new Term().parse(valAsString, ";"));
+			data.setTags(invert(rowIndex), new Term().parse(valAsString, ";"));
 			this.fireTableCellUpdated(rowIndex, columnIndex); // notice to change tags list
 			break;
 		default:

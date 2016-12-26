@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2feb4bf2-5a4a-4b8b-a1ce-c5f5e6496f04" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/CheckValueHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/DictionaryTable.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/DictionaryTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrasesFiltered.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrasesFiltered.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Worklist.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Worklist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Task.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Task.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Term.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Term.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Phrase.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java" />
     </list>
     <ignored path="LangH.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,26 +26,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Phrases.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java">
+      <file leaf-file-name="Dictionary.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-182">
-              <caret line="375" column="42" selection-start-line="375" selection-start-column="42" selection-end-line="375" selection-end-column="42" />
+            <state relative-caret-position="-83">
+              <caret line="414" column="9" selection-start-line="414" selection-start-column="9" selection-end-line="414" selection-end-column="9" />
               <folding>
-                <element signature="e#3759#3760#0" expanded="true" />
-                <element signature="e#3785#3786#0" expanded="true" />
-                <element signature="e#3875#3876#0" expanded="true" />
-                <element signature="e#3898#3899#0" expanded="true" />
+                <element signature="e#1458#1459#0" expanded="true" />
+                <element signature="e#1481#1482#0" expanded="true" />
+                <element signature="e#1503#1504#0" expanded="true" />
+                <element signature="e#1529#1530#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/GUI.java">
+      <file leaf-file-name="ModelPhrases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="112" column="31" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="31" />
+            <state relative-caret-position="118">
+              <caret line="554" column="17" selection-start-line="554" selection-start-column="17" selection-end-line="554" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -131,6 +120,7 @@
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/CheckValueHelper.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java" />
       </list>
     </option>
   </component>
@@ -605,13 +595,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3747954" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3747954" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -637,7 +627,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="32" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -646,15 +636,15 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java">
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3759#3760#0" expanded="true" />
-            <element signature="e#3785#3786#0" expanded="true" />
-            <element signature="e#3875#3876#0" expanded="true" />
-            <element signature="e#3898#3899#0" expanded="true" />
+            <element signature="e#1458#1459#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1503#1504#0" expanded="true" />
+            <element signature="e#1529#1530#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -728,6 +718,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="52" column="45" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -900,11 +891,11 @@
         <state relative-caret-position="680">
           <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
           <folding>
-            <element signature="e#1263#1264#0" expanded="true" />
-            <element signature="e#1286#1287#0" expanded="true" />
-            <element signature="e#1675#1676#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1263#1264#0" expanded="false" />
+            <element signature="e#1286#1287#0" expanded="false" />
+            <element signature="e#1675#1676#0" expanded="false" />
+            <element signature="e#1708#1709#0" expanded="false" />
+            <element signature="e#1793#1794#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -950,16 +941,6 @@
         <state relative-caret-position="0">
           <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
-          <folding>
-            <element signature="e#6241#6242#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1016,27 +997,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="202" column="4" selection-start-line="202" selection-start-column="4" selection-end-line="202" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-182">
-          <caret line="375" column="42" selection-start-line="375" selection-start-column="42" selection-end-line="375" selection-end-column="42" />
-          <folding>
-            <element signature="e#3759#3760#0" expanded="true" />
-            <element signature="e#3785#3786#0" expanded="true" />
-            <element signature="e#3875#3876#0" expanded="true" />
-            <element signature="e#3898#3899#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2890">
@@ -1047,9 +1007,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="112" column="31" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="31" />
+        <state relative-caret-position="184">
+          <caret line="115" column="12" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+          <folding>
+            <element signature="e#6241#6242#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="554" column="17" selection-start-line="554" selection-start-column="17" selection-end-line="554" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-83">
+          <caret line="414" column="9" selection-start-line="414" selection-start-column="9" selection-end-line="414" selection-end-column="9" />
+          <folding>
+            <element signature="e#1458#1459#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1503#1504#0" expanded="true" />
+            <element signature="e#1529#1530#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

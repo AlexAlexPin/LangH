@@ -26,39 +26,47 @@ import java.util.*;
 import com.pinin.alex.main.Common.*;
 
 /**
- * Object that represents a virtual dictionary of foreign phrases that contain identifiers, 
- * phrases itself and sets of translations, comments, and tags.
+ * A virtual dictionary of foreign phrases with translations comments and tags.
  */
-public class Phrases
+public class Dictionary
 {
 	private ArrayList<PhraseSet> items;
-
-	// The larger id attribute of elements of this object
 	private int biggestID;
-	
-	// The list of all ID attribute values of elements of this object
-	private HashSet<Integer> ids;
-	
-	// The list of all phrase attribute values of elements of this object
+	private HashSet<Integer> IDSet;
 	private HashSet<String> phrases;
-	
-	// The list of all tags as <String< of tag attribute values of elements of this object
 	private Term tags;
-	
-	// The character that is used to separate elements in a file
-	private char DELIMITER = '~';
 
-	public Phrases() {
+	private final char FILE_DATA_DELIMITER = '~';
+
+	public Dictionary() {
 		items = new ArrayList<>();
 		setDefault();
 	}
 
+	private void setDefault() {
+		biggestID = 0;
+		IDSet = new HashSet<>();
+		phrases = new HashSet<>();
+		tags = new Term();
+	}
+
+	public int getBiggestID() {
+		return biggestID;
+	}
+
+	public int size() {
+		return items.size();
+	}
+
+	public void clear() {
+		items.clear();
+		setDefault();
+	}
+
 	/**
-	 * Appends the specified element to the end of this list.<br>
-	 * The new element must not be empty. The IDof this object must not contain the same value
-	 * as the ID of the specified element. The phrases of this object must not contain the same value as the
-	 * phrase of the specified element.
-	 * In the case of failure of these conditions this method does not append the specified element and returns false.
+	 * Add a new element.
+	 * The new element must be not null.
+	 * An ID and a phrase of the specified element have to be not contained in this object.
 	 */
 	public boolean add(PhraseSet e) throws IllegalArgumentException {
 		CheckValueHelper.checkNull(e);
@@ -66,15 +74,12 @@ public class Phrases
 	}
 
 	/**
-	 * Tries to append the specified element to the end of this list or edit the existing element.
-	 * Note: A new element must not be empty. The ID of this object must not be the same value as the ID
-	 * of the specified element.
-	 * In the case of failure of these conditions this method does not append the specified element
-	 * and returns -2.
-	 * If the phrases of this object contains the same value as the phrase of the specified object this method
-	 * edits the existing element that contains the same phrase value and returns the index
-	 * of the edited element. Edits the transl, the comment and the tag fields only.
-	 * In other cases append the specified element to the end of this list and returns -1.
+	 * Appends the specified element to the end of this list or edit the existing element.
+	 * The new element must be not null.
+	 * An ID and a phrase of the specified element have to be not contained in this object.
+	 * If the element is not added or edited returns -2;
+	 * If the element is added returns -1;
+	 * If an existing element is edited returns an index of that element.
 	 */
 	public int addEdit(PhraseSet e) throws IllegalArgumentException {
 		CheckValueHelper.checkNull(e);
@@ -106,22 +111,9 @@ public class Phrases
 		return p;
 	}
 
-	public int size() {
-		return items.size();
-	}
-
-	public void clear() {
-		items.clear();
-		setDefault();
-	}
-
-	public int getBiggestID() {
-		return biggestID;
-	}
-
 	/**
-	 * Returns the list of indices of elements of this object if attributes
-	 * of these elements content at least a part of according specified elements.
+	 * Returns indices of elements if one of their phrase, translation, comment of tag value contains at least
+	 * a part of the specified values.
 	 */
 	public int[] indexOfPart(String phrase, String transl, String comment, String tag) throws IllegalArgumentException {
 		CheckValueHelper.checkNull(phrase, transl, comment, tag);
@@ -162,7 +154,7 @@ public class Phrases
 	}
 
 //
-// Phrases
+// Dictionary
 //
 
 	public String getPhrase(int index) throws IllegalArgumentException {
@@ -172,8 +164,8 @@ public class Phrases
 
 	/**
 	 * Replaces element's phrase value at the specified position in this with the specified value.
-	 * The new value must not be empty. The phrases of this object must not contain the specified value.
-	 * In the case of failure of these conditions this method does not replace value.
+	 * The new element must be not null.
+	 * A phrase of the specified element have to be not contained in this object.
 	 */
 	public void setPhrase(int index, String value) throws IllegalArgumentException {
 		CheckValueHelper.checkNull(value);
@@ -233,12 +225,7 @@ public class Phrases
 		return items.get(index).getTag();
 	}
 
-	/**
-	 * Replaces element's tag value at the specified position in this list with the specified value.
-	 * Note: To set value it is strongly recommended to use this method rather then
-	 * this.findContaining(...).setTag(...) because this method allows to correlate new values with list of tags.
-	 */
-	public void setTag(int index, Term value) throws IllegalArgumentException {
+	public void setTags(int index, Term value) throws IllegalArgumentException {
 		CheckValueHelper.checkNull(value);
 		CheckValueHelper.checkSize(index, size());
 		items.get(index).setTag(value);
@@ -310,7 +297,7 @@ public class Phrases
 			for (int i=0; i<fileContent.length(); i++) {
 				final char each = fileContent.charAt(i);
 
-				if (each == DELIMITER) stage++;
+				if (each == FILE_DATA_DELIMITER) stage++;
 				else {
 					switch (stage) {
 						case 0: id     .append(each); break;
@@ -374,16 +361,16 @@ public class Phrases
 		try {
 			StringBuilder sb = new StringBuilder();
 			for (PhraseSet each : items) {
-				sb.append(each.getId()).append(DELIMITER);
-				sb.append(each.getPhrase()            .replace(DELIMITER, delimiterFileReplacement)).append(DELIMITER);
-				sb.append(each.getTransl() .toString().replace(DELIMITER, delimiterFileReplacement)).append(DELIMITER);
-				sb.append(each.getComment().toString().replace(DELIMITER, delimiterFileReplacement)).append(DELIMITER);
-				sb.append(each.getTag()    .toString().replace(DELIMITER, delimiterFileReplacement)).append(DELIMITER);
+				sb.append(each.getId()).append(FILE_DATA_DELIMITER);
+				sb.append(each.getPhrase()            .replace(FILE_DATA_DELIMITER, delimiterFileReplacement)).append(FILE_DATA_DELIMITER);
+				sb.append(each.getTransl() .toString().replace(FILE_DATA_DELIMITER, delimiterFileReplacement)).append(FILE_DATA_DELIMITER);
+				sb.append(each.getComment().toString().replace(FILE_DATA_DELIMITER, delimiterFileReplacement)).append(FILE_DATA_DELIMITER);
+				sb.append(each.getTag()    .toString().replace(FILE_DATA_DELIMITER, delimiterFileReplacement)).append(FILE_DATA_DELIMITER);
 			}
 			Common.putFileContent(file, sb);
 		}
 		catch (Exception e) {
-			CodeFileException ee = new CodeFileException(e.getClass() + " exception in Phrases.codeFile()");
+			CodeFileException ee = new CodeFileException(e.getClass() + " exception in Dictionary.codeFile()");
 			ee.initCause(e);
 			throw ee;
 		}
@@ -393,29 +380,17 @@ public class Phrases
 // Tools
 //
 
-	private void setDefault() {
-		biggestID = 0;
-		ids = new HashSet<>();
-		phrases = new HashSet<>();
-		tags = new Term();
-	}
-
 	/**
 	 * Adds to variables of this object information about the specified element.
-	 * Note: A new element must be not null and empty.
-	 * The ID of this object must not contain the same value as the ID of the specified object.
-	 * The phrases of this object must not contain the same value as the phrase phrases of the specified object.
-	 * In the case of failure of these conditions this method does not add information about the specified
-	 * object and returns false.
 	 */
 	private boolean increase(PhraseSet e) {
 		int ID = e.getId();
 		String phrase = e.getPhrase();
-		if (e.isEmpty() || ids.contains(ID) || phrases.contains(phrase)) return false;
+		if (e.isEmpty() || IDSet.contains(ID) || phrases.contains(phrase)) return false;
 
 		if (biggestID < ID) biggestID = ID;
 
-		ids.add(ID);
+		IDSet.add(ID);
 		phrases.add(phrase);
 		Term t = e.getTag();
 		tags.addAll(t);
@@ -424,14 +399,13 @@ public class Phrases
 
 	/**
 	 * Removes from variables of this object information about the specified element.
-	 * @param e - the element to be removed
 	 */
 	private void decrease(PhraseSet e) {
 		final Integer ID = e.getId();
-		ids.remove(ID);
+		IDSet.remove(ID);
 		if (ID == biggestID) {
 			biggestID = 0;
-			ids.stream().filter(each -> biggestID < each).forEach(each -> biggestID = each);
+			IDSet.stream().filter(each -> biggestID < each).forEach(each -> biggestID = each);
 		}
 		phrases.remove(e.getPhrase());
 

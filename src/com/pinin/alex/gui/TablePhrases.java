@@ -271,7 +271,7 @@ class TablePhrases extends JTable
 	
 	/**
 	 * Apples the filter for this table.
-	 * Phrases that contain the specified values will be displayed.
+	 * Dictionary that contain the specified values will be displayed.
 	 * @param phrase - a value to find among <code>phrase</code> values.
 	 * @param transl - a value to find among <code>transl</code> values.
 	 * @param comment - a value to find among <code>comment</code> values.
@@ -291,7 +291,7 @@ class TablePhrases extends JTable
 	
 	/**
 	 * Apples the filter for this table.
-	 * Phrases that contain the specified tags will be displayed.
+	 * Dictionary that contain the specified tags will be displayed.
 	 * @param tags - a set of tags. 
 	 */
 	void applyFilter(Term tags) 
