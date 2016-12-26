@@ -98,7 +98,7 @@ class TableTerm extends JTable
 	void loadData(Term term) 
 	{
 		model.loadData(term);
-		this.repaint();
+		this.updateUI();
 	}
 	
 	/**
