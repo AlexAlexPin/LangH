@@ -72,8 +72,8 @@ public class PrefFacade
         return new Dimension(frameWidth, frameHeight);
     }
 
-	public void putMainFrameSize(Dimension size) throws NullPointerException {
-		if (size == null) throw new NullPointerException("null value in PrefFacade.putMainFrameSize()");
+	public void putMainFrameSize(Dimension size) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(size);
 		preferences.putInt(MAIN_FRAME_HEIGHT_PREF, size.height);
 		preferences.putInt(MAIN_FRAME_WIDTH_PREF,  size.width);
 	}
@@ -107,8 +107,8 @@ public class PrefFacade
 		return preferences.get(LANGUAGE_PREF, TextsRepo.PH_TEXT);
 	}
 
-	public void putLanguage(String lang) throws NullPointerException {
-		if (lang == null) throw new NullPointerException("Language value is null");
+	public void putLanguage(String lang) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(lang);
 		preferences.put(LANGUAGE_PREF, lang);
 	}
 
@@ -116,8 +116,8 @@ public class PrefFacade
 		return preferences.get(DATA_PATH_PREF, "");
 	}
 
-	public void putDataPath(String path) throws NullPointerException {
-		if (path == null) throw new NullPointerException("PrefFacade path is null");
+	public void putDataPath(String path) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(path);
 		preferences.put(DATA_PATH_PREF, path);
 	}
 
@@ -165,13 +165,9 @@ public class PrefFacade
 	 * Constructs and returns the path of the task list.
 	 * @param dataPath - data path.
 	 * @param newExt - a extension of a task list file.
-	 * @return the path of the task list.
-	 * @throws NullPointerException in case of <code>null</code> value.
 	 */
-	public String getTaskPath(String dataPath, String newExt) throws NullPointerException {
-		if (dataPath == null || newExt == null) 
-			throw new NullPointerException("PrefFacade path or extension is null");
-			
+	public String getTaskPath(String dataPath, String newExt) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(dataPath, newExt);
 		if (dataPath.isEmpty()) return "";
 			
 		int extPoint = dataPath.lastIndexOf(".");
@@ -183,18 +179,14 @@ public class PrefFacade
 	}
 	
 	/**
-	 * Constructs and returns the path of the folder with sounds
+	 * Constructs and returns the path of the folder with sounds.
 	 * @param path - data path.
-	 * @param toAdd - a <code>String</code> to add to findContaining a new path
-	 * @return the path of the folder with sounds
-	 * @throws NullPointerException in case of <code>null</code> value.
+	 * @param toAdd - a value to add to findWithText a new path.
 	 */
 	public String getSoundFolderPath(File path, String toAdd) throws NullPointerException {
-		if (path == null || toAdd == null)
-            throw new NullPointerException("File path or additional part is null");
-			
+		CheckValueHelper.checkNull(path, toAdd);
+
 		String dataPath = path.getAbsolutePath();
-			
 		int extPoint = dataPath.lastIndexOf(".");
 		String result;
 			

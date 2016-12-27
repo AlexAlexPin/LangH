@@ -35,11 +35,11 @@ public class Replacer
 	 * Each line must be in format: "letter: replacement_1; replacement_2; ... replacement_n;"
 	 * In the end of the specified sequence must be a new line symbol.
 	 */
-	public Replacer(CharSequence csq) {
-		CheckNull(csq);
+	public Replacer(CharSequence source) {
+		CheckValueHelper.checkNull(source);
 		StringBuilder sb = new StringBuilder();
-		for (int i=0; i<csq.length(); i++) {
-			char c = csq.charAt(i);
+		for (int i=0; i<source.length(); i++) {
+			char c = source.charAt(i);
 			sb.append(c);
 			if (c == '\n') {
 				ReplSet rs = parseLine(sb);
@@ -49,14 +49,14 @@ public class Replacer
 		}
 	}
 
-	private ReplSet parseLine(CharSequence csq) {
+	private ReplSet parseLine(CharSequence line) {
 		StringBuilder text = new StringBuilder();
 		StringBuilder repl = new StringBuilder();
 		LinkedList<String> replacements = new LinkedList<>();
 
 		boolean isText = true;
-		for (int i=0; i<csq.length(); i++) {
-			char each = csq.charAt(i);
+		for (int i=0; i<line.length(); i++) {
+			char each = line.charAt(i);
 			switch (each) {
 				case ' ': case '\t': case '\n': case '\f': case '\r': // skip spaces
 					continue;
@@ -80,28 +80,23 @@ public class Replacer
 		return new ReplSet(text.toString(), replacementsArr);
 	}
 
-	public boolean add(ReplSet e) throws IllegalArgumentException {
-		CheckNull(e);
-		return items.add(e);
+	public boolean add(ReplSet item) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(item);
+		return items.add(item);
 	}
 
-	public boolean remove(ReplSet e) throws IllegalArgumentException {
-		CheckNull(e);
-		return items.remove(e);
+	public boolean remove(ReplSet item) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(item);
+		return items.remove(item);
 	}
 
 	/**
-	 * Returns an object that contains the specified value or empty object.
+	 * Returns an object that contains the specified text or empty object.
 	 */
-	public ReplSet findContaining(String value) {
-		for (ReplSet each : items)
-			if (each.getText().equals(value))
-				return each;
+	public ReplSet findWithText(String text) {
+		for (ReplSet item : items)
+			if (item.getText().equals(text))
+				return item;
 		return new ReplSet();
-	}
-
-	private void CheckNull(Object... objects) throws IllegalArgumentException {
-		for (Object obj : objects)
-			if (obj == null) throw new IllegalArgumentException("Value can not be null");
 	}
 }

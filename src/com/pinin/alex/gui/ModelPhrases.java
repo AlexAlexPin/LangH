@@ -119,7 +119,7 @@ class ModelPhrases extends AbstractTableModel
 
 	/**
 	 * Loads data from the specified file.
-	 * @param dataPath - a file to findContaining data.
+	 * @param dataPath - a file to findWithText data.
 	 */
 	void loadData(File dataPath)
 	{
@@ -333,8 +333,8 @@ class ModelPhrases extends AbstractTableModel
 	
 	/**
 	 * Fill the specified <code>AudioContainer</code> with sound with the specified id.
-	 * @param toGet - an object to findContaining the sound.
-	 * @param id - an id to be used to findContaining the sound.
+	 * @param toGet - an object to findWithText the sound.
+	 * @param id - an id to be used to findWithText the sound.
 	 * @return <code>true</code> if the sound has been got successfully.
 	 */
 	boolean getSound(AudioContainer toGet, int id) {

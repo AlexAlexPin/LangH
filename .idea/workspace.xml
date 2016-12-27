@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2feb4bf2-5a4a-4b8b-a1ce-c5f5e6496f04" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/TaskEnum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/TaskResultEnum.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/ButtonCellEditor.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/ButtonCellEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/COPYING.txt" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/COPYING.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Common.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Common.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/main/Task.java" afterPath="$PROJECT_DIR$/src/com/pinin/alex/main/Task.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/texts/info.txt" afterPath="$PROJECT_DIR$/src/com/pinin/alex/texts/info.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pinin/alex/texts/texts.txt" afterPath="$PROJECT_DIR$/src/com/pinin/alex/texts/texts.txt" />
     </list>
     <ignored path="LangH.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,25 +41,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Tags.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java">
+      <file leaf-file-name="Task.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Task.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="125" column="16" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="16" />
+            <state relative-caret-position="318">
+              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
               <folding>
-                <element signature="e#4197#4198#0" expanded="true" />
-                <element signature="e#4224#4225#0" expanded="true" />
+                <element signature="e#4866#4867#0" expanded="true" />
+                <element signature="e#4886#4887#0" expanded="true" />
+                <element signature="e#4914#4915#0" expanded="true" />
+                <element signature="e#4935#4936#0" expanded="true" />
+                <element signature="e#4969#4970#0" expanded="true" />
+                <element signature="e#4998#4999#0" expanded="true" />
+                <element signature="e#5032#5033#0" expanded="true" />
+                <element signature="e#5059#5060#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TableTerm.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -67,21 +80,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/DataFactoryImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/DataFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuFile.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogAbout.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogHelp.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/DialogSetting.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuHelp.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Search.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrasesFiltered.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelTerm.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Worklist.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/LangH.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Filler.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Dictionary.java" />
@@ -99,24 +107,30 @@
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Data.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/SavedData.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PreferencesProxy.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Sound.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Common.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/MenuEdit.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/ReplEnum.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Phrase.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/ModelPhrases.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Term.java" />
-        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/CheckValueHelper.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Phrases.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java" />
         <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/TaskEmun.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/TaskResultEnum.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/TaskEnum.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java" />
+        <option value="$PROJECT_DIR$/src/com/pinin/alex/main/Task.java" />
       </list>
     </option>
   </component>
@@ -173,6 +187,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -228,14 +243,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -547,7 +561,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3747954" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22585924" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -588,20 +602,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1458#1459#0" expanded="true" />
-            <element signature="e#1481#1482#0" expanded="true" />
-            <element signature="e#1503#1504#0" expanded="true" />
-            <element signature="e#1529#1530#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/texts/GlobalFactory.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
@@ -652,17 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-496">
           <caret line="31" column="46" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3145">
-          <caret line="227" column="35" selection-start-line="227" selection-start-column="35" selection-end-line="227" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -670,7 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="52" column="45" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -686,15 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -749,10 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#1621#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,23 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2333">
-          <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="210" column="12" selection-start-line="210" selection-start-column="12" selection-end-line="210" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/texts/replacements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -812,78 +770,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ReplEnum.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="87" column="85" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
-          <folding>
-            <element signature="e#1263#1264#0" expanded="false" />
-            <element signature="e#1286#1287#0" expanded="false" />
-            <element signature="e#1675#1676#0" expanded="false" />
-            <element signature="e#1708#1709#0" expanded="false" />
-            <element signature="e#1793#1794#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/BordersRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-828">
-          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ColorsRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199">
-          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/FontsRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Common.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10669">
-          <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/TablePhrases.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="69" column="45" selection-start-line="69" selection-start-column="45" selection-end-line="69" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/CheckValueHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="79" selection-start-line="5" selection-start-column="79" selection-end-line="5" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -914,47 +804,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="429" column="16" selection-start-line="429" selection-start-column="16" selection-end-line="429" selection-end-column="16" />
-          <folding>
-            <element signature="e#1458#1459#0" expanded="true" />
-            <element signature="e#1481#1482#0" expanded="true" />
-            <element signature="e#1503#1504#0" expanded="true" />
-            <element signature="e#1529#1530#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1769">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="77" column="40" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Term.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-647">
           <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-885">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -971,7 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -980,8 +832,8 @@
         <state relative-caret-position="95">
           <caret line="3311" column="16" selection-start-line="3311" selection-start-column="16" selection-end-line="3311" selection-end-column="16" />
           <folding>
-            <element signature="e#114530#114531#0" expanded="true" />
-            <element signature="e#114577#114578#0" expanded="true" />
+            <element signature="e#114530#114531#0" expanded="false" />
+            <element signature="e#114577#114578#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -990,26 +842,196 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="77">
           <caret line="57" column="16" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="124" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Tags.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
+        <state relative-caret-position="323">
           <caret line="125" column="16" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="16" />
           <folding>
-            <element signature="e#4197#4198#0" expanded="true" />
-            <element signature="e#4224#4225#0" expanded="true" />
+            <element signature="e#4197#4198#0" expanded="false" />
+            <element signature="e#4224#4225#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/TableTerm.java">
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Recorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+        <state relative-caret-position="322">
+          <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/CheckValueHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="79" selection-start-line="5" selection-start-column="79" selection-end-line="5" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/BordersRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ColorsRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Dictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="429" column="16" selection-start-line="429" selection-start-column="16" selection-end-line="429" selection-end-column="16" />
+          <folding>
+            <element signature="e#1458#1459#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1503#1504#0" expanded="true" />
+            <element signature="e#1529#1530#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/FontsRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/AudioContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PhraseSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/PrefFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="180" column="7" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/RecordedSound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/PopupReplacer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="88" column="13" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Replacer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/ReplSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
+          <folding>
+            <element signature="e#1687#1688#0" expanded="true" />
+            <element signature="e#1743#1744#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Common.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-782">
+          <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/javax/swing/JEditorPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="1433" column="18" selection-start-line="1433" selection-start-column="18" selection-end-line="1433" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/TaskResultEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/TaskEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/gui/Exercise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="257" column="47" selection-start-line="257" selection-start-column="47" selection-end-line="257" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pinin/alex/main/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
+          <folding>
+            <element signature="e#4866#4867#0" expanded="true" />
+            <element signature="e#4886#4887#0" expanded="true" />
+            <element signature="e#4914#4915#0" expanded="true" />
+            <element signature="e#4935#4936#0" expanded="true" />
+            <element signature="e#4969#4970#0" expanded="true" />
+            <element signature="e#4998#4999#0" expanded="true" />
+            <element signature="e#5032#5033#0" expanded="true" />
+            <element signature="e#5059#5060#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

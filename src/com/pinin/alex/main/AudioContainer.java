@@ -28,7 +28,7 @@ import java.io.*;
 public interface AudioContainer
 {
 	void capture();
-	void stopCapture();
+	void stopCapturing();
 	void play();
 	boolean saveSound(File file);
 	boolean loadSound(File file);

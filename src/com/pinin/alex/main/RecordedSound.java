@@ -34,7 +34,7 @@ public class RecordedSound implements AudioContainer
 	private byte[] capturedSoundRaw;
 
 	/**
-	 * Creates the <code>AudioFormat</code> object for 2 channels recording in 16 kHz
+	 * Creates the AudioFormat object for 2 channels recording in 16 kHz
 	 */
 	private AudioFormat getAudioFormat() {
 		capturedSound = new ByteArrayOutputStream();
@@ -87,6 +87,7 @@ public class RecordedSound implements AudioContainer
 							AudioCapturingException ee = new AudioCapturingException(
 									e.getClass() + " " + e.getMessage());
 							ee.initCause(e);
+							//noinspection ThrowFromFinallyBlock
 							throw ee;
 						}
 					}
@@ -102,7 +103,7 @@ public class RecordedSound implements AudioContainer
 	}
 	
 	@Override
-	public void stopCapture() {
+	public void stopCapturing() {
 		running = false;
 	}
 

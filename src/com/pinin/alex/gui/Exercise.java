@@ -239,21 +239,21 @@ public class Exercise extends AbstractControlledPanel
 	 */
     private void exerEnter(DictionaryTable dic)
 	{
-		if (tasks == null) return;	
-		
-		int check = tasks.enter(answField.getText());
+		if (tasks == null) return;
+
+		TaskResultEnum check = tasks.enter(answField.getText());
 			
 		// do actions depending on result
 			
-		switch (check) 
+		switch (check)
 		{
-		case Task.WRONG_ANSW:	// incorrect answer
+		case wrongAnswer:	// incorrect answer
 			answField.setBorder(bordersRepo.getWrongBorder());
 			answField.requestFocus();
-			GUI.sendMessage(textsRepo.MG_WRONG_ANSW + " (" + textsRepo.MG_ATTEMPT + tasks.getAttempt() + ")");
-			break;	
-			
-		case Task.RIGHT_ANSW:	// correct answer and there are more questions
+			GUI.sendMessage(textsRepo.MG_WRONG_ANSW + " (" + textsRepo.MG_ATTEMPT + (tasks.getAttempt() - 1) + ")");
+			break;
+
+		case correctAnswer:	// correct answer and there are more questions
 		
 			switch (option) // do the next task
 			{
@@ -276,7 +276,7 @@ public class Exercise extends AbstractControlledPanel
 			GUI.sendMessage(textsRepo.MG_CORRECT_ANSW + " (" + textsRepo.MG_REST + " " + tasks.getRestOfPhrases() + ")");
 			break;
 				
-		case Task.RIGHT_ANSW_FIN:	// correct answer and the last question	
+		case finalCorrectAnswer:	// correct answer and the last question
 			
 			if (option != BY_PHRASE_SOUND && option != BY_TRANSL_SOUND) playSound(dic);
 	
@@ -351,7 +351,7 @@ public class Exercise extends AbstractControlledPanel
 		{
 			option = BY_PHRASE;
 			
-			task = tasks.doExercise(Task.OPTION_BY_PHRASE);
+			task = tasks.doExercise(TaskEnum.trainByPhrase);
 			answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
@@ -374,7 +374,7 @@ public class Exercise extends AbstractControlledPanel
 		{
 			option = BY_TRANSL;
 			
-			task = tasks.doExercise(Task.OPTION_BY_TRANSL);
+			task = tasks.doExercise(TaskEnum.trainByTranslation);
 			answField.setBorder(bordersRepo.getInTextBorder(textsRepo.LB_HEADER_ASWER));
 			taskField.setText(task);
 			answField.setText("");
@@ -398,7 +398,7 @@ public class Exercise extends AbstractControlledPanel
 		{
 			option = BY_PHRASE_SOUND;
 			
-			task = tasks.doExercise(Task.OPTION_BY_PHRASE);
+			task = tasks.doExercise(TaskEnum.trainByPhrase);
 			if ("".equals(task)) return;
 			
 			if (!playSound(dic)) // play sound as a task
@@ -430,7 +430,7 @@ public class Exercise extends AbstractControlledPanel
 		{
 			option = BY_TRANSL_SOUND;
 			
-			task = tasks.doExercise(Task.OPTION_BY_TRANSL);
+			task = tasks.doExercise(TaskEnum.trainByTranslation);
 			if ("".equals(task)) return;
 			
 			if (!playSound(dic)) // play sound as a task

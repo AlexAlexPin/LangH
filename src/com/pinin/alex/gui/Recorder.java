@@ -156,7 +156,7 @@ class Recorder extends AbstractControlledPanel
 			captureMit.setEnabled(true);
 			stopBut.setEnabled(false);
 			stopMit.setEnabled(false);
-			audio.stopCapture();
+			audio.stopCapturing();
 		}
 		catch (Exception e) 
 		{

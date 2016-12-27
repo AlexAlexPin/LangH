@@ -550,10 +550,10 @@ public class Common
 		
 		try 
 		{
-			// findContaining all resources in the specified folder
+			// findWithText all resources in the specified folder
 			File[] wholeList = path.listFiles();
 			
-			// findContaining only selected resources in the specified folder
+			// findWithText only selected resources in the specified folder
 			LinkedList<File> only = new LinkedList<File>();
 			
 			switch (option) 
@@ -598,7 +598,7 @@ public class Common
 	
 	/**
 	 * Returns an up level of a path of the specified file.
-	 * @param file - a file to findContaining an up level.
+	 * @param file - a file to findWithText an up level.
 	 * @return an up level of a path of the specified file.
 	 * @throws NullPointerException in case of <code>null</code> values.
 	 * @throws FilePathException in case of other exceptions during the process.

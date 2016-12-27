@@ -109,7 +109,7 @@ public class ButtonCellEditor extends AbstractCellEditor
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// the button has been pressed. stopCapture editing and invoke the action
+		// the button has been pressed. stopCapturing editing and invoke the action
 		int row = table.convertRowIndexToModel(table.getEditingRow());
 		fireEditingStopped();
 

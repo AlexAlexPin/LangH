@@ -65,7 +65,7 @@ public class PhraseSet implements Comparable <PhraseSet>
 	}
 
 	void setPhrase(String phrase) throws IllegalArgumentException {
-		CheckNull(phrase);
+		CheckValueHelper.checkNull(phrase);
 		if (phrase.isEmpty()) throw new IllegalArgumentException("Value can not be empty");
 		this.phrase = phrase;
 	}
@@ -75,12 +75,12 @@ public class PhraseSet implements Comparable <PhraseSet>
 	}
 
 	void setTransl(Term transl) throws IllegalArgumentException {
-		CheckNull(transl);
+		CheckValueHelper.checkNull(transl);
 		this.transl = transl;
 	}
 
 	void addTransl(Term transl) throws IllegalArgumentException {
-		CheckNull(transl);
+		CheckValueHelper.checkNull(transl);
         this.transl.addAll(transl);
 	}
 
@@ -89,12 +89,12 @@ public class PhraseSet implements Comparable <PhraseSet>
 	}
 
 	void setComment(Term comment) throws IllegalArgumentException {
-		CheckNull(comment);
+		CheckValueHelper.checkNull(comment);
 		this.comment = comment;
 	}
 
 	void addComment(Term comment) throws IllegalArgumentException {
-		CheckNull(comment);
+		CheckValueHelper.checkNull(comment);
         this.comment.addAll(comment);
 	}
 
@@ -103,12 +103,12 @@ public class PhraseSet implements Comparable <PhraseSet>
 	}
 
 	void setTag(Term tag) throws IllegalArgumentException {
-		CheckNull(tag);
+		CheckValueHelper.checkNull(tag);
 		this.tag = tag;
 	}
 
 	void addTag(Term tag) throws IllegalArgumentException {
-        CheckNull(tag);
+		CheckValueHelper.checkNull(tag);
         this.tag.addAll(tag);
 	}
 
@@ -153,9 +153,5 @@ public class PhraseSet implements Comparable <PhraseSet>
 				&& transl.equals(aOther.transl)
 				&& comment.equals(aOther.comment)
 				&& tag.equals(aOther.tag);
-	}
-
-	private void CheckNull(Object o) {
-		if (o == null) throw new IllegalArgumentException("Value can not be null");
 	}
 }
