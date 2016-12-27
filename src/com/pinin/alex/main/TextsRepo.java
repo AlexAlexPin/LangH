@@ -28,8 +28,7 @@ import java.util.*;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class TextsRepo
 {
-	public TextsRepo(CharSequence textsSource)
-	{
+	public TextsRepo(CharSequence textsSource) {
         HashMap<String, String> textsMap = loadTextsMap(textsSource);
 
 		// hot keys
@@ -303,8 +302,7 @@ public class TextsRepo
 		URL_SUPPORT 			= textsMap.get("URL_SUPPORT");
 	}
 
-    private HashMap<String, String> loadTextsMap(CharSequence textsSource)
-    {
+    private HashMap<String, String> loadTextsMap(CharSequence textsSource) {
         HashMap<String, String> result = new HashMap<>();
 
         final int keyStage = 1;
@@ -316,11 +314,9 @@ public class TextsRepo
         StringBuilder key = new StringBuilder();
         StringBuilder value = new StringBuilder();
 
-        for (int i=0; i<textsSource.length(); i++)
-        {
+        for (int i=0; i<textsSource.length(); i++) {
             char c = textsSource.charAt(i);
-            switch (c)
-            {
+            switch (c) {
                 case '*':
                     stage = commentStage;
                     continue;
@@ -329,18 +325,14 @@ public class TextsRepo
                     continue;
                 case '\n':
                     stage = keyStage;
-                    if (key.length() > 0)
-                    {
-                        result.put(key.toString().trim(), value.toString().trim());
-                    }
+                    if (key.length() > 0) result.put(key.toString().trim(), value.toString().trim());
                     key = new StringBuilder();
                     value = new StringBuilder();
                     continue;
                 case '\r':
                     continue;
             }
-            switch (stage)
-            {
+            switch (stage) {
                 case keyStage:
                     key.append(c);
                     break;
@@ -352,8 +344,7 @@ public class TextsRepo
         return result;
     }
 
-	private char getChar(Map<String, String> map, String key)
-	{
+	private char getChar(Map<String, String> map, String key) {
 		String s = map.get(key);
 		if (s == null || s.length() == 0) return ' ';
 		return s.charAt(0);

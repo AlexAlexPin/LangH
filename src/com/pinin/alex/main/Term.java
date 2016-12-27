@@ -23,83 +23,36 @@ package com.pinin.alex.main;
 import java.util.LinkedHashSet;
 
 /**
- * Represents a virtual set of addition information for the <code>PhraseSet</code> object
- * and may content set of <code>String</code> objects.
+ * Represents a virtual set of addition information for the PhraseSet object.
  */
 public class Term extends LinkedHashSet<String> 
 {
-//
-// Variables
-//
-	
-	/** Default serial version ID */
 	private static final long serialVersionUID = 1L;
 
-//
-// Methods
-//
-	
 	/**
-	 * Parses the specified <code>String</code> by the specified delimiter to this object
-	 * and adds elements into this object
-	 * @param line - the <code>String</code> to be parsed
-	 * @param delimiter - the delimiter to split the specified <code>String</code>
-	 * @return this object
-	 * @throws NullPointerException if at least one of specified <code>String</code> 
-	 * is <code>null</code>
+	 * Parses the specified String by the specified delimiter to this object
+	 * and adds elements into this object.
 	 */
-	public Term parse(String line, String delimiter) throws NullPointerException 
-	{
-		if (line == null || delimiter == null) 
-			throw new NullPointerException("null value in Term.parse(String, String)");
-		
-		String[] sarr = line.split(delimiter);
-		
-		for (String each : sarr) 
-		{
+	public Term parse(String line, String delimiter) throws IllegalArgumentException {
+		CheckValueHelper.checkNull(line, delimiter);
+		for (String each : line.split(delimiter)) {
 			String trim = each.trim();
 			boolean isEmpty = trim.isEmpty();
 			if (!isEmpty) this.add(each.trim());
 		}
 		return this;
 	}
-	
-	/**
-	 * Parses the specified <code>String</code> to this object
-	 * @param line - the <code>String</code> to be parsed
-	 * @return this object
-	 * @throws NullPointerException the specified <code>String</code> is <code>null</code>
-	 */
-	public Term parse(String line) 
-	{
-		if (line == null) throw new NullPointerException("null value in Term.parse(String)");
-		this.add(line);
-		return this;
-	}
 
-
-
-//
-// Extending Object
-//
-	
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		if (this.size() == 0) return "";
-		
 		StringBuilder sb = new StringBuilder();
-
-		for (String each : this) 
-		{
+		for (String each : this) {
 			sb.append(each);
 			sb.append("; ");
 		}
-		
 		int length = sb.length();
-		sb.delete(length-2, length);
-		
+		sb.delete(length - 2, length);
 		return sb.toString();
 	}
-	
-} // end Term
+}
