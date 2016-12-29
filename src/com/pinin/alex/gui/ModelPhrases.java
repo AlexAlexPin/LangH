@@ -55,7 +55,7 @@ class ModelPhrases extends AbstractTableModel
 	/** A list of existing sound records */
 	private LinkedList<String> sounds;
 	
-	// icons for the button column
+	// icons for the menuItem column
 	
 	/** An icon that shows a existing sound record */
 	private Icon icon_sound;

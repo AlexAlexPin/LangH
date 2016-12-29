@@ -96,7 +96,7 @@ class DialogSetting extends JDialog
 		mainPl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
 				textsRepo.MG_SET_REST_TO_APL, TitledBorder.CENTER, TitledBorder.BOTTOM, fontP));
 		
-		// button
+		// menuItem
 				
 		JButton button = getButton(textsRepo.BT_SET_OK_BT, event -> applySettings(dataFactory));
 				

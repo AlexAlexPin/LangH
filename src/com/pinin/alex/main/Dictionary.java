@@ -217,7 +217,7 @@ public class Dictionary
 	}
 
 //
-// Tags
+// TagsPanel
 //
 
 	public Term getTag(int index) throws IllegalArgumentException {

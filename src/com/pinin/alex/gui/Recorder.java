@@ -192,7 +192,7 @@ class Recorder extends AbstractControlledPanel
 		return menu;
 	}
 
-	public JButton[] getToolBarButtons()
+	public JButton[] getButtons()
 	{
 		return new JButton[] {openCloseBut};
 	}

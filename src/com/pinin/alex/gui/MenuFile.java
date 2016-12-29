@@ -210,7 +210,7 @@ class MenuFile extends AbstractControlledPanel
 		return menu;
 	}
 
-	public JButton[] getToolBarButtons()
+	public JButton[] getButtons()
 	{
 		return new JButton[] {saveFileBut};
 	}

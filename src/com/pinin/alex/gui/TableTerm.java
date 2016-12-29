@@ -134,7 +134,7 @@ class TableTerm extends JTable
 	 * Gets selected tags. Shows only found phrases in the dictionary table.
 	 * @param component - an object to exchange data.
 	 */
-	void find(DictionaryTable component) 
+	void find(DictionaryTable component)
 	{
 		Term tags = getSelectedTags();
 		component.showOnly(tags);

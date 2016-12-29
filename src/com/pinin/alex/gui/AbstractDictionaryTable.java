@@ -2,7 +2,7 @@
 //	This file is part of LangH.
 //
 //	LangH is a program that allows to keep foreign phrases and test yourself.
-//	Copyright © 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
+//	Copyright ï¿½ 2015 Aleksandr Pinin. e-mail: <alex.pinin@gmail.com>
 //
 //	LangH is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -18,12 +18,9 @@
 //	along with LangH.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-
 package com.pinin.alex.gui;
 
-public abstract class AbstractDictionaryTable extends AbstractControlledPanel implements DictionaryTable
+abstract class AbstractDictionaryTable extends AbstractControlledPanel implements DictionaryTable
 {
-	/** Default serial version ID. */
 	private static final long serialVersionUID = 1L;
-	
-} // end AbstractDictionaryTable
+}

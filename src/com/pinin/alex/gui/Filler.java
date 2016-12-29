@@ -207,7 +207,7 @@ class Filler extends AbstractControlledPanel
 	 * Returns tool buttons of this panel.
 	 * @return tool buttons of this panel.
 	 */
-	public JButton[] getToolBarButtons()
+	public JButton[] getButtons()
 	{
 		return new JButton[] {openCloseBut};
 	}
@@ -260,11 +260,11 @@ class Filler extends AbstractControlledPanel
 
 //	private JButton getButton(String labelPath, String tip, ActionListener action)
 //	{
-//		JButton button = new JButton();
-//		button.setIcon(CommonDataFactoryImpl.getIconFromResource(labelPath));
-//		button.setToolTipText(tip);
-//		button.addActionListener(action);
-//		return button;
+//		JButton menuItem = new JButton();
+//		menuItem.setIcon(CommonDataFactoryImpl.getIconFromResource(labelPath));
+//		menuItem.setToolTipText(tip);
+//		menuItem.addActionListener(action);
+//		return menuItem;
 //	}
 
 	private JButton getButton(ImageIcon icon, String tip, ActionListener action) 

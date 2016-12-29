@@ -30,7 +30,7 @@ import com.pinin.alex.main.*;
 /**
  * Extends <code>JPanel</code>. Displays the tag list.
  */
-public class Tags extends JPanel implements TagContainer
+public class TagsPanel extends JPanel implements TagContainer
 {
 	// the table for this panel
 	private TableTerm table;
@@ -57,7 +57,7 @@ public class Tags extends JPanel implements TagContainer
 	 * @param dictionary - an object to exchange data.
 	 * @param dataFactory - a common data factory;
 	 */
-	public Tags(DictionaryTable dictionary, CommonDataFactory dataFactory)
+	public TagsPanel(DictionaryTable dictionary, CommonDataFactory dataFactory)
 	{
         fontsRepo = dataFactory.getFontsRepo();
         colorsRepo = dataFactory.getColorsRepo();

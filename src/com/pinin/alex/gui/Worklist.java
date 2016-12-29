@@ -209,7 +209,7 @@ public class Worklist extends AbstractFilteredTable<Integer>
 	 * Returns tool buttons of this panel.
 	 * @return tool buttons of this panel.
 	 */
-	public JButton[] getToolBarButtons()
+	public JButton[] getButtons()
 	{
 		return new JButton[] {openCloseBut};
 	}

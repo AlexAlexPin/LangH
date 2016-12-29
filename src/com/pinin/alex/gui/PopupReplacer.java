@@ -83,7 +83,7 @@ class PopupReplacer extends JPopupMenu
 				
 				final String replacement = replSet.getReplacement(selection, i);
 
-				// add the new button
+				// add the new menuItem
 				
 				this.add(getMenuItem(replacement, event -> component.replaceSelection(replacement)));
 			}

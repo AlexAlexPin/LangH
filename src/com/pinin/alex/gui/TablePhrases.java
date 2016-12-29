@@ -110,7 +110,7 @@ class TablePhrases extends JTable
 		JMenuItem mark    = getMenuItem(textsRepo.BT_SELECT_TABLE_PL,  TextsRepo.PH_ICON_SELECT, event -> mark());
 		JMenuItem markAll = getMenuItem(textsRepo.BT_SEL_ALL_TABLE_PL, TextsRepo.PH_ICON_SEL_ALL, event -> markAll());
 		JMenuItem remove  = getMenuItem(textsRepo.BT_DELETE_TABLE_PL,  TextsRepo.PH_ICON_DELETE, event -> removeMarkedRows());
-		JMenuItem toTask  = getMenuItem(textsRepo.BT_TO_TASK_TABLE_PL, TextsRepo.PH_ICON_TOTASK, event -> toTask(workList));
+		JMenuItem toTask  = getMenuItem(textsRepo.BT_TO_TASK_TABLE_PL, TextsRepo.PH_ICON_TOTASK, event -> putToTask(workList));
 			
 		JPopupMenu popup = new JPopupMenu();
 		popup.add(mark);
@@ -207,7 +207,7 @@ class TablePhrases extends JTable
 	 * Puts marked rows to the task list.
 	 * @param worklist - an object to exchange data.
 	 */
-	void toTask(AbstractFilteredTable<Integer> worklist)
+	void putToTask(AbstractFilteredTable<Integer> worklist)
 	{
 		model.toTask(worklist);
 		this.clearSelection();

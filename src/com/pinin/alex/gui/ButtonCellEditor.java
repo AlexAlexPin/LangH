@@ -50,7 +50,7 @@ public class ButtonCellEditor extends AbstractCellEditor
 	/**
 	 * Constructor
 	 * @param table - the table with buttons
-	 * @param action - the action to be invoked when the button is pressed
+	 * @param action - the action to be invoked when the menuItem is pressed
 	 */
 	public ButtonCellEditor(JTable table, Action action) 
 	{
@@ -109,7 +109,7 @@ public class ButtonCellEditor extends AbstractCellEditor
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// the button has been pressed. stopCapturing editing and invoke the action
+		// the menuItem has been pressed. stopCapturing editing and invoke the action
 		int row = table.convertRowIndexToModel(table.getEditingRow());
 		fireEditingStopped();
 

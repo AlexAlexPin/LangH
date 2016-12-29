@@ -29,7 +29,7 @@ import com.pinin.alex.main.*;
 /**
  * Extends <code>JPanel</code>. Allows to find phrases in the search panel.
  */
-public class Search extends JPanel implements PhraseFieldsContainer
+public class SearchPanel extends JPanel implements PhraseFieldsContainer
 {
 	// elements of this panel
 	private JTextArea findPhrase;
@@ -47,7 +47,7 @@ public class Search extends JPanel implements PhraseFieldsContainer
 	 * Constructor.
 	 * @param dataFactory - a common data factory
 	 */
-	public Search(CommonDataFactory dataFactory)
+	public SearchPanel(CommonDataFactory dataFactory)
 	{
         fontsRepo = dataFactory.getFontsRepo();
         TextsRepo textsRepo = dataFactory.getTextsRepo();

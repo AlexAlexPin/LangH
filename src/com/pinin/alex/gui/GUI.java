@@ -107,7 +107,7 @@ public class GUI extends JFrame
 		});
 			
 		// panels
-		
+
 		dictionary = new Dictionary(dataFactory);
 		worklist   = new Worklist(dictionary, dataFactory);
 		filler     = new Filler(dictionary, dataFactory);
@@ -130,13 +130,13 @@ public class GUI extends JFrame
 			
 		JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
-		addSet(toolBar, menuFile.getToolBarButtons());
-		addSet(toolBar, exercise.getToolBarButtons());
-		addSet(toolBar, worklist.getToolBarButtons());
-		addSet(toolBar, filler.getToolBarButtons());
-		addSet(toolBar, dictionary.getToolBarButtons());
-		addSet(toolBar, recorder.getToolBarButtons());
-		addSet(toolBar, menuHelp.getToolBarButtons());
+		addSet(toolBar, menuFile.getButtons());
+		addSet(toolBar, exercise.getButtons());
+		addSet(toolBar, worklist.getButtons());
+		addSet(toolBar, filler.getButtons());
+		addSet(toolBar, dictionary.getButtons());
+		addSet(toolBar, recorder.getButtons());
+		addSet(toolBar, menuHelp.getButtons());
 			
 		FIX = new JPanel();
 		
