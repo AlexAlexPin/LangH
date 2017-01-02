@@ -26,12 +26,12 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-import com.pinin.alex.CommonDataFactory;
+import com.pinin.alex.data.CommonDataFactory;
 import com.pinin.alex.LangH;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.*;
 
 /**
- * Extends <code>JPanel</code>.Contains only part of phrases from the main table.
+ * Extends <code>JPanel</code>.Contains only part of phrases from the data table.
  */
 public class Worklist extends AbstractFilteredTable<Integer>
 {

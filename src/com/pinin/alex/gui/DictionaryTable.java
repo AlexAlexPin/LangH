@@ -23,7 +23,7 @@ package com.pinin.alex.gui;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.*;
 
 public interface DictionaryTable
 {

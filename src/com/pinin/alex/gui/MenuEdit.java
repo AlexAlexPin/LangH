@@ -24,8 +24,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 class MenuEdit extends AbstractControlledPanel
 {

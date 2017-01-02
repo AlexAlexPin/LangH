@@ -1,4 +1,4 @@
-package com.pinin.alex.main;
+package com.pinin.alex.data;
 
 class CheckValueHelper {
 

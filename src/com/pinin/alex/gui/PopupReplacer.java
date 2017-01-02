@@ -26,8 +26,8 @@ import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.text.*;
 
-import com.pinin.alex.CommonDataFactory;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.CommonDataFactory;
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JPopupMenu</code> and contains a popup menu with the set of

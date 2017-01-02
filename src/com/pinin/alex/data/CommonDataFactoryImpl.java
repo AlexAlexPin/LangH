@@ -1,12 +1,13 @@
-package com.pinin.alex;
+package com.pinin.alex.data;
 
-import com.pinin.alex.main.*;
+import com.pinin.alex.LangH;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.util.logging.*;
 import java.util.prefs.Preferences;
 
-class CommonDataFactoryImpl implements CommonDataFactory {
+public class CommonDataFactoryImpl implements CommonDataFactory {
 
     private Logger logger;
     private Preferences preferences;
@@ -16,7 +17,7 @@ class CommonDataFactoryImpl implements CommonDataFactory {
     private ColorsRepo colorsRepo;
     private BordersRepo bordersRepo;
 
-    CommonDataFactoryImpl() throws IOException {
+    public CommonDataFactoryImpl() throws IOException {
         logger = Logger.getLogger("com.pinin.alex.langh");
         colorsRepo = new ColorsRepo();
 

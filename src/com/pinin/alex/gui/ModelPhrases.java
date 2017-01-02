@@ -26,10 +26,10 @@ import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import com.pinin.alex.CommonDataFactory;
+import com.pinin.alex.data.CommonDataFactory;
 import com.pinin.alex.LangH;
-import com.pinin.alex.main.*;
-import com.pinin.alex.main.Dictionary;
+import com.pinin.alex.data.*;
+import com.pinin.alex.data.Dictionary;
 
 /**
  * Extends <code>AbstractTableModel</code>. Contains a <code>Dictionary</code>

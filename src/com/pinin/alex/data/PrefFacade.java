@@ -18,7 +18,7 @@
 //	along with LangH.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-package com.pinin.alex.main;
+package com.pinin.alex.data;
 
 import java.awt.*;
 import java.io.*;
@@ -32,7 +32,7 @@ public class PrefFacade
 	// data
 	private Dimension screenSize;
 	
-	// default ratios between the screen size and the main frame
+	// default ratios between the screen size and the data frame
 	private final static int DEFAULT_WIDTH_COEFFICIENT = 2;
 	private final static int DEFAULT_HEIGHT_COEFFICIENT = 2;
 	

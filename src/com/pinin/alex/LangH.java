@@ -25,6 +25,8 @@ import java.io.*;
 import java.util.logging.*;
 
 import com.pinin.alex.gui.*;
+import com.pinin.alex.data.CommonDataFactory;
+import com.pinin.alex.data.CommonDataFactoryImpl;
 
 public class LangH 
 {

@@ -23,15 +23,15 @@ package com.pinin.alex.gui;
 import java.util.*;
 import javax.swing.table.*;
 
-import com.pinin.alex.CommonDataFactory;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.CommonDataFactory;
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>AbstractTableModel</code> and allows to create a table model for <code>Term</code> object.
  */
 class ModelTerm extends AbstractTableModel
 {
-	/** The main database. */
+	/** The data database. */
 	private ArrayList<String> data;
 	
 	/** The column with check boxes. */

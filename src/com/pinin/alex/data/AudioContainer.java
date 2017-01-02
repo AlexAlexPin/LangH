@@ -18,41 +18,18 @@
 //	along with LangH.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-package com.pinin.alex.main;
+package com.pinin.alex.data;
 
-import java.awt.*;
-import javax.swing.*;
+import java.io.*;
 
 /**
- * Loads and contains colors.
+ * Manages a sound.
  */
-public class ColorsRepo
+public interface AudioContainer
 {
-	private Color basicBackground;
-	private Color pushedButton;
-	private Color green;
-	private Color red;
-
-	public ColorsRepo() {
-		basicBackground = new JLabel().getBackground();
-		pushedButton = new Color(200, 238, 250);
-		green = new Color(0, 128, 0);
-		red = new Color(255, 0, 0);
-	}
-
-	public Color getBasicBackground() {
-		return basicBackground;
-	}
-
-	public Color getPushedButton() {
-		return pushedButton;
-	}
-
-	Color getGreen() {
-		return green;
-	}
-
-	Color getRed() {
-		return red;
-	}
+	void capture();
+	void stopCapturing();
+	void play();
+	boolean saveSound(File file);
+	boolean loadSound(File file);
 }

@@ -26,8 +26,8 @@ import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.text.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JPanel</code>. A panel that allow to execute exercises.

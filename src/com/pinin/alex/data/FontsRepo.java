@@ -18,12 +18,12 @@
 //	along with LangH.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-package com.pinin.alex.main;
+package com.pinin.alex.data;
 
 import java.awt.*;
 
 /**
- * Contains main fonts.
+ * Contains data fonts.
  */
 @SuppressWarnings("unused")
 public class FontsRepo

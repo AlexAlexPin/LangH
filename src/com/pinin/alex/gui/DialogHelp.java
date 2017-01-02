@@ -24,8 +24,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.logging.*;
 import javax.swing.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JDialog</code>. Shows help information.

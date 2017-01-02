@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.table.*;
 import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JTable</code>. Displays <code>ModelPhrases</code>.
@@ -40,7 +40,7 @@ class TablePhrases extends JTable
 	/** The model for this table. */
 	private ModelPhrases model;
 	
-	/** Filter to show only part of phrases of the main table. */
+	/** Filter to show only part of phrases of the data table. */
 	private RowFilter<AbstractTableModel, Integer> filter;
 	private HashSet<Integer> filteredIds;
 	private TableRowSorter<AbstractTableModel> sorter;

@@ -24,8 +24,8 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 /**
  * Displays the whole phrases list.

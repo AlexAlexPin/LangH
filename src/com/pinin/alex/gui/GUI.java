@@ -25,8 +25,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.logging.*;
 import javax.swing.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 /**
  * Contains all components of GUI. All components are available for each other.
@@ -44,9 +44,9 @@ public class GUI extends JFrame
 	private static JTextField message;
 
 	/**
-	 * A panel that provides an opportunity to hide all main panels
+	 * A panel that provides an opportunity to hide all data panels
 	 * and lets other elements to stay on their positions.
-	 * When all main panels are not visible this panel is turned on
+	 * When all data panels are not visible this panel is turned on
 	 * it takes a place on the frame and prevent moving of other elements.
 	 */
 	private static JPanel FIX;	
@@ -187,7 +187,7 @@ public class GUI extends JFrame
 	}
 	
 	/**
-	 * Informs this panel about changing a visible status of one of the main panels
+	 * Informs this panel about changing a visible status of one of the data panels
 	 */
 	static void infoPanelVisibility() 
 	{

@@ -28,9 +28,9 @@ import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import com.pinin.alex.CommonDataFactory;
+import com.pinin.alex.data.CommonDataFactory;
 import com.pinin.alex.LangH;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JTable</code>. Displays the phrases list for exercises.
@@ -40,7 +40,7 @@ class TablePhrasesFiltered extends JTable
 	/** The model for this table */
 	private ModelPhrases model;
 	
-	/** Filter to show only part of phrases of the main table. */
+	/** Filter to show only part of phrases of the data table. */
 	private RowFilter<TableModel, Integer> filter;
 	private HashSet<Integer> filteredIds;
 	private TableRowSorter<TableModel> sorter;

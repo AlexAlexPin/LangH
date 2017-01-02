@@ -1,6 +1,4 @@
-package com.pinin.alex;
-
-import com.pinin.alex.main.*;
+package com.pinin.alex.data;
 
 import javax.swing.*;
 import java.util.logging.Logger;

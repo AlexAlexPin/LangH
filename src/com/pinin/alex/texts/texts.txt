@@ -279,5 +279,5 @@ MG_NEW_QUESTION = 		Do you want to make a new dictionary?
 
 * URLs
 
-URL_WEBSITE =			www.alexpinin.com	
-URL_SUPPORT =			www.alexpinin.com/#!langhsupport/gifwh/
+URL_WEBSITE =			http://alexpinin.wixsite.com/alexpinin
+URL_SUPPORT =			http://alexpinin.wixsite.com/alexpinin/langhsupport

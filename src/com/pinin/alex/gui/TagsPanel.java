@@ -24,8 +24,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import com.pinin.alex.CommonDataFactory;
-import com.pinin.alex.main.*;
+import com.pinin.alex.data.CommonDataFactory;
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JPanel</code>. Displays the tag list.

@@ -18,7 +18,7 @@
 //	along with LangH.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-package com.pinin.alex.main;
+package com.pinin.alex.data;
 
 /**
  * Element that represents a virtual foreign phrase and contains the identifier, the phrase itself
@@ -29,7 +29,7 @@ public class PhraseSet implements Comparable <PhraseSet>
 	// An attribute for easier representation this element in other objects
 	private Integer id = 0;
 	
-	// The main attribute that contains the phrase itself.
+	// The data attribute that contains the phrase itself.
 	// It can be empty in case of using the default constructor only
 	private String phrase = "";
 	

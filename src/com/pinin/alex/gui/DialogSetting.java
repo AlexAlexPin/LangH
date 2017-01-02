@@ -24,8 +24,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import com.pinin.alex.*;
-import com.pinin.alex.main.*;
+
+import com.pinin.alex.data.*;
 
 /**
  * Extends <code>JDialog</code> and contains settings of this program. After changing
@@ -90,7 +90,7 @@ class DialogSetting extends JDialog
 		fontPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
 				textsRepo.LB_HEADER_SET_FSIZE, TitledBorder.LEFT, TitledBorder.TOP, fontP));
 			
-		// main panel
+		// data panel
 				
 		JPanel mainPl = this.getPanel(new GridLayout(1,2), langPanel, fontPanel);
 		mainPl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), 
